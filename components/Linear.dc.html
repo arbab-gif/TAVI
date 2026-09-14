@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap");
+    body { margin: 0; }
+    a { color: #e2ab61; } a:hover { color: #c78f45; }
+  </style>
+</helmet>
+<div style="width: 420px; height: 340px; box-sizing: border-box; background: #08080a; color: #f5f3ef; font-family: 'Sora', system-ui, sans-serif; padding: 32px 30px; display: flex; flex-direction: column; justify-content: space-between;">
+  <div style="display: flex; flex-direction: column; gap: 26px;">
+
+    <!-- Core (emphasised) -->
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between;">
+        <span style="font-size: 14px; letter-spacing: 1.5px; color: #f5f3ef;">CORE</span>
+        <span style="font-weight: 200; font-size: 30px;">82<span style="font-size: 15px;">%</span></span>
+      </div>
+      <div style="height: 12px; border-radius: 999px; background: #191a1e;">
+        <div style="height: 12px; width: 82%; border-radius: 999px; background: #e2ab61;"></div>
+      </div>
+      <span style="font-size: 11px; color: #5b5963;">Today's physical demand</span>
+    </div>
+
+    <!-- Recovery -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between;">
+        <span style="font-size: 12px; letter-spacing: 1.4px; color: #96949d;">RECOVERY</span>
+        <span style="font-weight: 300; font-size: 20px;">78<span style="font-size: 12px;">%</span></span>
+      </div>
+      <div style="height: 8px; border-radius: 999px; background: #191a1e;">
+        <div style="height: 8px; width: 78%; border-radius: 999px; background: #7cc2a3;"></div>
+      </div>
+    </div>
+
+    <!-- Sleep -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between;">
+        <span style="font-size: 12px; letter-spacing: 1.4px; color: #96949d;">SLEEP</span>
+        <span style="font-weight: 300; font-size: 20px;">90<span style="font-size: 12px;">%</span></span>
+      </div>
+      <div style="height: 8px; border-radius: 999px; background: #191a1e;">
+        <div style="height: 8px; width: 90%; border-radius: 999px; background: #989cdb;"></div>
+      </div>
+    </div>
+
+  </div>
+  <div style="font-size: 11px; letter-spacing: 1.6px; color: #5b5963; text-transform: uppercase;">C · Linear tracks</div>
+</div>
+</x-dc>
+</body>
+</html>

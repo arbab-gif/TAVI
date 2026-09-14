@@ -1,0 +1,23 @@
+{
+  "pages": [
+    { "id": "page-1", "name": "Directions" },
+    { "id": "page-2", "name": "Progress circles" }
+  ],
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 420, "h": 400, "page": "page-1" },
+    { "file": "Concentric.dc.html", "x": 520, "y": 0, "w": 400, "h": 440, "page": "page-1" },
+    { "file": "Linear.dc.html", "x": 1020, "y": 0, "w": 420, "h": 340, "page": "page-1" },
+    { "file": "CircleRow.dc.html", "x": 0, "y": 0, "w": 460, "h": 260, "page": "page-2" },
+    { "file": "CircleStacked.dc.html", "x": 560, "y": 0, "w": 380, "h": 300, "page": "page-2" },
+    { "file": "CircleTriad.dc.html", "x": 1040, "y": 0, "w": 420, "h": 420, "page": "page-2" }
+  ],
+  "annotations": [
+    { "id": "note-a", "x": 0, "y": -132, "w": 420, "text": "Variation A — Cluster\nClosest to today's Day screen. Core dominates by size; Recovery and Sleep read as supporting satellites.\nTradeoff: uses the most vertical space.", "page": "page-1" },
+    { "id": "note-b", "x": 520, "y": -132, "w": 400, "text": "Variation B — Concentric dial\nOne compact instrument, Core on the outer ring. Premium and space-efficient.\nTradeoff: arcs are harder to compare at a glance; leans on the legend.", "page": "page-1" },
+    { "id": "note-c", "x": 1020, "y": -132, "w": 420, "text": "Variation C — Linear tracks\nMost minimal and most legible for exact values; scales to more metrics later.\nTradeoff: loses the iconic ring identity.", "page": "page-1" },
+    { "id": "note-row", "x": 0, "y": -120, "w": 460, "text": "Style 1 — Equal row\nAll three circles the same size, evenly placed. Calm and symmetric; good for Body overview.\nTradeoff: no visual hierarchy — Core is not emphasised.", "page": "page-2" },
+    { "id": "note-stacked", "x": 560, "y": -120, "w": 380, "text": "Style 2 — Stacked list\nSmall circle + label per row, left-aligned. The most compact placement; fits alongside other content.\nTradeoff: circles are small, less of a hero moment.", "page": "page-2" },
+    { "id": "note-triad", "x": 1040, "y": -120, "w": 420, "text": "Style 3 — Triad\nCore larger, top-centre; Recovery and Sleep below. Gradient tapered arcs add depth.\nTradeoff: gradient is slightly less flat/minimal than solid arcs.", "page": "page-2" }
+  ],
+  "launch": { "view": "canvas", "page": "page-2" }
+}
