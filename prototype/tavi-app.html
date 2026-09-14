@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>TAVI Prototype</title>
 <meta name="description" content="Interactive TAVI app prototype — Day, Body, Capture, Ask — with one fictional user and labelled sample data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -380,6 +381,140 @@ button.tapq{padding:6px}
 /* tab bar: minimal, no heavy chrome */
 .tabbar{border:1px solid var(--line);box-shadow:none;background:color-mix(in srgb,var(--app) 78%,transparent)}
 .tab[aria-selected="true"]{background:var(--surface2)}
+
+/* ============================================================
+   HOME (Day) — dashboard redesign
+   Card-based, chart-rich, dark-first. Scoped to #view-day.home
+   so the minimal-flatten pass above does not reach it.
+   ============================================================ */
+#view-day.home{padding:6px 16px 128px}
+
+/* header */
+.home .hhead{display:flex;align-items:center;justify-content:space-between;padding:10px 2px 2px}
+.home .hname{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-d);font-weight:600;font-size:29px;
+  letter-spacing:-.02em;color:var(--ink);background:none;border:none;cursor:pointer;padding:0}
+.home .hname svg{width:19px;height:19px;color:var(--ink3);margin-top:3px}
+.home .hname:focus-visible{outline:2px solid var(--core);outline-offset:3px;border-radius:8px}
+.home .hactions{display:flex;align-items:center;gap:9px}
+.home .iconbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);background:var(--surface);
+  color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s,background .2s}
+.home .iconbtn:hover{transform:translateY(-1px);background:var(--surface2)}
+.home .iconbtn:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.home .iconbtn svg{width:17px;height:17px}
+.home .iconbtn.spark{color:var(--sleep)}
+
+/* weekday strip */
+.home .wkstrip{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:16px 0 2px}
+.home .wk{display:flex;flex-direction:column;align-items:center;gap:10px;padding:9px 0;border-radius:14px;cursor:pointer;
+  background:none;border:none;font-family:var(--font-u);transition:background .2s}
+.home .wk:hover{background:var(--surface2)}
+.home .wk:focus-visible{outline:2px solid var(--core);outline-offset:-2px}
+.home .wk .wl{font-size:12px;font-weight:600;color:var(--ink3)}
+.home .wk .wd{width:7px;height:7px;border-radius:50%;background:var(--line2)}
+.home .wk.on{background:var(--surface2)}
+.home .wk.on .wl{color:var(--ink)}
+.home .wk.on .wd{box-shadow:0 0 0 3px color-mix(in srgb,var(--core) 22%,transparent)}
+
+/* sample tag spacing inside home */
+.home .sample-tag{margin:14px 2px 0}
+
+/* generic home card */
+.home .hcard{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:20px;margin-top:14px;
+  box-shadow:var(--shadow);border-top-color:color-mix(in srgb,var(--line) 55%,var(--hairline))}
+
+/* hero gauge card */
+.home .herocard{padding:22px 20px 20px;margin-top:12px}
+.home .gauge{position:relative;width:100%;max-width:290px;margin:4px auto 0;padding-bottom:4px}
+.home .gauge-svg{display:block;width:100%;height:auto;overflow:visible}
+.home .gauge-center{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center}
+.home .gauge-num{font-family:var(--font-d);font-weight:200;font-size:76px;line-height:.86;letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums;color:var(--ink)}
+.home .gauge-status{font-size:13px;color:var(--ink2);margin-top:8px;display:inline-flex;align-items:center;gap:6px}
+.home .gauge-status i{width:6px;height:6px;border-radius:50%;background:var(--recovery)}
+.home .gauge-title{text-align:center;font-family:var(--font-d);font-size:14px;font-weight:600;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--ink);margin-top:16px}
+.home .gauge-sub{text-align:center;font-size:12.5px;color:var(--ink3);margin-top:4px}
+
+/* metric trio under gauge */
+.home .mtrio{display:grid;grid-template-columns:repeat(3,1fr);margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.home .mcell{text-align:center}
+.home .mcell+.mcell{border-left:1px solid var(--line)}
+.home .mcell .ml{font-size:12px;color:var(--ink3);font-weight:600}
+.home .mcell .mv{font-family:var(--font-u);font-weight:600;font-size:16px;margin-top:7px;display:inline-flex;align-items:center;gap:5px;justify-content:center}
+.home .mcell .mv i{width:5px;height:5px;border-radius:50%;background:var(--recovery)}
+
+/* recap card (tinted, echoes AUTOPILOT RECAP) */
+.home .recap{background:color-mix(in srgb,var(--sleep) 15%,var(--surface));
+  border:1px solid color-mix(in srgb,var(--sleep) 32%,var(--line));border-radius:24px;padding:18px 20px;margin-top:14px;
+  cursor:pointer;transition:transform .15s,box-shadow .2s;width:100%;text-align:left;font-family:var(--font-u);color:var(--ink);display:block}
+.home .recap:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.home .recap:focus-visible{outline:2px solid var(--sleep);outline-offset:2px}
+.home .recap .re{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sleep)}
+.home .recap .rt{font-size:15.5px;line-height:1.5;margin:10px 0 0;color:var(--ink);font-weight:500}
+.home .recap .rt b{font-weight:700}
+.home .recap .rstats{display:flex;gap:18px;margin-top:15px;padding-top:14px;
+  border-top:1px solid color-mix(in srgb,var(--sleep) 24%,var(--line))}
+.home .recap .rstat{font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;color:var(--ink)}
+.home .recap .rstat .up{color:var(--recovery);font-weight:700}
+.home .recap .rstat .dn{color:var(--core);font-weight:700}
+
+/* section labels */
+.home .hlabel{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);
+  margin:28px 4px 0;display:flex;align-items:center;justify-content:space-between}
+.home .hlabel a{color:var(--core);font-weight:600;letter-spacing:0;text-transform:none;font-size:12.5px;cursor:pointer}
+
+/* vitals grid — rich metric cards */
+.home .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.home .vcard{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:15px 15px 14px;cursor:pointer;
+  transition:transform .15s,box-shadow .2s;text-align:left;font-family:var(--font-u);color:var(--ink);
+  border-top-color:color-mix(in srgb,var(--line) 55%,var(--hairline))}
+.home .vcard:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.home .vcard:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.home .vcard .vc-h{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.home .vcard .vc-t{font-size:13px;font-weight:600;color:var(--ink)}
+.home .vcard .vc-s{font-size:10.5px;color:var(--ink3);margin-top:2px}
+.home .vcard .vc-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.home .vcard .vc-badge svg{width:15px;height:15px}
+.home .vcard .vc-chart{height:42px;margin:13px 0 11px}
+.home .vcard .vc-chart svg{width:100%;height:100%;display:block}
+.home .vcard .vc-v{font-family:var(--font-d);font-weight:300;font-size:26px;font-variant-numeric:tabular-nums;letter-spacing:-.01em;color:var(--ink)}
+.home .vcard .vc-v small{font-size:12px;color:var(--ink3);font-weight:400;font-family:var(--font-u);margin-left:3px}
+
+/* score cards — Recovery / Core / Sleep */
+.home .scardrow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.home .scard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px 8px 14px;text-align:center;
+  cursor:pointer;transition:transform .15s,box-shadow .2s;font-family:var(--font-u);color:var(--ink);
+  border-top-color:color-mix(in srgb,var(--line) 55%,var(--hairline))}
+.home .scard:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.home .scard:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.home .scard.dom{border-color:color-mix(in srgb,var(--core) 34%,var(--line))}
+.home .scard svg{display:block;margin:0 auto}
+.home .scard svg text{font-family:var(--font-d);font-weight:300}
+.home .scard .sl{font-size:12.5px;font-weight:600;margin-top:9px}
+.home .scard .sm{font-size:10.5px;color:var(--ink3);margin-top:2px;line-height:1.3}
+
+/* list cards — captures, commitments, completed */
+.home .listcard{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:2px 16px;margin-top:12px;
+  border-top-color:color-mix(in srgb,var(--line) 55%,var(--hairline))}
+.home .litem{display:flex;align-items:center;gap:13px;padding:14px 0;cursor:pointer;width:100%;background:none;border:none;
+  text-align:left;font-family:var(--font-u);color:var(--ink)}
+.home .litem+.litem{border-top:1px solid var(--line)}
+.home .litem:focus-visible{outline:2px solid var(--core);outline-offset:-2px;border-radius:12px}
+.home .litem .lic{width:38px;height:38px;border-radius:12px;background:var(--surface2);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--ink)}
+.home .litem .lic svg{width:19px;height:19px}
+.home .litem .lx{flex:1;min-width:0}
+.home .litem .lx .lt{font-size:14px;font-weight:600}
+.home .litem .lx .ls{font-size:12px;color:var(--ink3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.home .litem .lchip{font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:999px;flex:0 0 auto}
+.home .lchip.ok{background:var(--recovery-soft);color:var(--recovery)}
+.home .lchip.rev{background:var(--core-soft);color:var(--core)}
+.home .litem .llink{font-size:12px;font-weight:700;color:var(--core);flex:0 0 auto}
+
+/* learning state on home */
+.home .learnnote{border-radius:24px;margin-top:14px}
+.home.learning .recap{display:none}
+.home.learning .gauge-status{visibility:hidden}
+.home.learning .herocard .gauge-num{color:var(--ink3)}
 </style>
 
 <div class="stage">
@@ -414,16 +549,30 @@ button.tapq{padding:6px}
         <div class="viewport" id="viewport">
 
           <!-- ============ DAY ============ -->
-          <section class="view active" id="view-day" role="tabpanel" aria-label="Day">
-            <div class="appbar">
-              <div>
-                <div class="daytitle">Today</div>
-                <div class="datehead">
-                  <span class="d">14 September</span>
-                  <span class="sync" id="syncLine"><span class="dot"></span> Synced 5 minutes ago</span>
-                </div>
+          <section class="view active home" id="view-day" role="tabpanel" aria-label="Day">
+            <div class="hhead">
+              <button class="hname" id="profileBtn" aria-label="Switch profile and open settings">Layla
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="hactions">
+                <button class="iconbtn spark" id="askShortcut" aria-label="Ask TAVI">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 4.8 4.8 1.7-4.8 1.7L12 15l-1.7-4.8L5.5 8.5l4.8-1.7z"/><path d="M18.5 13l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z"/></svg>
+                </button>
+                <button class="iconbtn" id="shareDay" data-share="My Day" aria-label="Share my day">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M12 15V3M8 7l4-4 4 4"/></svg>
+                </button>
               </div>
-              <button class="avatar" id="profileBtn" aria-label="Open profile and settings">LH</button>
+            </div>
+
+            <!-- weekday strip -->
+            <div class="wkstrip" role="group" aria-label="This week">
+              <button class="wk"><span class="wl">M</span><span class="wd" style="background:var(--recovery)"></span></button>
+              <button class="wk"><span class="wl">T</span><span class="wd" style="background:var(--core)"></span></button>
+              <button class="wk"><span class="wl">W</span><span class="wd" style="background:var(--recovery)"></span></button>
+              <button class="wk"><span class="wl">T</span><span class="wd" style="background:var(--recovery)"></span></button>
+              <button class="wk"><span class="wl">F</span><span class="wd" style="background:var(--sleep)"></span></button>
+              <button class="wk on" aria-current="date"><span class="wl">S</span><span class="wd" style="background:var(--core)"></span></button>
+              <button class="wk"><span class="wl">S</span><span class="wd"></span></button>
             </div>
 
             <button class="startact" id="startAct">
@@ -433,51 +582,59 @@ button.tapq{padding:6px}
 
             <div class="sample-tag" id="sampleTag">Sample data · Layla Haddad</div>
 
-            <!-- rings hero -->
-            <div class="rings">
-              <svg width="288" height="300" viewBox="0 0 288 300" role="img" aria-label="Core, Recovery and Sleep for today">
-                <!-- Recovery ring (left, smaller) -->
-                <g transform="translate(58,206)">
-                  <circle r="42" fill="none" stroke="var(--track)" stroke-width="9"/>
-                  <circle id="recoveryArc" r="42" fill="none" stroke="var(--recovery)" stroke-width="9" stroke-linecap="round"
-                    stroke-dasharray="263.9" stroke-dashoffset="58.1" transform="rotate(-90)"/>
-                </g>
-                <!-- Sleep ring (right, smaller) -->
-                <g transform="translate(230,206)">
-                  <circle r="42" fill="none" stroke="var(--track)" stroke-width="9"/>
-                  <circle id="sleepArc" r="42" fill="none" stroke="var(--sleep)" stroke-width="9" stroke-linecap="round"
-                    stroke-dasharray="263.9" stroke-dashoffset="26.4" transform="rotate(-90)"/>
-                </g>
-                <!-- Core ring (center, dominant) -->
-                <g transform="translate(144,116)">
-                  <circle r="90" fill="none" stroke="var(--track)" stroke-width="15"/>
-                  <circle id="coreArc" r="90" fill="none" stroke="var(--core)" stroke-width="15" stroke-linecap="round"
-                    stroke-dasharray="565.5" stroke-dashoffset="101.8" transform="rotate(-90)"/>
-                  <text id="coreNum" x="0" y="4" text-anchor="middle" class="ringnum" font-size="58" fill="var(--ink)">82<tspan font-size="24" dy="-22">%</tspan></text>
-                </g>
-                <text id="recoveryNum" x="58" y="211" text-anchor="middle" class="ringnum" font-size="23" fill="var(--ink)">78<tspan font-size="11" dy="-9">%</tspan></text>
-                <text id="sleepNum" x="230" y="211" text-anchor="middle" class="ringnum" font-size="23" fill="var(--ink)">90<tspan font-size="11" dy="-9">%</tspan></text>
-              </svg>
-            </div>
-            <div class="legend">
-              <button class="legitem tapq" data-metric="Recovery">
-                <span class="nm"><i style="background:var(--recovery)"></i>Recovery</span>
-                <span class="mn" data-full="Body recovery state" data-learn="Learning">Body recovery state</span>
-              </button>
-              <button class="legitem tapq core" data-metric="Core">
-                <span class="nm"><i style="background:var(--core)"></i>Core</span>
-                <span class="mn" data-full="Your physical demand today" data-learn="Learning">Your physical demand today</span>
-              </button>
-              <button class="legitem tapq" data-metric="Sleep">
-                <span class="nm"><i style="background:var(--sleep)"></i>Sleep</span>
-                <span class="mn" data-full="Sleep quality &amp; support" data-learn="Learning">Sleep quality &amp; support</span>
-              </button>
+            <!-- hero: readiness tick-gauge -->
+            <div class="hcard herocard" data-metric="Readiness detail">
+              <div class="gauge">
+                <svg class="gauge-svg" viewBox="0 0 260 158" role="img" aria-label="Readiness 82, in range">
+                  <defs>
+                    <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0" stop-color="var(--recovery)"/>
+                      <stop offset=".5" stop-color="var(--core)"/>
+                      <stop offset="1" stop-color="var(--sleep)"/>
+                    </linearGradient>
+                  </defs>
+                  <g id="gaugeTicks"></g>
+                </svg>
+                <div class="gauge-center">
+                  <div class="gauge-num" id="gaugeNum">82</div>
+                  <div class="gauge-status"><i></i> In range</div>
+                </div>
+              </div>
+              <div class="gauge-title">Readiness</div>
+              <div class="gauge-sub" id="gaugeSub">Today · synced 5 minutes ago</div>
+              <div class="mtrio">
+                <div class="mcell"><div class="ml">Recovery</div><div class="mv" id="mRecovery"><i></i>84%</div></div>
+                <div class="mcell"><div class="ml">Sleep</div><div class="mv" id="mSleep"><i></i>7h 12m</div></div>
+                <div class="mcell"><div class="ml">Load</div><div class="mv" id="mLoad"><i></i>72%</div></div>
+              </div>
             </div>
 
-            <div class="sharemyday">
-              <button class="ghost" id="shareDay" data-share="My Day">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M12 15V3M8 7l4-4 4 4"/></svg>
-                Share my day
+            <!-- score cards: Recovery / Core / Sleep -->
+            <div class="hlabel">Today's scores <a data-metric="Body overview">Body</a></div>
+            <div class="scardrow">
+              <button class="scard" data-metric="Recovery">
+                <svg viewBox="0 0 72 72" width="72" height="72" aria-label="Recovery 84">
+                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--track)" stroke-width="6"/>
+                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--recovery)" stroke-width="6" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="26.1" transform="rotate(-90 36 36)"/>
+                  <text x="36" y="42" text-anchor="middle" font-size="20" fill="var(--ink)">84</text>
+                </svg>
+                <div class="sl">Recovery</div><div class="sm">Ready for load</div>
+              </button>
+              <button class="scard dom" data-metric="Core">
+                <svg viewBox="0 0 72 72" width="72" height="72" aria-label="Core 82">
+                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--track)" stroke-width="7"/>
+                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--core)" stroke-width="7" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="29.4" transform="rotate(-90 36 36)"/>
+                  <text x="36" y="42" text-anchor="middle" font-size="21" fill="var(--ink)">82</text>
+                </svg>
+                <div class="sl">Core</div><div class="sm">Moderate demand</div>
+              </button>
+              <button class="scard" data-metric="Sleep">
+                <svg viewBox="0 0 72 72" width="72" height="72" aria-label="Sleep 72">
+                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--track)" stroke-width="6"/>
+                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--sleep)" stroke-width="6" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="45.8" transform="rotate(-90 36 36)"/>
+                  <text x="36" y="42" text-anchor="middle" font-size="20" fill="var(--ink)">72</text>
+                </svg>
+                <div class="sl">Sleep</div><div class="sm">7h 12m</div>
               </button>
             </div>
 
@@ -487,66 +644,107 @@ button.tapq{padding:6px}
               <p>Your first few days help TAVI learn your baseline. Keep wearing your band during daily life and sleep. Vitals, activities and captures stay available while it learns.</p>
             </div>
 
-            <!-- insight -->
-            <div class="section-title stq">Today's insight</div>
-            <div class="insight tap" id="dayInsight" data-metric="Sleep detail">
-              <div class="eyebrow">Sleep · vs your 7-day average</div>
-              <div class="insight-h">Your sleep ran <b>45 minutes longer</b> than your usual — a good window to take on load today.</div>
-              <span class="evidence">View evidence
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </span>
-            </div>
-
-            <!-- vitals + HRV -->
-            <div class="section-title stq">Vitals</div>
-            <div class="vitals">
-              <button class="vital" data-metric="Heart rate">
-                <span class="k"><span class="pulse"></span>Heart rate</span>
-                <span class="v">72<small>bpm</small></span>
-                <span class="w">Updated 10:42 AM</span>
-              </button>
-              <button class="vital" data-metric="Resting HR">
-                <span class="k">Resting HR</span>
-                <span class="v">58<small>bpm</small></span>
-                <span class="w">Overnight</span>
-              </button>
-              <button class="vital hrv" data-metric="HRV">
-                <span class="k">HRV</span>
-                <span class="v">45<small>ms</small></span>
-                <span class="w">Overnight window</span>
-              </button>
-            </div>
-
-            <!-- capture highlights -->
-            <div class="section-title stq">From today <a data-metric="Capture library">Captures</a></div>
-            <button class="row" data-metric="Capture: Team Meeting">
-              <span class="rico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 19v3"/></svg></span>
-              <span class="rtext"><span class="t">Team Meeting</span><span class="s">10:30 AM · discussed the launch timeline</span></span>
-              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            <!-- recap / today's insight (tinted) -->
+            <button class="recap" id="dayInsight" data-metric="Sleep detail">
+              <div class="re">Today's recap</div>
+              <div class="rt">While you slept, recovery rose. Your sleep ran <b>45 minutes longer</b> than usual — a good window to take on load today.</div>
+              <div class="rstats">
+                <span class="rstat">Deep sleep <span class="up">↑ 20%</span></span>
+                <span class="rstat">Recovery <span class="up">↑ 12%</span></span>
+              </div>
             </button>
+
+            <!-- vitals grid -->
+            <div class="hlabel">Vitals <a data-metric="All vitals">See all</a></div>
+            <div class="vgrid">
+              <button class="vcard" data-metric="Heart rate">
+                <div class="vc-h">
+                  <div><div class="vc-t">Heart rate</div><div class="vc-s">Now</div></div>
+                  <div class="vc-badge" style="background:color-mix(in srgb,#e5484d 20%,transparent);color:#e5484d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-7 4 14 2.5-7H21"/></svg></div>
+                </div>
+                <div class="vc-chart"><svg viewBox="0 0 120 42" preserveAspectRatio="none"><defs><linearGradient id="hrFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e5484d" stop-opacity=".35"/><stop offset="1" stop-color="#e5484d" stop-opacity="0"/></linearGradient></defs><path d="M0,30 8,28 16,22 24,31 32,14 40,26 48,20 56,33 64,10 72,24 80,18 88,28 96,16 104,26 112,20 120,24 V42 H0 Z" fill="url(#hrFill)"/><polyline fill="none" stroke="#e5484d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="0,30 8,28 16,22 24,31 32,14 40,26 48,20 56,33 64,10 72,24 80,18 88,28 96,16 104,26 112,20 120,24"/></svg></div>
+                <div class="vc-v">72<small>bpm</small></div>
+              </button>
+
+              <button class="vcard" data-metric="HRV">
+                <div class="vc-h">
+                  <div><div class="vc-t">HRV</div><div class="vc-s">Overnight</div></div>
+                  <div class="vc-badge" style="background:color-mix(in srgb,var(--sleep) 22%,transparent);color:var(--sleep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.5 0 2.5 2 5 2s2.5-2 5-2c1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1C7 13 7 11 9.5 11c2.5 0 2.5 2 5 2s2.5-2 5-2c1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1C7 19 7 17 9.5 17c2.5 0 2.5 2 5 2s2.5-2 5-2c1.3 0 1.9.5 2.5 1"/></svg></div>
+                </div>
+                <div class="vc-chart"><svg viewBox="0 0 120 42" preserveAspectRatio="none"><g fill="var(--sleep)"><rect x="2" y="22" width="7" height="20" rx="2.5"/><rect x="14" y="16" width="7" height="26" rx="2.5"/><rect x="26" y="26" width="7" height="16" rx="2.5"/><rect x="38" y="12" width="7" height="30" rx="2.5"/><rect x="50" y="20" width="7" height="22" rx="2.5"/><rect x="62" y="8" width="7" height="34" rx="2.5"/><rect x="74" y="18" width="7" height="24" rx="2.5"/><rect x="86" y="14" width="7" height="28" rx="2.5"/><rect x="98" y="24" width="7" height="18" rx="2.5"/><rect x="110" y="10" width="7" height="32" rx="2.5"/></g></svg></div>
+                <div class="vc-v">45<small>ms</small></div>
+              </button>
+
+              <button class="vcard" data-metric="Resting HR">
+                <div class="vc-h">
+                  <div><div class="vc-t">Resting HR</div><div class="vc-s">Overnight</div></div>
+                  <div class="vc-badge" style="background:color-mix(in srgb,var(--core) 22%,transparent);color:var(--core)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5v14"/><path d="M2 10h16a4 4 0 0 1 4 4v5"/><path d="M2 15h20"/><path d="M6 10v5"/></svg></div>
+                </div>
+                <div class="vc-chart"><svg viewBox="0 0 120 42" preserveAspectRatio="none"><polyline fill="none" stroke="var(--core)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="0,26 20,22 40,28 60,20 80,24 100,16 120,18"/><circle cx="120" cy="18" r="3" fill="var(--core)"/></svg></div>
+                <div class="vc-v">58<small>bpm</small></div>
+              </button>
+
+              <button class="vcard" data-metric="Average HR">
+                <div class="vc-h">
+                  <div><div class="vc-t">Average</div><div class="vc-s">Overnight</div></div>
+                  <div class="vc-badge" style="background:color-mix(in srgb,var(--recovery) 22%,transparent);color:var(--recovery)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 15.5 4 9.5A4.5 4.5 0 0 1 12 6.5A4.5 4.5 0 0 1 20 9.5C20 15.5 12 21 12 21Z"/><path d="M8 11.5h8"/></svg></div>
+                </div>
+                <div class="vc-chart"><svg viewBox="0 0 120 42" preserveAspectRatio="none"><g fill="var(--recovery)"><rect x="2" y="30" width="7" height="12" rx="2.5"/><rect x="14" y="24" width="7" height="18" rx="2.5"/><rect x="26" y="18" width="7" height="24" rx="2.5"/><rect x="38" y="28" width="7" height="14" rx="2.5"/><rect x="50" y="12" width="7" height="30" rx="2.5"/><rect x="62" y="22" width="7" height="20" rx="2.5"/><rect x="74" y="16" width="7" height="26" rx="2.5"/><rect x="86" y="26" width="7" height="16" rx="2.5"/><rect x="98" y="20" width="7" height="22" rx="2.5"/><rect x="110" y="14" width="7" height="28" rx="2.5"/></g></svg></div>
+                <div class="vc-v">54<small>bpm</small></div>
+              </button>
+            </div>
+
+            <!-- from today: captures -->
+            <div class="hlabel">From today <a data-metric="Capture library">Captures</a></div>
+            <div class="listcard">
+              <button class="litem" data-metric="Capture: Team Meeting">
+                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 19v3"/></svg></span>
+                <span class="lx"><span class="lt">Team Meeting</span><span class="ls">10:30 AM · discussed the launch timeline</span></span>
+                <span class="llink" data-metric="Capture: Team Meeting">Open</span>
+              </button>
+            </div>
 
             <!-- commitments -->
-            <div class="section-title stq">Today's commitments <a data-metric="Commitments: Today · Upcoming · Overdue">Today</a></div>
-            <button class="row" data-metric="Commitment: proposal for Ahmed">
-              <span class="rico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-              <span class="rtext"><span class="t">Send proposal to Ahmed</span><span class="s">Due today 4:00 PM · from Team Meeting</span></span>
-              <span class="chip confirmed">Confirmed</span>
-            </button>
-            <button class="row" data-metric="Commitment needs review">
-              <span class="rico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
-              <span class="rtext"><span class="t">Book the Yas HQ room</span><span class="s">Proposed · confirm a time to schedule a reminder</span></span>
-              <span class="chip review">Needs review</span>
-            </button>
+            <div class="hlabel">Today's commitments <a data-metric="Commitments: Today · Upcoming · Overdue">Today</a></div>
+            <div class="listcard">
+              <button class="litem" data-metric="Commitment: proposal for Ahmed">
+                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="lx"><span class="lt">Send proposal to Ahmed</span><span class="ls">Due today 4:00 PM · from Team Meeting</span></span>
+                <span class="lchip ok">Confirmed</span>
+              </button>
+              <button class="litem" data-metric="Commitment: reply to Sara">
+                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="lx"><span class="lt">Reply to Sara about the venue</span><span class="ls">Due today 2:00 PM · from Morning standup</span></span>
+                <span class="lchip ok">Confirmed</span>
+              </button>
+              <button class="litem" data-metric="Commitment: share design specs">
+                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="lx"><span class="lt">Share design specs with the dev team</span><span class="ls">Due today 5:30 PM · from Call with supplier</span></span>
+                <span class="lchip ok">Confirmed</span>
+              </button>
+              <button class="litem" data-metric="Commitment needs review">
+                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
+                <span class="lx"><span class="lt">Book the Yas HQ room</span><span class="ls">Proposed · confirm a time to schedule a reminder</span></span>
+                <span class="lchip rev">Needs review</span>
+              </button>
+              <button class="litem" data-metric="Commitment needs review: follow up invoice">
+                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
+                <span class="lx"><span class="lt">Follow up on the supplier invoice</span><span class="ls">Proposed · confirm to add a reminder</span></span>
+                <span class="lchip rev">Needs review</span>
+              </button>
+            </div>
 
-            <!-- activity summary -->
-            <div class="section-title stq">Completed today</div>
-            <button class="row" data-metric="Activity: Morning Run">
-              <span class="rico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M7 21l3-6 3 2 1-4M14 13l4 1M8 9l3-1 2 3"/></svg></span>
-              <span class="rtext"><span class="t">Morning Run · 5.0 km</span><span class="s">32 min · 6:24 /km avg</span></span>
-              <span class="linklike" data-metric="Activity result">View result</span>
-            </button>
+            <!-- completed -->
+            <div class="hlabel">Completed today</div>
+            <div class="listcard">
+              <button class="litem" data-metric="Activity: Morning Run">
+                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M7 21l3-6 3 2 1-4M14 13l4 1M8 9l3-1 2 3"/></svg></span>
+                <span class="lx"><span class="lt">Morning Run · 5.0 km</span><span class="ls">32 min · 6:24 /km avg</span></span>
+                <span class="llink" data-metric="Activity result">View result</span>
+              </button>
+            </div>
 
-            <div class="footce">Mandated order, realised: <b>rings → insight → vitals + HRV → follow-through.</b><br>Try the <b>Learning state</b> toggle above.</div>
+            <div class="footce">Home, in the mandated order: <b>readiness → recap → vitals → follow-through.</b><br>Try the <b>Learning state</b> toggle above.</div>
           </section>
 
           <!-- ============ BODY ============ -->
@@ -689,6 +887,25 @@ button.tapq{padding:6px}
     vp.scrollTop=0;
   }
   tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.view);});});
+  var askShortcut=document.getElementById('askShortcut');
+  if(askShortcut){askShortcut.addEventListener('click',function(){show('ask');});}
+
+  // readiness tick-gauge (top semicircle of radial ticks)
+  function buildGauge(pct){
+    var g=document.getElementById('gaugeTicks'); if(!g) return;
+    var N=44, cx=130, cy=132, rOuter=118, len=15;
+    var lit = (pct==null) ? 0 : Math.round(pct/100*N);
+    var out='';
+    for(var i=0;i<N;i++){
+      var a=(180 + i/(N-1)*180)*Math.PI/180;
+      var x1=(cx+Math.cos(a)*rOuter).toFixed(1), y1=(cy+Math.sin(a)*rOuter).toFixed(1);
+      var x2=(cx+Math.cos(a)*(rOuter-len)).toFixed(1), y2=(cy+Math.sin(a)*(rOuter-len)).toFixed(1);
+      var on=i<lit;
+      out+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+(on?'url(#gaugeGrad)':'var(--track)')+'" stroke-width="2.6" stroke-linecap="round"'+(on?'':' opacity=".6"')+'/>';
+    }
+    g.innerHTML=out;
+  }
+  buildGauge(82);
 
   // toast
   var toast=document.getElementById('toast'),tmr;
@@ -710,13 +927,12 @@ button.tapq{padding:6px}
 
   // learning-state toggle
   var day=document.getElementById('view-day');
-  var coreNum=document.getElementById('coreNum'),recoveryNum=document.getElementById('recoveryNum'),sleepNum=document.getElementById('sleepNum');
-  var coreArc=document.getElementById('coreArc'),recoveryArc=document.getElementById('recoveryArc'),sleepArc=document.getElementById('sleepArc');
-  var learnNote=document.getElementById('learnNote'),syncLine=document.getElementById('syncLine'),sampleTag=document.getElementById('sampleTag');
+  var gaugeNum=document.getElementById('gaugeNum'),gaugeSub=document.getElementById('gaugeSub');
+  var mRec=document.getElementById('mRecovery'),mSlp=document.getElementById('mSleep'),mLoad=document.getElementById('mLoad');
+  var learnNote=document.getElementById('learnNote'),sampleTag=document.getElementById('sampleTag');
   var learnBtn=document.getElementById('learnBtn'),learnLabel=document.getElementById('learnLabel');
-  var orig={core:coreNum.innerHTML,rec:recoveryNum.innerHTML,slp:sleepNum.innerHTML,
-    coff:coreArc.getAttribute('stroke-dashoffset'),roff:recoveryArc.getAttribute('stroke-dashoffset'),soff:sleepArc.getAttribute('stroke-dashoffset'),
-    sync:syncLine.innerHTML,tag:sampleTag.textContent};
+  var HERO_SCORE=82;
+  var orig={num:gaugeNum.textContent,sub:gaugeSub.innerHTML,rec:mRec.innerHTML,slp:mSlp.innerHTML,load:mLoad.innerHTML,tag:sampleTag.textContent};
   var learning=false;
   function setLearning(on){
     learning=on;
@@ -725,22 +941,22 @@ button.tapq{padding:6px}
     learnBtn.setAttribute('aria-pressed',on?'true':'false');
     learnLabel.textContent=on?'Populated':'Learning state';
     if(on){
-      coreNum.textContent='--';recoveryNum.textContent='--';sleepNum.textContent='--';
-      coreArc.setAttribute('stroke-dashoffset','565.5');
-      recoveryArc.setAttribute('stroke-dashoffset','263.9');
-      sleepArc.setAttribute('stroke-dashoffset','263.9');
-      syncLine.innerHTML='<span class="dot" style="background:var(--core)"></span> Getting to know your usual · day 3 of 7';
+      gaugeNum.textContent='—';buildGauge(null);
+      mRec.innerHTML='—';mSlp.innerHTML='—';mLoad.innerHTML='—';
+      gaugeSub.innerHTML='Getting to know your usual · day 3 of 7';
       sampleTag.textContent='Sample data · learning state';
     }else{
-      coreNum.innerHTML=orig.core;recoveryNum.innerHTML=orig.rec;sleepNum.innerHTML=orig.slp;
-      coreArc.setAttribute('stroke-dashoffset',orig.coff);
-      recoveryArc.setAttribute('stroke-dashoffset',orig.roff);
-      sleepArc.setAttribute('stroke-dashoffset',orig.soff);
-      syncLine.innerHTML=orig.sync;
+      gaugeNum.textContent=orig.num;buildGauge(HERO_SCORE);
+      mRec.innerHTML=orig.rec;mSlp.innerHTML=orig.slp;mLoad.innerHTML=orig.load;
+      gaugeSub.innerHTML=orig.sub;
       sampleTag.textContent=orig.tag;
     }
-    document.querySelectorAll('#view-day .legend .mn').forEach(function(m){
-      m.textContent=on?m.getAttribute('data-learn'):m.getAttribute('data-full');
+    document.querySelectorAll('#view-day .scard').forEach(function(c){
+      var t=c.querySelector('text'),arc=c.querySelectorAll('circle')[1];
+      if(!t||!arc)return;
+      if(on){ if(!t.dataset.orig){t.dataset.orig=t.textContent;arc.dataset.orig=arc.getAttribute('stroke-dashoffset');}
+        t.textContent='—';arc.setAttribute('stroke-dashoffset','163.4'); }
+      else if(t.dataset.orig){ t.textContent=t.dataset.orig;arc.setAttribute('stroke-dashoffset',arc.dataset.orig); }
     });
   }
   learnBtn.addEventListener('click',function(){setLearning(!learning);});

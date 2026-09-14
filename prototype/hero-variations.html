@@ -1,0 +1,190 @@
+<meta charset="utf-8">
+<title>TAVI — Hero graph variations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --app:#08080a; --surface:#101013; --surface2:#161619;
+  --ink:#f5f3ef; --ink2:#96949d; --ink3:#5b5963;
+  --line:#1b1b1f; --line2:#292930; --track:#26262c;
+  --core:#e2ab61; --recovery:#7cc2a3; --sleep:#8e93c8;
+  --font-d:"Sora",system-ui,sans-serif; --font-u:"Hanken Grotesk",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 700px at 50% -10%, #0b0b0f, #050506 60%),#050506;
+  color:var(--ink);font-family:var(--font-u);-webkit-font-smoothing:antialiased;min-height:100vh}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 20px 80px}
+.head{margin-bottom:8px}
+.wm{font-family:var(--font-d);font-weight:700;letter-spacing:.3em;font-size:15px}
+h1{font-family:var(--font-d);font-weight:600;font-size:26px;letter-spacing:-.02em;margin:14px 0 6px}
+.sub{color:var(--ink2);font-size:13.5px;line-height:1.6;max-width:640px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:28px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:22px 20px 18px;
+  border-top-color:#232329}
+.card.pin{border-color:color-mix(in srgb,var(--recovery) 40%,var(--line))}
+.viz{height:190px;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.viz svg{overflow:visible;max-width:100%;height:auto}
+.name{display:flex;align-items:center;gap:8px;font-family:var(--font-d);font-weight:600;font-size:15px;margin-top:6px}
+.tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;
+  background:var(--surface2);color:var(--ink3)}
+.tag.prd{background:color-mix(in srgb,var(--recovery) 22%,transparent);color:var(--recovery)}
+.desc{font-size:12.5px;color:var(--ink3);line-height:1.5;margin-top:6px}
+.gnum{font-family:var(--font-d);font-weight:200;letter-spacing:-.03em;fill:var(--ink)}
+.gcap{font-family:var(--font-u);font-weight:600;fill:var(--ink3)}
+.gstat{font-family:var(--font-u);font-weight:500;fill:var(--ink2)}
+.legend{display:flex;justify-content:center;gap:14px;margin-top:2px}
+.legend span{font-size:11px;color:var(--ink3);display:inline-flex;align-items:center;gap:5px}
+.legend i{width:7px;height:7px;border-radius:50%}
+.foot{color:var(--ink3);font-size:12px;margin-top:30px;line-height:1.6}
+</style>
+
+<div class="wrap">
+  <div class="head">
+    <div class="wm">TAVI</div>
+    <h1>Hero graph — six directions</h1>
+    <p class="sub">Six approaches to the Day home hero, same value (Readiness 82 · in range). Variation&nbsp;3 is the PRD-faithful three-ring composition (Core dominant, Recovery + Sleep supporting). The others are stylistic alternatives on the same data.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1 · Tick gauge (current) -->
+    <div class="card">
+      <div class="viz">
+        <svg viewBox="0 0 240 150" width="240" height="150" role="img" aria-label="Tick gauge, 82">
+          <defs><linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="var(--recovery)"/><stop offset=".5" stop-color="var(--core)"/><stop offset="1" stop-color="var(--sleep)"/>
+          </linearGradient></defs>
+          <g id="ticks1"></g>
+          <text x="120" y="118" text-anchor="middle" class="gnum" font-size="52">82</text>
+          <text x="120" y="140" text-anchor="middle" class="gstat" font-size="12">In range</text>
+        </svg>
+      </div>
+      <div class="name">1 · Tick gauge <span class="tag">Current</span></div>
+      <div class="desc">Radial ticks over a tri-hue arc. Technical, precise, calm. Reads as a measured index.</div>
+    </div>
+
+    <!-- 2 · Solid arc (270°) -->
+    <div class="card">
+      <div class="viz">
+        <svg viewBox="0 0 240 200" width="240" height="200" role="img" aria-label="Solid arc gauge, 82">
+          <defs><linearGradient id="grad2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="var(--recovery)"/><stop offset="1" stop-color="var(--core)"/>
+          </linearGradient></defs>
+          <circle cx="120" cy="108" r="86" fill="none" stroke="var(--track)" stroke-width="16"
+            stroke-linecap="round" stroke-dasharray="405.3 135.1" transform="rotate(135 120 108)"/>
+          <circle cx="120" cy="108" r="86" fill="none" stroke="url(#grad2)" stroke-width="16"
+            stroke-linecap="round" stroke-dasharray="332.4 208.0" transform="rotate(135 120 108)"/>
+          <text x="120" y="118" text-anchor="middle" class="gnum" font-size="58">82</text>
+          <text x="120" y="142" text-anchor="middle" class="gstat" font-size="12">Readiness · in range</text>
+        </svg>
+      </div>
+      <div class="name">2 · Solid arc</div>
+      <div class="desc">One clean 270° gradient stroke on a quiet track. Bold, modern, unmistakable at a glance.</div>
+    </div>
+
+    <!-- 3 · Concentric trio (PRD) -->
+    <div class="card pin">
+      <div class="viz">
+        <svg viewBox="0 0 240 172" width="240" height="172" role="img" aria-label="Three rings: Core 82, Recovery 84, Sleep 72">
+          <!-- Recovery -->
+          <g>
+            <circle cx="56" cy="140" r="27" fill="none" stroke="var(--track)" stroke-width="8"/>
+            <circle cx="56" cy="140" r="27" fill="none" stroke="var(--recovery)" stroke-width="8" stroke-linecap="round"
+              stroke-dasharray="169.6" stroke-dashoffset="27.1" transform="rotate(-90 56 140)"/>
+            <text x="56" y="145" text-anchor="middle" class="gnum" font-size="18">84</text>
+          </g>
+          <!-- Sleep -->
+          <g>
+            <circle cx="184" cy="140" r="27" fill="none" stroke="var(--track)" stroke-width="8"/>
+            <circle cx="184" cy="140" r="27" fill="none" stroke="var(--sleep)" stroke-width="8" stroke-linecap="round"
+              stroke-dasharray="169.6" stroke-dashoffset="47.5" transform="rotate(-90 184 140)"/>
+            <text x="184" y="145" text-anchor="middle" class="gnum" font-size="18">72</text>
+          </g>
+          <!-- Core (dominant) -->
+          <g>
+            <circle cx="120" cy="78" r="62" fill="none" stroke="var(--track)" stroke-width="13"/>
+            <circle cx="120" cy="78" r="62" fill="none" stroke="var(--core)" stroke-width="13" stroke-linecap="round"
+              stroke-dasharray="389.6" stroke-dashoffset="70.1" transform="rotate(-90 120 78)"/>
+            <text x="120" y="86" text-anchor="middle" class="gnum" font-size="42">82</text>
+          </g>
+        </svg>
+      </div>
+      <div class="name">3 · Concentric trio <span class="tag prd">PRD-faithful</span></div>
+      <div class="legend"><span><i style="background:var(--recovery)"></i>Recovery</span><span><i style="background:var(--core)"></i>Core</span><span><i style="background:var(--sleep)"></i>Sleep</span></div>
+      <div class="desc">The brief's model: Core dominant, Recovery + Sleep supporting. Percentages only in-ring.</div>
+    </div>
+
+    <!-- 4 · Closed ring (Oura style) -->
+    <div class="card">
+      <div class="viz">
+        <svg viewBox="0 0 240 200" width="240" height="200" role="img" aria-label="Closed ring, 82">
+          <defs><linearGradient id="grad4" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="var(--sleep)"/><stop offset=".5" stop-color="var(--recovery)"/><stop offset="1" stop-color="var(--core)"/>
+          </linearGradient></defs>
+          <circle cx="120" cy="100" r="78" fill="none" stroke="var(--track)" stroke-width="13"/>
+          <circle cx="120" cy="100" r="78" fill="none" stroke="url(#grad4)" stroke-width="13" stroke-linecap="round"
+            stroke-dasharray="490.1" stroke-dashoffset="88.2" transform="rotate(-90 120 100)"/>
+          <text x="120" y="108" text-anchor="middle" class="gnum" font-size="56">82</text>
+          <text x="120" y="132" text-anchor="middle" class="gstat" font-size="12">In range</text>
+        </svg>
+      </div>
+      <div class="name">4 · Closed ring</div>
+      <div class="desc">A single full loop (Oura-like). Complete, quiet, jewel-like. Great for a calm daily glance.</div>
+    </div>
+
+    <!-- 5 · Dotted gauge -->
+    <div class="card">
+      <div class="viz">
+        <svg viewBox="0 0 240 150" width="240" height="150" role="img" aria-label="Dotted gauge, 82">
+          <defs><linearGradient id="grad5" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="var(--recovery)"/><stop offset=".5" stop-color="var(--core)"/><stop offset="1" stop-color="var(--sleep)"/>
+          </linearGradient></defs>
+          <g id="dots5"></g>
+          <text x="120" y="118" text-anchor="middle" class="gnum" font-size="52">82</text>
+          <text x="120" y="140" text-anchor="middle" class="gstat" font-size="12">In range</text>
+        </svg>
+      </div>
+      <div class="name">5 · Dotted gauge</div>
+      <div class="desc">Pointillist semicircle. Softer and more organic than ticks; fills dot-by-dot as the score rises.</div>
+    </div>
+
+    <!-- 6 · Zone gauge + needle -->
+    <div class="card">
+      <div class="viz">
+        <svg viewBox="0 0 240 150" width="240" height="150" role="img" aria-label="Zone gauge needle, 82">
+          <defs><linearGradient id="grad6" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#6d9bd1"/><stop offset=".4" stop-color="var(--recovery)"/><stop offset=".72" stop-color="var(--core)"/><stop offset="1" stop-color="#e5675f"/>
+          </linearGradient></defs>
+          <path d="M28 132 A92 92 0 0 1 212 132" fill="none" stroke="url(#grad6)" stroke-width="13" stroke-linecap="round"/>
+          <line id="needle6" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="120" cy="132" r="5.5" fill="var(--ink)"/>
+          <text x="120" y="112" text-anchor="middle" class="gnum" font-size="44">82</text>
+          <text x="120" y="130" text-anchor="middle" class="gstat" font-size="11">In range</text>
+        </svg>
+      </div>
+      <div class="name">6 · Zone gauge</div>
+      <div class="desc">Coloured zones + needle (speedometer feel). Best when the value should read against named ranges.</div>
+    </div>
+
+  </div>
+
+  <p class="foot">All six use the same sample value. Tell me which direction to take, and I'll wire it into the Day home screen (and add the learning/empty state).</p>
+</div>
+
+<script>
+function polar(cx,cy,r,deg){var a=deg*Math.PI/180;return[cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+// 1 · ticks
+(function(){var g=document.getElementById('ticks1');if(!g)return;var N=44,cx=120,cy=132,rO=112,len=14,lit=Math.round(82/100*N),s='';
+  for(var i=0;i<N;i++){var a=180+i/(N-1)*180,p1=polar(cx,cy,rO,a),p2=polar(cx,cy,rO-len,a),on=i<lit;
+    s+='<line x1="'+p1[0].toFixed(1)+'" y1="'+p1[1].toFixed(1)+'" x2="'+p2[0].toFixed(1)+'" y2="'+p2[1].toFixed(1)+'" stroke="'+(on?'url(#grad1)':'var(--track)')+'" stroke-width="2.6" stroke-linecap="round"'+(on?'':' opacity=".6"')+'/>';}
+  g.innerHTML=s;})();
+// 5 · dots
+(function(){var g=document.getElementById('dots5');if(!g)return;var N=40,cx=120,cy=132,r=106,lit=Math.round(82/100*N),s='';
+  for(var i=0;i<N;i++){var a=180+i/(N-1)*180,p=polar(cx,cy,r,a),on=i<lit;
+    s+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="3.1" fill="'+(on?'url(#grad5)':'var(--track)')+'"'+(on?'':' opacity=".7"')+'/>';}
+  g.innerHTML=s;})();
+// 6 · needle
+(function(){var n=document.getElementById('needle6');if(!n)return;var cx=120,cy=132,a=180+82/100*180,t=polar(cx,cy,78,a);
+  n.setAttribute('x1',cx);n.setAttribute('y1',cy);n.setAttribute('x2',t[0].toFixed(1));n.setAttribute('y2',t[1].toFixed(1));})();
+</script>
