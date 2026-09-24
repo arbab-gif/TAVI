@@ -702,6 +702,59 @@ button.tapq{padding:6px}
 .fbody .fb-cbar{flex:1;height:6px;border-radius:4px;background:var(--track);overflow:hidden}
 .fbody .fb-cbar span{display:block;height:100%;border-radius:4px}
 .fbody .fb-cn{font-size:11px;color:var(--ink3);width:78px;flex:0 0 auto;text-align:right}
+.fbody .fb-open{font-size:12px;font-weight:700;color:var(--core);flex:0 0 auto;margin-left:10px}
+
+/* ============================================================
+   DETAIL OVERLAY — reusable pushed detail screen
+   ============================================================ */
+.detail{position:absolute;inset:0;z-index:20;background:var(--app);display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .32s cubic-bezier(.2,.7,.2,1);visibility:hidden}
+.detail.open{transform:translateX(0);visibility:visible}
+@media (prefers-reduced-motion:reduce){.detail{transition:none}}
+.d-head{display:flex;align-items:center;gap:12px;padding:16px 18px 10px;flex:0 0 auto}
+.d-back{width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);background:var(--surface);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto}
+.d-back:hover{background:var(--surface2)}
+.d-back svg{width:18px;height:18px}
+.d-title{flex:1;font-family:var(--font-d);font-weight:600;font-size:18px;letter-spacing:-.01em}
+.d-ask{font-size:12.5px;font-weight:600;color:var(--teal);background:color-mix(in srgb,var(--teal) 14%,transparent);
+  border:1px solid color-mix(in srgb,var(--teal) 30%,var(--line));border-radius:999px;padding:8px 14px;cursor:pointer}
+.d-back:focus-visible,.d-ask:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.d-body{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;padding:6px 18px 40px}
+.d-body::-webkit-scrollbar{display:none}
+.d-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.d-chips::-webkit-scrollbar{display:none}
+.d-chip{flex:0 0 auto;font-size:12.5px;font-weight:600;color:var(--ink3);background:var(--surface);
+  border:1px solid var(--line2);border-radius:999px;padding:8px 15px;cursor:pointer;transition:.2s}
+.d-chip.on{color:var(--ink);background:var(--surface2);border-color:var(--ink3)}
+.d-chip:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.d-hero{margin-top:18px}
+.d-val{font-family:var(--font-d);font-weight:200;font-size:52px;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.d-val small{font-size:18px;color:var(--ink3);font-weight:400;font-family:var(--font-u);margin-left:5px}
+.d-sub{font-size:13px;color:var(--ink2);margin-top:8px}
+.d-chart{margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px 14px 12px}
+.d-chart svg{width:100%;height:150px;display:block}
+.d-axis{display:grid;grid-template-columns:repeat(7,1fr);font-size:10px;color:var(--ink3);text-align:center;margin-top:8px}
+.d-readout{font-size:12.5px;color:var(--ink2);margin-top:10px;min-height:16px}
+.d-readout b{color:var(--ink);font-weight:700}
+.d-rows{margin-top:14px;border-top:1px solid var(--line)}
+.d-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}
+.d-k{font-size:13px;color:var(--ink3)}
+.d-v{font-size:13.5px;font-weight:600}
+.d-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin:24px 0 2px}
+.detail .fcommits{margin-top:6px}
+.detail .fcommit{display:flex;align-items:center;gap:13px;width:100%;background:none;border:none;cursor:pointer;
+  text-align:left;font-family:var(--font-u);color:var(--ink);padding:14px 2px}
+.detail .fcommit+.fcommit{border-top:1px solid var(--line)}
+.detail .fcommit:focus-visible{outline:2px solid var(--core);outline-offset:-2px;border-radius:12px}
+.detail .fc-ic{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;
+  justify-content:center;flex:0 0 auto;color:var(--ink3)}
+.detail .fc-ic svg{width:18px;height:18px}
+.detail .fc-x{flex:1;min-width:0}
+.detail .fc-t{font-size:14px;font-weight:600;display:block}
+.detail .fc-s{font-size:12px;color:var(--ink3);margin-top:2px;display:block}
+.detail .fc-st{color:var(--ink3);font-weight:700;flex:0 0 auto}
+.d-note{font-size:12.5px;color:var(--ink2);line-height:1.55;margin:8px 0 0}
 </style>
 
 <div class="stage">
@@ -987,10 +1040,10 @@ button.tapq{padding:6px}
               <button class="fseg on" id="trend7" role="tab" aria-selected="true">7 Days</button>
               <button class="fseg" id="trend30" role="tab" aria-selected="false">30 Days</button>
             </div>
-            <button class="fb-card" data-metric="Resting HR trend">
+            <button class="fb-card" id="trendsCard" aria-haspopup="dialog">
               <div class="fb-row"><div><div class="fv-v" style="margin-top:0"><span id="trendVal">68</span><small>bpm</small></div><div class="fb-sub" id="trendLbl">Resting HR · 7-day average</div></div><span class="fb-badge" id="trendObs" style="color:var(--ink2);background:var(--surface2)">7 valid days</span></div>
               <div class="fv-area" style="height:56px"><svg viewBox="0 0 320 60" preserveAspectRatio="none"><polyline fill="none" stroke="var(--core)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="0,40 46,34 92,38 137,30 183,32 229,22 274,26 320,20"/><circle cx="320" cy="20" r="3.5" fill="var(--core)"/></svg></div>
-              <div class="fb-meta" id="trendCmp">Compared with the previous 7 days · trending down 3 bpm</div>
+              <div class="fb-row" style="align-items:center"><div class="fb-meta" id="trendCmp" style="margin-top:0">Compared with the previous 7 days · trending down 3 bpm</div><span class="fb-open">View detail ›</span></div>
             </button>
 
             <!-- 30-day report -->
@@ -1054,6 +1107,69 @@ button.tapq{padding:6px}
           </section>
 
         </div><!-- /viewport -->
+
+        <!-- ============ TRENDS DETAIL (overlay) ============ -->
+        <section class="detail" id="detailTrends" role="dialog" aria-modal="true" aria-label="Trends detail" aria-hidden="true">
+          <div class="d-head">
+            <button class="d-back" id="trendsBack" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="d-title">Trends</div>
+            <button class="d-ask" id="trendsAsk">Ask about this</button>
+          </div>
+          <div class="d-body">
+            <div class="d-chips" role="tablist" aria-label="Metric">
+              <button class="d-chip on" data-tmetric="rhr" role="tab" aria-selected="true">Resting HR</button>
+              <button class="d-chip" data-tmetric="hrv" role="tab" aria-selected="false">HRV</button>
+              <button class="d-chip" data-tmetric="steps" role="tab" aria-selected="false">Steps</button>
+              <button class="d-chip" data-tmetric="sleep" role="tab" aria-selected="false">Sleep</button>
+            </div>
+
+            <div class="d-hero">
+              <div class="d-val"><span id="tdVal">68</span><small id="tdUnit">bpm</small></div>
+              <div class="d-sub" id="tdLbl">Resting HR · 7-day average</div>
+            </div>
+
+            <div class="fsegs" role="tablist" aria-label="Range" style="margin-top:14px">
+              <button class="fseg on" id="td7" role="tab" aria-selected="true">7 Days</button>
+              <button class="fseg" id="td30" role="tab" aria-selected="false">30 Days</button>
+            </div>
+
+            <div class="d-chart">
+              <svg id="tdChart" viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Trend chart">
+                <g stroke="var(--line)" stroke-width="1">
+                  <line x1="0" y1="30" x2="320" y2="30"/><line x1="0" y1="70" x2="320" y2="70"/><line x1="0" y1="110" x2="320" y2="110"/>
+                </g>
+                <path id="tdFill" fill="url(#tdGrad)" d=""/>
+                <polyline id="tdLine" fill="none" stroke="var(--core)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points=""/>
+                <circle id="tdDot" r="4" fill="var(--core)" cx="0" cy="0"/>
+                <defs><linearGradient id="tdGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--core)" stop-opacity=".3"/><stop offset="1" stop-color="var(--core)" stop-opacity="0"/></linearGradient></defs>
+              </svg>
+              <div class="d-axis"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+            </div>
+            <div class="d-readout" id="tdReadout">Tap the chart to read an exact value, time and source.</div>
+
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Comparison period</span><span class="d-v" id="tdCmpP">Previous 7 days</span></div>
+              <div class="d-row"><span class="d-k">Observations</span><span class="d-v" id="tdObs">7 valid days</span></div>
+              <div class="d-row"><span class="d-k">Trend</span><span class="d-v" id="tdTrend" style="color:var(--recovery)">↓ 3 bpm</span></div>
+            </div>
+
+            <div class="d-label">Contributors</div>
+            <div class="fcommits">
+              <button class="fcommit" data-metric="Contributor: Sleep"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M50 44.5" transform="scale(0)"/><path d="M20 14.5A8.5 8.5 0 1 1 10.3 5 6.6 6.6 0 0 0 20 14.5Z"/></svg></span><span class="fc-x"><span class="fc-t">Sleep</span><span class="fc-s">Longer, steadier sleep lowers resting HR</span></span><span class="fc-st">›</span></button>
+              <button class="fcommit" data-metric="Contributor: Recovery"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 2.3 5.6"/><path d="M4 18v-5h5"/></svg></span><span class="fc-x"><span class="fc-t">Recovery</span><span class="fc-s">Higher recovery supports a lower baseline</span></span><span class="fc-st">›</span></button>
+            </div>
+
+            <div class="d-label">Source &amp; coverage</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Source</span><span class="d-v">TAVI Band</span></div>
+              <div class="d-row"><span class="d-k">Window</span><span class="d-v">Overnight</span></div>
+              <div class="d-row"><span class="d-k">Coverage</span><span class="d-v" id="tdCov">7 of 7 nights</span></div>
+            </div>
+
+            <div class="d-label">How it is measured</div>
+            <p class="d-note">Resting HR is the lowest sustained heart rate detected during overnight wear. The trend is the average across valid nights in the selected range. Ranges with too few valid nights are shown honestly, not filled in.</p>
+          </div>
+        </section>
 
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -1144,6 +1260,77 @@ button.tapq{padding:6px}
     }
     t7.addEventListener('click',function(){set(true);});
     t30.addEventListener('click',function(){set(false);});
+  })();
+
+  // Body → Trends detail overlay
+  (function(){
+    var card=document.getElementById('trendsCard'),ov=document.getElementById('detailTrends');
+    if(!card||!ov)return;
+    var back=document.getElementById('trendsBack'),ask=document.getElementById('trendsAsk');
+    var val=document.getElementById('tdVal'),unit=document.getElementById('tdUnit'),lbl=document.getElementById('tdLbl');
+    var line=document.getElementById('tdLine'),fill=document.getElementById('tdFill'),dot=document.getElementById('tdDot'),
+        chart=document.getElementById('tdChart'),grad=document.querySelector('#tdGrad'),
+        readout=document.getElementById('tdReadout');
+    var cmpP=document.getElementById('tdCmpP'),obs=document.getElementById('tdObs'),trend=document.getElementById('tdTrend'),cov=document.getElementById('tdCov');
+    var s7=document.getElementById('td7'),s30=document.getElementById('td30');
+    var chips=[].slice.call(ov.querySelectorAll('.d-chip'));
+    var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    function hm(m){return Math.floor(m/60)+'h '+(m%60)+'m';}
+    var DATA={
+      rhr:{unit:'bpm',color:'var(--core)',dir:'down',
+        d7:{disp:'68',pts:[62,58,60,55,57,50,54],cmp:'Previous 7 days',obs:'7 valid days',tr:'↓ 3 bpm',cov:'7 of 7 nights'},
+        d30:{disp:'66',pts:[65,63,61,60,58,55,52],cmp:'Previous 30 days',obs:'26 valid days',tr:'↓ 2 bpm',cov:'26 of 30 nights'}},
+      hrv:{unit:'ms',color:'var(--sleep)',dir:'up',
+        d7:{disp:'45',pts:[38,42,40,48,44,52,50],cmp:'Previous 7 days',obs:'7 valid nights',tr:'↑ 2 ms',cov:'7 of 7 nights'},
+        d30:{disp:'47',pts:[40,42,44,45,47,49,50],cmp:'Previous 30 days',obs:'25 valid nights',tr:'↑ 3 ms',cov:'25 of 30 nights'}},
+      steps:{unit:'steps',color:'var(--recovery)',dir:'up',
+        d7:{disp:'7,980',pts:[6800,7200,8100,7600,8400,9100,8432],cmp:'Previous 7 days',obs:'7 of 7 days',tr:'↑ 6%',cov:'7 of 7 days'},
+        d30:{disp:'7,540',pts:[6900,7100,7400,7300,7600,7800,7540],cmp:'Previous 30 days',obs:'28 of 30 days',tr:'↑ 4%',cov:'28 of 30 days'}},
+      sleep:{unit:'',color:'var(--sleep)',dir:'up',fmt:hm,
+        d7:{disp:hm(438),pts:[402,428,415,450,438,462,448],cmp:'Previous 7 days',obs:'7 valid nights',tr:'↑ 22 min',cov:'7 of 7 nights'},
+        d30:{disp:hm(431),pts:[410,418,425,430,435,440,431],cmp:'Previous 30 days',obs:'26 valid nights',tr:'↑ 12 min',cov:'26 of 30 nights'}}
+    };
+    var cur='rhr',is7=true,lastLabel='';
+    function coords(pts){
+      var mn=Math.min.apply(null,pts),mx=Math.max.apply(null,pts),rng=(mx-mn)||1;
+      return pts.map(function(v,i){return [i/(pts.length-1)*320, 130-((v-mn)/rng)*100];});
+    }
+    function render(){
+      var m=DATA[cur],r=is7?m.d7:m.d30;
+      val.textContent=r.disp;
+      unit.textContent=m.fmt?'':m.unit;
+      var nm={rhr:'Resting HR',hrv:'HRV',steps:'Steps',sleep:'Sleep'}[cur];
+      lbl.textContent=nm+' · '+(is7?'7-day average':'30-day average');
+      cmpP.textContent=r.cmp;obs.textContent=r.obs;trend.textContent=r.tr;cov.textContent=r.cov;
+      trend.style.color=(m.dir==='up')?'var(--recovery)':'var(--recovery)';
+      line.setAttribute('stroke',m.color);dot.setAttribute('fill',m.color);
+      var stops=grad.querySelectorAll('stop');stops[0].setAttribute('stop-color',m.color);stops[1].setAttribute('stop-color',m.color);
+      var pc=coords(r.pts);
+      line.setAttribute('points',pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' '));
+      fill.setAttribute('d','M'+pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ')+' L320,150 L0,150 Z');
+      var last=pc[pc.length-1];dot.setAttribute('cx',last[0].toFixed(1));dot.setAttribute('cy',last[1].toFixed(1));
+      readout.innerHTML='Tap the chart to read an exact value, time and source.';
+    }
+    function setChip(key){cur=key;chips.forEach(function(c){var on=c.dataset.tmetric===key;c.classList.toggle('on',on);c.setAttribute('aria-selected',on?'true':'false');});render();}
+    function setRange(v){is7=v;s7.classList.toggle('on',v);s30.classList.toggle('on',!v);s7.setAttribute('aria-selected',v?'true':'false');s30.setAttribute('aria-selected',v?'false':'true');render();}
+    chips.forEach(function(c){c.addEventListener('click',function(){setChip(c.dataset.tmetric);});});
+    s7.addEventListener('click',function(){setRange(true);});
+    s30.addEventListener('click',function(){setRange(false);});
+    chart.addEventListener('click',function(e){
+      var m=DATA[cur],r=is7?m.d7:m.d30,n=r.pts.length;
+      var rect=chart.getBoundingClientRect();
+      var i=Math.round((e.clientX-rect.left)/rect.width*(n-1));i=Math.max(0,Math.min(n-1,i));
+      var v=m.fmt?m.fmt(r.pts[i]):r.pts[i]+(cur==='steps'?'':' '+m.unit);
+      if(cur==='steps')v=r.pts[i].toLocaleString()+' steps';
+      var when=is7?days[i]:'Day '+(i*4+2);
+      readout.innerHTML='<b>'+v+'</b> · '+when+' · TAVI Band';
+    });
+    function open(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');setChip('rhr');setRange(true);}
+    function close(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}
+    card.addEventListener('click',open);
+    back.addEventListener('click',close);
+    ask.addEventListener('click',function(){openToast('Ask opens with context · '+ ({rhr:'Resting HR',hrv:'HRV',steps:'Steps',sleep:'Sleep'}[cur]) +' · '+(is7?'7 days':'30 days'));});
+    render();
   })();
 
   // toast
