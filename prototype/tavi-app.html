@@ -941,7 +941,7 @@ button.tapq{padding:6px}
                 <div class="fv-v">58<small>bpm</small></div>
               </button>
             </div>
-            <button class="fvcard fwide" data-metric="HRV">
+            <button class="fvcard fwide js-hrv">
               <div class="fv-h">
                 <div><div class="fv-t">HRV HR</div><div class="fv-s">Overnight</div></div>
                 <span class="fv-ic" style="color:var(--sleep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-5 3 10 2-7 2 4h3l2-2h3"/></svg></span>
@@ -1035,7 +1035,7 @@ button.tapq{padding:6px}
                 <div class="fv-v">58<small>bpm</small></div>
               </button>
             </div>
-            <button class="fvcard fwide" data-metric="HRV detail">
+            <button class="fvcard fwide js-hrv">
               <div class="fv-h"><div><div class="fv-t">HRV HR</div><div class="fv-s">Overnight · measured during sleep</div></div><span class="fv-ic" style="color:var(--sleep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-5 3 10 2-7 2 4h3l2-2h3"/></svg></span></div>
               <div class="fv-area"><svg viewBox="0 0 320 74" preserveAspectRatio="none"><defs><linearGradient id="hrvFillB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sleep)" stop-opacity=".38"/><stop offset="1" stop-color="var(--sleep)" stop-opacity="0"/></linearGradient></defs><path d="M0,50 46,44 92,52 137,30 183,40 229,22 274,34 320,10 V74 H0 Z" fill="url(#hrvFillB)"/><polyline fill="none" stroke="var(--sleep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points="0,50 46,44 92,52 137,30 183,40 229,22 274,34 320,10"/><circle cx="320" cy="10" r="4" fill="var(--sleep)"/></svg></div>
               <div class="fv-days wide"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class="on">S</span></div>
@@ -1555,6 +1555,61 @@ button.tapq{padding:6px}
           </div>
         </section>
 
+        <!-- ============ HRV DETAIL (overlay) ============ -->
+        <section class="detail" id="detailHrv" role="dialog" aria-modal="true" aria-label="HRV detail" aria-hidden="true">
+          <div class="d-head">
+            <button class="d-back" id="hrvBack" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="d-title">HRV</div>
+            <button class="d-ask" id="hrvAsk">Ask about this</button>
+          </div>
+          <div class="d-body">
+            <div class="d-hero">
+              <div class="d-val" id="hrvVal"><span>45</span><small>ms</small></div>
+              <div class="d-sub" id="hrvSub">Overnight HRV · measured during sleep</div>
+            </div>
+
+            <div class="d-label">Method &amp; window</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Measurement</span><span class="d-v">RMSSD, overnight</span></div>
+              <div class="d-row"><span class="d-k">Window</span><span class="d-v">01:10 – 06:44</span></div>
+              <div class="d-row"><span class="d-k">Source</span><span class="d-v">TAVI Band</span></div>
+              <div class="d-row"><span class="d-k">Samples</span><span class="d-v" id="hrvSamples">Valid overnight reading</span></div>
+            </div>
+
+            <div class="d-label">Last 7 nights</div>
+            <div class="d-chart">
+              <svg id="hrvChart" viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="HRV, last 7 nights">
+                <g stroke="var(--line)" stroke-width="1"><line x1="0" y1="30" x2="320" y2="30"/><line x1="0" y1="70" x2="320" y2="70"/><line x1="0" y1="110" x2="320" y2="110"/></g>
+                <path id="hrvFillD" fill="url(#hrvGradD)" d=""/>
+                <polyline id="hrvLine" fill="none" stroke="var(--sleep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points=""/>
+                <circle id="hrvDot" r="4" fill="var(--sleep)" cx="0" cy="0"/>
+                <defs><linearGradient id="hrvGradD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sleep)" stop-opacity=".34"/><stop offset="1" stop-color="var(--sleep)" stop-opacity="0"/></linearGradient></defs>
+              </svg>
+              <div class="d-axis"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+            </div>
+            <div class="d-readout" id="hrvReadout">Tap a night to read its exact value.</div>
+
+            <div class="d-label">Your usual</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Typical overnight range</span><span class="d-v">38 – 52 ms</span></div>
+              <div class="d-row"><span class="d-k">Tonight vs usual</span><span class="d-v" style="color:var(--recovery)">In range</span></div>
+            </div>
+
+            <div class="d-compare">
+              <div class="dcmp-h" style="color:var(--sleep)">What this means</div>
+              <div class="dcmp-b">Tonight's HRV is within your normal range. A <b>higher HRV</b> usually points to better recovery, but it's personal — TAVI compares you to your own baseline, not to other people.</div>
+            </div>
+
+            <div class="d-label">How it is measured</div>
+            <p class="d-note">HRV is the variation in time between heartbeats, measured overnight during sleep — <b>it is not your heart rate</b>. When there is no valid overnight measurement, TAVI shows <b>-- ms</b> (unavailable), never 0. A change in method or source stays visible on your history.</p>
+
+            <div class="d-note" style="margin-top:14px;display:flex;align-items:center;gap:10px">
+              <button class="fseg" id="hrvToggle" style="flex:0 0 auto">Preview: no valid reading</button>
+              <span style="color:var(--ink3)">See the honest unavailable state.</span>
+            </div>
+          </div>
+        </section>
+
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
         <nav class="tabbar" role="tablist" aria-label="Main">
@@ -1838,6 +1893,49 @@ button.tapq{padding:6px}
     back.addEventListener('click',close);
     [].forEach.call(document.querySelectorAll('.js-recovery'),function(el){el.addEventListener('click',open);});
     draw();setDate();
+  })();
+
+  // HRV detail overlay
+  (function(){
+    var ov=document.getElementById('detailHrv');if(!ov)return;
+    var back=document.getElementById('hrvBack'),ask=document.getElementById('hrvAsk'),
+        chart=document.getElementById('hrvChart'),line=document.getElementById('hrvLine'),
+        fill=document.getElementById('hrvFillD'),dot=document.getElementById('hrvDot'),
+        readout=document.getElementById('hrvReadout'),val=document.getElementById('hrvVal'),sub=document.getElementById('hrvSub'),
+        toggle=document.getElementById('hrvToggle'),chartWrap=chart.parentNode,samples=document.getElementById('hrvSamples');
+    var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    var vals=[38,42,40,48,44,52,45];
+    var pc=(function(){var mn=Math.min.apply(null,vals),mx=Math.max.apply(null,vals),rng=(mx-mn)||1;
+      return vals.map(function(v,i){return [i/(vals.length-1)*320,130-((v-mn)/rng)*100];});})();
+    function draw(){
+      line.setAttribute('points',pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' '));
+      fill.setAttribute('d','M'+pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ')+' L320,150 L0,150 Z');
+      var l=pc[pc.length-1];dot.setAttribute('cx',l[0].toFixed(1));dot.setAttribute('cy',l[1].toFixed(1));
+    }
+    chart.addEventListener('click',function(e){
+      if(unavailable)return;
+      var rect=chart.getBoundingClientRect();
+      var i=Math.round((e.clientX-rect.left)/rect.width*(vals.length-1));i=Math.max(0,Math.min(vals.length-1,i));
+      dot.setAttribute('cx',pc[i][0].toFixed(1));dot.setAttribute('cy',pc[i][1].toFixed(1));
+      readout.innerHTML='<b>'+vals[i]+' ms</b> · '+days[i]+' · TAVI Band';
+    });
+    var unavailable=false;
+    function setUnavail(on){
+      unavailable=on;
+      if(on){ val.innerHTML='<span>--</span><small>ms</small>'; sub.textContent='HRV unavailable · No valid overnight measurement';
+        chartWrap.style.opacity='.3'; readout.textContent='No valid overnight measurement — shown as -- , never 0.';
+        if(samples){samples.textContent='No valid reading';} toggle.textContent='Preview: valid reading'; toggle.classList.add('on'); }
+      else{ val.innerHTML='<span>45</span><small>ms</small>'; sub.textContent='Overnight HRV · measured during sleep';
+        chartWrap.style.opacity=''; readout.textContent='Tap a night to read its exact value.';
+        if(samples){samples.textContent='Valid overnight reading';} toggle.textContent='Preview: no valid reading'; toggle.classList.remove('on'); }
+    }
+    toggle.addEventListener('click',function(){setUnavail(!unavailable);});
+    function open(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');ov.querySelector('.d-body').scrollTop=0;setUnavail(false);draw();}
+    function close(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}
+    back.addEventListener('click',close);
+    ask.addEventListener('click',function(){openToast('Ask opens with context · HRV · Overnight');});
+    [].forEach.call(document.querySelectorAll('.js-hrv'),function(el){el.addEventListener('click',open);});
+    draw();
   })();
 
   // toast
