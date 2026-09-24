@@ -768,6 +768,41 @@ button.tapq{padding:6px}
 .d-cbar span{display:block;height:100%;border-radius:4px}
 .d-cn{font-size:11.5px;color:var(--ink3);width:82px;flex:0 0 auto;text-align:right}
 .d-swatch{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle}
+
+/* sleep detail specifics */
+.d-datenav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+.d-nav{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);background:var(--surface);color:var(--ink2);
+  display:flex;align-items:center;justify-content:center;cursor:pointer}
+.d-nav:hover{background:var(--surface2);color:var(--ink)}
+.d-nav svg{width:16px;height:16px}
+.d-date{font-size:13.5px;font-weight:600;color:var(--ink)}
+.d-gauge{position:relative;width:100%;max-width:220px;margin:18px auto 0}
+.d-gauge svg{width:100%;height:auto;display:block;overflow:visible}
+.d-gnum{position:absolute;left:0;right:0;top:44%;transform:translateY(-50%);text-align:center;
+  font-family:var(--font-d);font-weight:600;font-size:38px;letter-spacing:-.02em}
+.d-gnum span{font-size:.5em;font-weight:400;color:var(--ink2);margin-left:1px}
+.d-mean{font-size:13.5px;line-height:1.55;color:var(--ink2);text-align:center;margin:14px 2px 0}
+.d-mean b{color:var(--ink);font-weight:600}
+.d-contribs{margin-top:8px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:4px 16px;
+  border-top-color:color-mix(in srgb,var(--line) 55%,var(--hairline))}
+.d-contrib{display:flex;align-items:center;gap:13px;width:100%;background:none;border:none;cursor:pointer;
+  text-align:left;font-family:var(--font-u);color:var(--ink);padding:14px 0}
+.d-contrib+.d-contrib{border-top:1px solid var(--line)}
+.d-contrib:focus-visible{outline:2px solid var(--core);outline-offset:-2px;border-radius:10px}
+.dc-ic{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;
+  justify-content:center;flex:0 0 auto;color:var(--sleep)}
+.dc-ic svg{width:17px;height:17px}
+.dc-x{flex:1;min-width:0}
+.dc-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.dc-t{font-size:14px;font-weight:600}
+.dc-v{font-size:13.5px;font-weight:600;color:var(--ink2);flex:0 0 auto}
+.dc-bar{display:block;height:5px;border-radius:3px;background:var(--track);overflow:hidden;margin-top:8px}
+.dc-bar span{display:block;height:100%;border-radius:3px}
+.d-compare{background:color-mix(in srgb,var(--sleep) 14%,var(--surface));
+  border:1px solid color-mix(in srgb,var(--sleep) 30%,var(--line));border-radius:18px;padding:16px 18px;margin-top:18px}
+.dcmp-h{font-size:12px;font-weight:700;color:var(--sleep);letter-spacing:.02em}
+.dcmp-b{font-size:14px;line-height:1.5;color:var(--ink);margin-top:8px}
+.dcmp-b b{font-weight:700}
 </style>
 
 <div class="stage">
@@ -867,7 +902,7 @@ button.tapq{padding:6px}
             </div>
 
             <!-- today's insight -->
-            <button class="finsight" id="dayInsight" data-metric="Sleep detail">
+            <button class="finsight js-sleep" id="dayInsight">
               <div class="fi-h">Today's Insight</div>
               <div class="fi-b">Your sleep ran <b>45 minutes</b> longer than your usual a good window to take on load today.</div>
               <span class="fi-ev">View evidence <span class="fi-arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></span>
@@ -967,7 +1002,7 @@ button.tapq{padding:6px}
                 <div class="fring-viz lg"><svg viewBox="0 0 120 120" role="img" aria-label="Core 64"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--track)" stroke-width="9"/><circle cx="60" cy="60" r="50" fill="none" stroke="var(--core)" stroke-width="9" stroke-linecap="round" stroke-dasharray="314.2" stroke-dashoffset="113.1" transform="rotate(-90 60 60)"/><circle cx="60" cy="60" r="7" fill="none" stroke="var(--core)" stroke-width="2"/><circle cx="60" cy="60" r="2.2" fill="var(--core)"/></svg></div>
                 <div class="fring-num">64<span>%</span></div><div class="fring-nm">Core</div>
               </button>
-              <button class="fring" data-metric="Sleep detail">
+              <button class="fring js-sleep">
                 <div class="fring-viz sm"><svg viewBox="0 0 88 88" role="img" aria-label="Sleep 78"><circle cx="44" cy="44" r="36" fill="none" stroke="var(--track)" stroke-width="7"/><circle cx="44" cy="44" r="36" fill="none" stroke="var(--sleep)" stroke-width="7" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="49.8" transform="rotate(-90 44 44)"/><path d="M50 44.5A6.4 6.4 0 1 1 43.5 38 5 5 0 0 0 50 44.5Z" fill="none" stroke="var(--sleep)" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
                 <div class="fring-num">78<span>%</span></div><div class="fring-nm">Sleep</div>
               </button>
@@ -998,7 +1033,7 @@ button.tapq{padding:6px}
 
             <!-- sleep -->
             <div class="flabel">Sleep</div>
-            <button class="fb-card" data-metric="Sleep detail">
+            <button class="fb-card js-sleep">
               <div class="fb-row"><div><div class="fv-v" style="margin-top:0">7<small>h</small> 28<small>m</small></div><div class="fb-sub">Time asleep · Sleep score 78</div></div><span class="fb-badge" style="color:var(--sleep);background:color-mix(in srgb,var(--sleep) 18%,transparent)">Good</span></div>
               <div class="fb-stages"><span style="flex:18;background:var(--sleep)"></span><span style="flex:52;background:color-mix(in srgb,var(--sleep) 55%,var(--track))"></span><span style="flex:22;background:color-mix(in srgb,var(--recovery) 60%,var(--track))"></span><span style="flex:8;background:var(--track)"></span></div>
               <div class="fb-legend"><span>Deep 1h20</span><span>Light 3h52</span><span>REM 1h38</span><span>Awake 18m</span></div>
@@ -1243,6 +1278,75 @@ button.tapq{padding:6px}
           </div>
         </section>
 
+        <!-- ============ SLEEP DETAIL (overlay) ============ -->
+        <section class="detail" id="detailSleep" role="dialog" aria-modal="true" aria-label="Sleep detail" aria-hidden="true">
+          <div class="d-head">
+            <button class="d-back" id="sleepBack" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="d-title">Sleep</div>
+            <button class="d-ask" data-metric="Share Sleep">Share</button>
+          </div>
+          <div class="d-body">
+            <div class="d-datenav">
+              <button class="d-nav" id="sleepPrev" aria-label="Previous day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+              <div class="d-date" id="sleepDate">Today · 14 Sep</div>
+              <button class="d-nav" id="sleepNext" aria-label="Next day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+            </div>
+
+            <div class="d-gauge">
+              <svg viewBox="0 0 200 132" role="img" aria-label="Sleep 78 percent">
+                <circle cx="100" cy="96" r="62" fill="none" stroke="var(--track)" stroke-width="13" stroke-linecap="round" stroke-dasharray="292.2 97.4" transform="rotate(135 100 96)"/>
+                <circle cx="100" cy="96" r="62" fill="none" stroke="var(--sleep)" stroke-width="13" stroke-linecap="round" stroke-dasharray="227.9 161.7" transform="rotate(135 100 96)"/>
+              </svg>
+              <div class="d-gnum">78<span>%</span></div>
+            </div>
+            <p class="d-mean">7h 34m in bed, mostly restful. You slept <b>42 minutes longer</b> than your 7-day average — the main reason Recovery is high.</p>
+
+            <div class="d-label">Contributors</div>
+            <div class="d-contribs">
+              <button class="d-contrib" data-metric="Sleep duration">
+                <span class="dc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+                <span class="dc-x"><span class="dc-top"><span class="dc-t">Sleep duration</span><span class="dc-v">7h 34m</span></span><span class="dc-bar"><span style="width:94%;background:var(--sleep)"></span></span></span>
+              </button>
+              <button class="d-contrib" data-metric="Deep sleep">
+                <span class="dc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 10.3 5 6.6 6.6 0 0 0 20 14.5Z"/></svg></span>
+                <span class="dc-x"><span class="dc-top"><span class="dc-t">Deep sleep</span><span class="dc-v">1h 18m</span></span><span class="dc-bar"><span style="width:42%;background:var(--sleep)"></span></span></span>
+              </button>
+              <button class="d-contrib" data-metric="Sleep efficiency">
+                <span class="dc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></span>
+                <span class="dc-x"><span class="dc-top"><span class="dc-t">Sleep efficiency</span><span class="dc-v">91%</span></span><span class="dc-bar"><span style="width:91%;background:var(--recovery)"></span></span></span>
+              </button>
+            </div>
+
+            <div class="d-label">Last 7 nights</div>
+            <div class="d-chart">
+              <svg id="slChart" viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Sleep score, last 7 nights">
+                <g stroke="var(--line)" stroke-width="1"><line x1="0" y1="30" x2="320" y2="30"/><line x1="0" y1="70" x2="320" y2="70"/><line x1="0" y1="110" x2="320" y2="110"/></g>
+                <path id="slFill" fill="url(#slGrad)" d="M0,110 46,66 92,118 137,42 183,124 229,58 274,50 320,72 L320,150 L0,150 Z"/>
+                <polyline id="slLine" fill="none" stroke="var(--sleep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points="0,110 46,66 92,118 137,42 183,124 229,58 274,50 320,72"/>
+                <circle id="slDot" r="4" fill="var(--sleep)" cx="320" cy="72"/>
+                <defs><linearGradient id="slGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sleep)" stop-opacity=".34"/><stop offset="1" stop-color="var(--sleep)" stop-opacity="0"/></linearGradient></defs>
+              </svg>
+              <div class="d-axis"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+            </div>
+            <div class="d-readout" id="slReadout">Tap a night to read its exact score.</div>
+
+            <div class="d-compare">
+              <div class="dcmp-h">Compared to you</div>
+              <div class="dcmp-b">Longer than <b>5 of your last 7 nights</b>. Your usual bedtime is 23:40; last night was 23:52.</div>
+            </div>
+
+            <div class="d-label">Source &amp; window</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Source</span><span class="d-v">TAVI Band</span></div>
+              <div class="d-row"><span class="d-k">Window</span><span class="d-v">11:52 PM – 7:26 AM</span></div>
+              <div class="d-row"><span class="d-k">Coverage</span><span class="d-v">7h 34m valid</span></div>
+            </div>
+
+            <div class="d-label">How this is measured</div>
+            <p class="d-note">Sleep score blends total sleep time with deep and REM proportions and interruptions. Duration alone is shown separately above. Daytime sleep is counted when detected.</p>
+          </div>
+        </section>
+
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
         <nav class="tabbar" role="tablist" aria-label="Main">
@@ -1397,6 +1501,41 @@ button.tapq{padding:6px}
     var back=document.getElementById('reportBack');
     card.addEventListener('click',function(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');});
     back.addEventListener('click',function(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');});
+  })();
+
+  // Sleep detail overlay
+  (function(){
+    var ov=document.getElementById('detailSleep');if(!ov)return;
+    var back=document.getElementById('sleepBack'),chart=document.getElementById('slChart'),
+        line=document.getElementById('slLine'),fill=document.getElementById('slFill'),dot=document.getElementById('slDot'),
+        readout=document.getElementById('slReadout'),dateEl=document.getElementById('sleepDate'),
+        prev=document.getElementById('sleepPrev'),next=document.getElementById('sleepNext');
+    var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    var scores=[58,79,52,88,50,80,78];
+    var pc=(function(){var mn=Math.min.apply(null,scores),mx=Math.max.apply(null,scores),rng=(mx-mn)||1;
+      return scores.map(function(v,i){return [i/(scores.length-1)*320,130-((v-mn)/rng)*100];});})();
+    function draw(){
+      line.setAttribute('points',pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' '));
+      fill.setAttribute('d','M'+pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ')+' L320,150 L0,150 Z');
+      var l=pc[pc.length-1];dot.setAttribute('cx',l[0].toFixed(1));dot.setAttribute('cy',l[1].toFixed(1));
+    }
+    chart.addEventListener('click',function(e){
+      var rect=chart.getBoundingClientRect();
+      var i=Math.round((e.clientX-rect.left)/rect.width*(scores.length-1));i=Math.max(0,Math.min(scores.length-1,i));
+      dot.setAttribute('cx',pc[i][0].toFixed(1));dot.setAttribute('cy',pc[i][1].toFixed(1));
+      readout.innerHTML='<b>'+scores[i]+'% score</b> · '+days[i]+' · TAVI Band';
+    });
+    var dates=['Fri · 12 Sep','Sat · 13 Sep','Today · 14 Sep'],di=2;
+    function setDate(){dateEl.textContent=dates[di];prev.disabled=di<=0;next.disabled=di>=dates.length-1;
+      prev.style.opacity=di<=0?'.4':'';next.style.opacity=di>=dates.length-1?'.4':'';}
+    prev.addEventListener('click',function(){if(di>0){di--;setDate();}});
+    next.addEventListener('click',function(){if(di<dates.length-1){di++;setDate();}});
+    function open(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');ov.querySelector('.d-body').scrollTop=0;
+      di=2;setDate();draw();readout.innerHTML='Tap a night to read its exact score.';}
+    function close(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}
+    back.addEventListener('click',close);
+    [].forEach.call(document.querySelectorAll('.js-sleep'),function(el){el.addEventListener('click',open);});
+    draw();setDate();
   })();
 
   // toast
