@@ -803,6 +803,16 @@ button.tapq{padding:6px}
 .dcmp-h{font-size:12px;font-weight:700;color:var(--sleep);letter-spacing:.02em}
 .dcmp-b{font-size:14px;line-height:1.5;color:var(--ink);margin-top:8px}
 .dcmp-b b{font-weight:700}
+
+/* heart detail — four-measurement grid */
+.d-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.d-stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px;
+  border-top-color:color-mix(in srgb,var(--line) 55%,var(--hairline))}
+.ds-k{font-size:12px;color:var(--ink3);font-weight:600;display:flex;align-items:center;gap:7px}
+.ds-dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.ds-v{font-family:var(--font-d);font-weight:300;font-size:25px;margin-top:8px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.ds-v small{font-size:11px;color:var(--ink3);font-weight:400;font-family:var(--font-u);margin-left:3px}
+.ds-w{font-size:10.5px;color:var(--ink3);margin-top:4px}
 </style>
 
 <div class="stage">
@@ -911,7 +921,7 @@ button.tapq{padding:6px}
             <!-- vitals -->
             <div class="flabel">Vitals</div>
             <div class="fvitals">
-              <button class="fvcard" data-metric="Heart rate">
+              <button class="fvcard js-heart">
                 <div class="fv-h">
                   <div><div class="fv-t">Heart Rate</div><div class="fv-s">Now</div></div>
                   <span class="fv-ic" style="color:var(--recovery)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.2 12H8l1-2 2 4 1.4-2.5.8 1h5.4"/></svg></span>
@@ -920,7 +930,7 @@ button.tapq{padding:6px}
                 <div class="fv-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class="on">S</span></div>
                 <div class="fv-v">72<small>bpm</small></div>
               </button>
-              <button class="fvcard" data-metric="Resting HR">
+              <button class="fvcard js-heart">
                 <div class="fv-h">
                   <div><div class="fv-t">Resting HR</div><div class="fv-s">Overnight</div></div>
                   <span class="fv-ic" style="color:var(--core)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.7A8.5 8.5 0 1 1 11.3 3a6.6 6.6 0 0 0 9.7 9.7Z"/><path d="M9.4 8.9c.7-.9 1.9-.6 2.1.2.2-.8 1.4-1.1 2.1-.2.5.7.1 1.6-2.1 3-2.2-1.4-2.6-2.3-2.1-3Z"/></svg></span>
@@ -1011,13 +1021,13 @@ button.tapq{padding:6px}
             <!-- heart & hrv -->
             <div class="flabel">Heart &amp; HRV</div>
             <div class="fvitals">
-              <button class="fvcard" data-metric="Heart detail">
+              <button class="fvcard js-heart">
                 <div class="fv-h"><div><div class="fv-t">Heart Rate</div><div class="fv-s">Now</div></div><span class="fv-ic" style="color:var(--recovery)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.2 12H8l1-2 2 4 1.4-2.5.8 1h5.4"/></svg></span></div>
                 <div class="fv-chart"><svg viewBox="0 0 154 46" preserveAspectRatio="none"><g fill="var(--recovery)"><rect x="2" y="24" width="14" height="22" rx="4" opacity=".5"/><rect x="24" y="16" width="14" height="30" rx="4" opacity=".5"/><rect x="46" y="26" width="14" height="20" rx="4" opacity=".5"/><rect x="68" y="12" width="14" height="34" rx="4" opacity=".5"/><rect x="90" y="20" width="14" height="26" rx="4" opacity=".5"/><rect x="112" y="22" width="14" height="24" rx="4" opacity=".5"/><rect x="134" y="6" width="14" height="40" rx="4"/></g></svg></div>
                 <div class="fv-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class="on">S</span></div>
                 <div class="fv-v">72<small>bpm</small></div>
               </button>
-              <button class="fvcard" data-metric="Resting HR detail">
+              <button class="fvcard js-heart">
                 <div class="fv-h"><div><div class="fv-t">Resting HR</div><div class="fv-s">Overnight</div></div><span class="fv-ic" style="color:var(--core)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.7A8.5 8.5 0 1 1 11.3 3a6.6 6.6 0 0 0 9.7 9.7Z"/><path d="M9.4 8.9c.7-.9 1.9-.6 2.1.2.2-.8 1.4-1.1 2.1-.2.5.7.1 1.6-2.1 3-2.2-1.4-2.6-2.3-2.1-3Z"/></svg></span></div>
                 <div class="fv-chart"><svg viewBox="0 0 154 46" preserveAspectRatio="none"><g fill="var(--core)"><rect x="2" y="20" width="14" height="26" rx="4" opacity=".5"/><rect x="24" y="24" width="14" height="22" rx="4" opacity=".5"/><rect x="46" y="14" width="14" height="32" rx="4" opacity=".5"/><rect x="68" y="22" width="14" height="24" rx="4" opacity=".5"/><rect x="90" y="18" width="14" height="28" rx="4" opacity=".5"/><rect x="112" y="26" width="14" height="20" rx="4" opacity=".5"/><rect x="134" y="10" width="14" height="36" rx="4"/></g></svg></div>
                 <div class="fv-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class="on">S</span></div>
@@ -1347,6 +1357,65 @@ button.tapq{padding:6px}
           </div>
         </section>
 
+        <!-- ============ HEART RATE DETAIL (overlay) ============ -->
+        <section class="detail" id="detailHeart" role="dialog" aria-modal="true" aria-label="Heart rate detail" aria-hidden="true">
+          <div class="d-head">
+            <button class="d-back" id="heartBack" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="d-title">Heart Rate</div>
+            <button class="d-ask" id="heartAsk">Ask about this</button>
+          </div>
+          <div class="d-body">
+            <div class="d-hero">
+              <div class="d-val"><span>72</span><small>bpm</small></div>
+              <div class="d-sub">Your latest reading · 9:41 AM</div>
+            </div>
+
+            <div class="d-label">The four heart measurements</div>
+            <div class="d-stats">
+              <div class="d-stat"><div class="ds-k"><span class="ds-dot" style="background:var(--recovery)"></span>Latest</div><div class="ds-v">72<small>bpm</small></div><div class="ds-w">9:41 AM</div></div>
+              <div class="d-stat"><div class="ds-k"><span class="ds-dot" style="background:var(--core)"></span>Resting</div><div class="ds-v">58<small>bpm</small></div><div class="ds-w">Overnight low</div></div>
+              <div class="d-stat"><div class="ds-k"><span class="ds-dot" style="background:var(--sleep)"></span>Average</div><div class="ds-v">76<small>bpm</small></div><div class="ds-w">Today</div></div>
+              <div class="d-stat"><div class="ds-k"><span class="ds-dot" style="background:#e5675f"></span>Maximum</div><div class="ds-v">162<small>bpm</small></div><div class="ds-w">Boxing · 6:12 PM</div></div>
+            </div>
+
+            <div class="d-label">Today</div>
+            <div class="d-chart">
+              <svg id="hrChart" viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Heart rate today">
+                <g stroke="var(--line)" stroke-width="1"><line x1="0" y1="30" x2="320" y2="30"/><line x1="0" y1="70" x2="320" y2="70"/><line x1="0" y1="110" x2="320" y2="110"/></g>
+                <polyline id="hrLine" fill="none" stroke="#e5675f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points=""/>
+                <g id="hrPts"></g>
+                <circle id="hrDot" r="4" fill="#e5675f" cx="0" cy="0"/>
+              </svg>
+              <div class="d-axis"><span>12a</span><span>4a</span><span>7a</span><span>9a</span><span>12p</span><span>3p</span><span>6p</span><span>9p</span></div>
+            </div>
+            <div class="d-readout" id="hrReadout">Tap a point to read an exact value, time and source.</div>
+            <p class="d-note" style="margin-top:8px">Points are samples, not a continuous trace — gaps mean the band wasn't measuring.</p>
+
+            <div class="d-label">Contributors</div>
+            <div class="fcommits">
+              <button class="fcommit" data-metric="Contributor: Sleep"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 10.3 5 6.6 6.6 0 0 0 20 14.5Z"/></svg></span><span class="fc-x"><span class="fc-t">Sleep</span><span class="fc-s">Better sleep lowers your resting and average HR</span></span><span class="fc-st">›</span></button>
+              <button class="fcommit" data-metric="Contributor: Activity"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M7 21l3-6 3 2 1-4M14 13l4 1M8 9l3-1 2 3"/></svg></span><span class="fc-x"><span class="fc-t">Activity · Boxing</span><span class="fc-s">Drove today's maximum of 162 bpm</span></span><span class="fc-st">›</span></button>
+              <button class="fcommit" data-metric="Contributor: Recovery"><span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 2.3 5.6"/><path d="M4 18v-5h5"/></svg></span><span class="fc-x"><span class="fc-t">Recovery</span><span class="fc-s">Higher recovery supports a lower baseline</span></span><span class="fc-st">›</span></button>
+            </div>
+
+            <div class="d-label">Your usual</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Typical latest range</span><span class="d-v">68 – 75 bpm</span></div>
+              <div class="d-row"><span class="d-k">Today vs usual</span><span class="d-v" style="color:var(--recovery)">In range</span></div>
+            </div>
+
+            <div class="d-label">Source &amp; window</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Source</span><span class="d-v">TAVI Band</span></div>
+              <div class="d-row"><span class="d-k">Window</span><span class="d-v">Today · 214 samples</span></div>
+              <div class="d-row"><span class="d-k">Latest</span><span class="d-v">9:41 AM</span></div>
+            </div>
+
+            <div class="d-label">How it is measured</div>
+            <p class="d-note">Latest, resting, average and maximum are distinct readings — resting is the overnight low, average spans the day, maximum is the single highest sample. TAVI never blends them into one number.</p>
+          </div>
+        </section>
+
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
         <nav class="tabbar" role="tablist" aria-label="Main">
@@ -1536,6 +1605,34 @@ button.tapq{padding:6px}
     back.addEventListener('click',close);
     [].forEach.call(document.querySelectorAll('.js-sleep'),function(el){el.addEventListener('click',open);});
     draw();setDate();
+  })();
+
+  // Heart rate detail overlay
+  (function(){
+    var ov=document.getElementById('detailHeart');if(!ov)return;
+    var back=document.getElementById('heartBack'),ask=document.getElementById('heartAsk'),
+        chart=document.getElementById('hrChart'),line=document.getElementById('hrLine'),
+        pts=document.getElementById('hrPts'),dot=document.getElementById('hrDot'),readout=document.getElementById('hrReadout');
+    var hr=[54,58,62,110,96,74,162,70],times=['12 AM','4 AM','7 AM','8 AM','10 AM','1 PM','6 PM','9 PM'];
+    var pc=(function(){var mn=Math.min.apply(null,hr),mx=Math.max.apply(null,hr),rng=(mx-mn)||1;
+      return hr.map(function(v,i){return [i/(hr.length-1)*320,130-((v-mn)/rng)*100];});})();
+    function draw(){
+      line.setAttribute('points',pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' '));
+      pts.innerHTML=pc.map(function(p){return '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="2.6" fill="#e5675f" opacity=".7"/>';}).join('');
+      var l=pc[pc.length-1];dot.setAttribute('cx',l[0].toFixed(1));dot.setAttribute('cy',l[1].toFixed(1));
+    }
+    chart.addEventListener('click',function(e){
+      var rect=chart.getBoundingClientRect();
+      var i=Math.round((e.clientX-rect.left)/rect.width*(hr.length-1));i=Math.max(0,Math.min(hr.length-1,i));
+      dot.setAttribute('cx',pc[i][0].toFixed(1));dot.setAttribute('cy',pc[i][1].toFixed(1));
+      readout.innerHTML='<b>'+hr[i]+' bpm</b> · '+times[i]+' · TAVI Band';
+    });
+    function open(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');ov.querySelector('.d-body').scrollTop=0;draw();readout.innerHTML='Tap a point to read an exact value, time and source.';}
+    function close(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}
+    back.addEventListener('click',close);
+    ask.addEventListener('click',function(){openToast('Ask opens with context · Heart rate · Today');});
+    [].forEach.call(document.querySelectorAll('.js-heart'),function(el){el.addEventListener('click',open);});
+    draw();
   })();
 
   // toast
