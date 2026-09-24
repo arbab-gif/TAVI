@@ -868,7 +868,7 @@ button.tapq{padding:6px}
 
             <!-- three rings: Recovery · Core (dominant) · Sleep -->
             <div class="frings">
-              <button class="fring" data-metric="Recovery">
+              <button class="fring js-recovery">
                 <div class="fring-viz sm">
                   <svg viewBox="0 0 88 88" role="img" aria-label="Recovery 82 percent">
                     <circle cx="44" cy="44" r="36" fill="none" stroke="var(--track)" stroke-width="7"/>
@@ -1005,7 +1005,7 @@ button.tapq{padding:6px}
             <!-- three scores -->
             <div class="flabel">Scores</div>
             <div class="frings">
-              <button class="fring" data-metric="Recovery detail">
+              <button class="fring js-recovery">
                 <div class="fring-viz sm"><svg viewBox="0 0 88 88" role="img" aria-label="Recovery 82"><circle cx="44" cy="44" r="36" fill="none" stroke="var(--track)" stroke-width="7"/><circle cx="44" cy="44" r="36" fill="none" stroke="var(--recovery)" stroke-width="7" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="40.7" transform="rotate(-90 44 44)"/><g transform="translate(44 44)" stroke="var(--recovery)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M-4.5 0a4.5 4.5 0 1 0 1.3-3.2"/><path d="M-4.6 -3.4l.1 2.9 2.9-.1"/></g></svg></div>
                 <div class="fring-num">82<span>%</span></div><div class="fring-nm">Recovery</div>
               </button>
@@ -1486,6 +1486,75 @@ button.tapq{padding:6px}
           </div>
         </section>
 
+        <!-- ============ RECOVERY DETAIL (overlay) ============ -->
+        <section class="detail" id="detailRecovery" role="dialog" aria-modal="true" aria-label="Recovery detail" aria-hidden="true">
+          <div class="d-head">
+            <button class="d-back" id="recBack" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="d-title">Recovery</div>
+            <button class="d-ask" data-metric="Share Recovery">Share</button>
+          </div>
+          <div class="d-body">
+            <div class="d-datenav">
+              <button class="d-nav" id="recPrev" aria-label="Previous day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+              <div class="d-date" id="recDate">Today · 14 Sep</div>
+              <button class="d-nav" id="recNext" aria-label="Next day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+            </div>
+
+            <div class="d-gauge">
+              <svg viewBox="0 0 200 132" role="img" aria-label="Recovery 82 percent">
+                <circle cx="100" cy="96" r="62" fill="none" stroke="var(--track)" stroke-width="13" stroke-linecap="round" stroke-dasharray="292.2 97.4" transform="rotate(135 100 96)"/>
+                <circle cx="100" cy="96" r="62" fill="none" stroke="var(--recovery)" stroke-width="13" stroke-linecap="round" stroke-dasharray="239.6 152.6" transform="rotate(135 100 96)"/>
+              </svg>
+              <div class="d-gnum">82<span>%</span></div>
+            </div>
+            <p class="d-mean">Your body is well recovered and ready for load. Recovery is driven mostly by last night's <b>HRV and resting heart rate</b>.</p>
+
+            <div class="d-label">Contributors</div>
+            <div class="d-contribs">
+              <button class="d-contrib" data-metric="HRV detail">
+                <span class="dc-ic" style="color:var(--recovery)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-5 3 10 2-7 2 4h3l2-2h3"/></svg></span>
+                <span class="dc-x"><span class="dc-top"><span class="dc-t">HRV</span><span class="dc-v">48 ms</span></span><span class="dc-bar"><span style="width:42%;background:var(--recovery)"></span></span><span class="dc-sub">42% of your Recovery</span></span>
+              </button>
+              <button class="d-contrib" data-metric="Resting HR detail">
+                <span class="dc-ic" style="color:var(--recovery)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.2 12H8l1-2 2 4 1.4-2.5.8 1h5.4"/></svg></span>
+                <span class="dc-x"><span class="dc-top"><span class="dc-t">Resting HR</span><span class="dc-v">59 bpm</span></span><span class="dc-bar"><span style="width:31%;background:var(--recovery)"></span></span><span class="dc-sub">31% of your Recovery</span></span>
+              </button>
+              <button class="d-contrib" data-metric="Sleep detail">
+                <span class="dc-ic" style="color:var(--recovery)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 10.3 5 6.6 6.6 0 0 0 20 14.5Z"/></svg></span>
+                <span class="dc-x"><span class="dc-top"><span class="dc-t">Sleep</span><span class="dc-v">7h 34m</span></span><span class="dc-bar"><span style="width:27%;background:var(--recovery)"></span></span><span class="dc-sub">27% of your Recovery</span></span>
+              </button>
+            </div>
+
+            <div class="d-label">Last 7 days</div>
+            <div class="d-chart">
+              <svg id="recChart" viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Recovery, last 7 days">
+                <g stroke="var(--line)" stroke-width="1"><line x1="0" y1="30" x2="320" y2="30"/><line x1="0" y1="70" x2="320" y2="70"/><line x1="0" y1="110" x2="320" y2="110"/></g>
+                <path id="recFill" fill="url(#recGrad)" d=""/>
+                <polyline id="recLine" fill="none" stroke="var(--recovery)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points=""/>
+                <circle id="recDot" r="4" fill="var(--recovery)" cx="0" cy="0"/>
+                <defs><linearGradient id="recGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--recovery)" stop-opacity=".32"/><stop offset="1" stop-color="var(--recovery)" stop-opacity="0"/></linearGradient></defs>
+              </svg>
+              <div class="d-axis"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+            </div>
+            <div class="d-readout" id="recReadout">Tap a day to read its exact Recovery.</div>
+
+            <div class="d-compare">
+              <div class="dcmp-h" style="color:var(--recovery)">Compared to you</div>
+              <div class="dcmp-b">Recovery is above your <b>30-day average of 71%</b>. Three strong nights in a row.</div>
+            </div>
+
+            <div class="d-label">Source &amp; window</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Source</span><span class="d-v">TAVI Band</span></div>
+              <div class="d-row"><span class="d-k">Window</span><span class="d-v">Overnight · 01:10 – 06:44</span></div>
+              <div class="d-row"><span class="d-k">Coverage</span><span class="d-v">5h 34m valid</span></div>
+            </div>
+
+            <div class="d-label">How this is measured</div>
+            <p class="d-note">Recovery summarizes the supported body measurements available for this period. It is not a guarantee of exercise safety or a medical clearance.</p>
+          </div>
+        </section>
+
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
         <nav class="tabbar" role="tablist" aria-label="Main">
@@ -1735,6 +1804,39 @@ button.tapq{padding:6px}
     function close(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}
     back.addEventListener('click',close);
     [].forEach.call(document.querySelectorAll('.js-core'),function(el){el.addEventListener('click',open);});
+    draw();setDate();
+  })();
+
+  // Recovery detail overlay
+  (function(){
+    var ov=document.getElementById('detailRecovery');if(!ov)return;
+    var back=document.getElementById('recBack'),chart=document.getElementById('recChart'),
+        line=document.getElementById('recLine'),fill=document.getElementById('recFill'),dot=document.getElementById('recDot'),
+        readout=document.getElementById('recReadout'),dateEl=document.getElementById('recDate'),
+        prev=document.getElementById('recPrev'),next=document.getElementById('recNext');
+    var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    var vals=[58,82,45,89,42,80,82];
+    var pc=(function(){var mn=Math.min.apply(null,vals),mx=Math.max.apply(null,vals),rng=(mx-mn)||1;
+      return vals.map(function(v,i){return [i/(vals.length-1)*320,130-((v-mn)/rng)*100];});})();
+    function draw(){
+      line.setAttribute('points',pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' '));
+      fill.setAttribute('d','M'+pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ')+' L320,150 L0,150 Z');
+      var l=pc[pc.length-1];dot.setAttribute('cx',l[0].toFixed(1));dot.setAttribute('cy',l[1].toFixed(1));
+    }
+    chart.addEventListener('click',function(e){
+      var rect=chart.getBoundingClientRect();
+      var i=Math.round((e.clientX-rect.left)/rect.width*(vals.length-1));i=Math.max(0,Math.min(vals.length-1,i));
+      dot.setAttribute('cx',pc[i][0].toFixed(1));dot.setAttribute('cy',pc[i][1].toFixed(1));
+      readout.innerHTML='<b>'+vals[i]+'% Recovery</b> · '+days[i]+' · TAVI Band';
+    });
+    var dates=['Fri · 12 Sep','Sat · 13 Sep','Today · 14 Sep'],di=2;
+    function setDate(){dateEl.textContent=dates[di];prev.style.opacity=di<=0?'.4':'';next.style.opacity=di>=dates.length-1?'.4':'';}
+    prev.addEventListener('click',function(){if(di>0){di--;setDate();}});
+    next.addEventListener('click',function(){if(di<dates.length-1){di++;setDate();}});
+    function open(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');ov.querySelector('.d-body').scrollTop=0;di=2;setDate();draw();readout.innerHTML='Tap a day to read its exact Recovery.';}
+    function close(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}
+    back.addEventListener('click',close);
+    [].forEach.call(document.querySelectorAll('.js-recovery'),function(el){el.addEventListener('click',open);});
     draw();setDate();
   })();
 
