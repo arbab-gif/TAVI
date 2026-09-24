@@ -380,7 +380,14 @@ button.tapq{padding:6px}
 
 /* tab bar: minimal, no heavy chrome */
 .tabbar{border:1px solid var(--line);box-shadow:none;background:color-mix(in srgb,var(--app) 78%,transparent)}
-.tab[aria-selected="true"]{background:var(--surface2)}
+.tab[aria-selected="true"]{color:var(--recovery);background:color-mix(in srgb,var(--recovery) 16%,transparent)}
+.tab.taborb{gap:0}
+.tab.taborb .orb{width:30px;height:30px;border-radius:50%;
+  background:conic-gradient(from 210deg,var(--core),var(--recovery),var(--sleep),var(--core));
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--sleep) 30%,transparent) inset;
+  -webkit-mask:radial-gradient(circle 8px at center,transparent 98%,#000 100%);
+  mask:radial-gradient(circle 8px at center,transparent 98%,#000 100%)}
+.tab.taborb[aria-selected="true"]{background:none}
 
 /* ============================================================
    HOME (Day) — dashboard redesign
@@ -515,6 +522,119 @@ button.tapq{padding:6px}
 .home.learning .recap{display:none}
 .home.learning .gauge-status{visibility:hidden}
 .home.learning .herocard .gauge-num{color:var(--ink3)}
+
+/* ============================================================
+   FDAY — Day home rebuilt to match the TAVI Figma design
+   ============================================================ */
+#view-day.fday{padding:4px 18px 128px}
+.fday .fhead{display:flex;align-items:flex-start;justify-content:space-between;padding:8px 0 2px}
+.fday .fdate{display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:0;
+  font-family:var(--font-d);font-weight:600;font-size:18px;letter-spacing:-.01em;color:var(--ink)}
+.fday .fdate svg{width:16px;height:16px;color:var(--ink2);margin-top:2px}
+.fday .fsync{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink3);margin-top:6px}
+.fday .fbatt{display:inline-flex;align-items:center;gap:4px;color:var(--recovery);font-weight:600}
+.fday .fbatt svg{width:16px;height:16px}
+.fday .fsep{color:var(--ink3)}
+.fday .fhead-r{display:flex;align-items:center;gap:10px}
+.fday .ficon{width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);background:var(--surface);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s,background .2s}
+.fday .ficon:hover{transform:translateY(-1px);background:var(--surface2)}
+.fday .ficon svg{width:17px;height:17px}
+.fday .favatar{width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);cursor:pointer;color:var(--ink);
+  background:linear-gradient(150deg,var(--core-soft),var(--sleep-soft));display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:13px}
+.fday .favatar:focus-visible,.fday .ficon:focus-visible,.fday .fdate:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.fday .sample-tag{margin:12px 0 0}
+
+/* three rings */
+.fday .frings{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;margin:16px 0 2px;padding:0 4px}
+.fday .fring{flex:1;background:none;border:none;cursor:pointer;font-family:var(--font-u);color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;padding:6px 0 2px;border-radius:16px;transition:background .2s}
+.fday .fring:hover{background:var(--surface2)}
+.fday .fring:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.fday .fring-viz svg{display:block}
+.fday .fring-viz.sm svg{width:82px;height:82px}
+.fday .fring-viz.lg svg{width:116px;height:116px}
+.fday .fring.dom{margin-top:-14px}
+.fday .fring-num{font-family:var(--font-d);font-weight:300;font-size:24px;letter-spacing:-.02em;margin-top:8px;font-variant-numeric:tabular-nums}
+.fday .fring.dom .fring-num{font-size:30px;font-weight:400}
+.fday .fring-num span{font-size:.5em;font-weight:400;color:var(--ink2);margin-left:1px}
+.fday .fring-nm{font-size:12px;color:var(--ink3);margin-top:2px;font-weight:500}
+.fday .fring.dom .fring-nm{color:var(--ink2)}
+
+/* start activity — white pill */
+.fday .fstart{display:flex;align-items:center;justify-content:center;width:100%;margin:18px 0 0;cursor:pointer;
+  background:#f5f3ef;color:#111;border:none;border-radius:16px;padding:16px;font-family:var(--font-u);
+  transition:transform .15s,opacity .2s}
+.fday .fstart b{font-size:15px;font-weight:700}
+.fday .fstart .fstart-sub{font-size:12px;opacity:.6;margin-left:8px}
+.fday .fstart:hover{transform:translateY(-1px)}
+.fday .fstart:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.fday .fstart.returning{background:var(--core)}
+
+.fday .flearn{border-radius:20px;margin-top:14px}
+
+/* today's insight */
+.fday .finsight{display:block;width:100%;text-align:left;font-family:var(--font-u);color:var(--ink);cursor:pointer;
+  background:var(--surface2);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:16px;
+  transition:transform .15s,box-shadow .2s}
+.fday .finsight:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.fday .finsight:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.fday .fi-h{font-size:13px;font-weight:600;color:var(--ink3)}
+.fday .fi-b{font-size:15px;line-height:1.5;color:var(--ink);margin-top:8px;font-weight:500}
+.fday .fi-b b{font-weight:700}
+.fday .fi-ev{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink3);font-weight:600;margin-top:12px}
+.fday .fi-arw{width:22px;height:22px;border-radius:50%;border:1px solid var(--line2);display:inline-flex;align-items:center;justify-content:center}
+.fday .fi-arw svg{width:12px;height:12px;color:var(--ink2)}
+
+/* section label */
+.fday .flabel{font-size:13.5px;font-weight:600;color:var(--ink2);margin:24px 2px 0}
+
+/* vitals */
+.fday .fvitals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.fday .fvcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:15px 15px 14px;cursor:pointer;
+  text-align:left;font-family:var(--font-u);color:var(--ink);transition:transform .15s,box-shadow .2s;
+  border-top-color:color-mix(in srgb,var(--line) 55%,var(--hairline))}
+.fday .fvcard:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.fday .fvcard:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.fday .fvcard.fwide{margin-top:12px}
+.fday .fv-h{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.fday .fv-t{font-size:13.5px;font-weight:600}
+.fday .fv-s{font-size:10.5px;color:var(--ink3);margin-top:2px}
+.fday .fv-ic svg{width:18px;height:18px;display:block}
+.fday .fv-chart{height:42px;margin:14px 0 6px}
+.fday .fv-chart svg{width:100%;height:100%;display:block}
+.fday .fv-area{height:64px;margin:14px 0 6px}
+.fday .fv-area svg{width:100%;height:100%;display:block}
+.fday .fv-days{display:grid;grid-template-columns:repeat(7,1fr);font-size:9.5px;color:var(--ink3);text-align:center}
+.fday .fv-days.wide{font-size:10px}
+.fday .fv-days .on{color:var(--ink);font-weight:700}
+.fday .fv-v{font-family:var(--font-d);font-weight:300;font-size:26px;font-variant-numeric:tabular-nums;letter-spacing:-.01em;margin-top:10px}
+.fday .fv-v small{font-size:12px;color:var(--ink3);font-weight:400;font-family:var(--font-u);margin-left:3px}
+
+/* commitments */
+.fday .fsegs{display:inline-flex;gap:6px;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:4px;margin-top:12px}
+.fday .fseg{border:none;background:none;cursor:pointer;font-family:var(--font-u);font-size:12.5px;font-weight:600;color:var(--ink3);
+  padding:7px 16px;border-radius:999px;transition:background .2s,color .2s}
+.fday .fseg.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.fday .fseg:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.fday .fcommits{margin-top:8px}
+.fday .fcommit{display:flex;align-items:center;gap:13px;width:100%;background:none;border:none;cursor:pointer;
+  text-align:left;font-family:var(--font-u);color:var(--ink);padding:14px 2px}
+.fday .fcommit+.fcommit{border-top:1px solid var(--line)}
+.fday .fcommit:focus-visible{outline:2px solid var(--core);outline-offset:-2px;border-radius:12px}
+.fday .fc-ic{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--ink3)}
+.fday .fc-ic svg{width:18px;height:18px}
+.fday .fc-ic.done{color:var(--recovery);border-color:color-mix(in srgb,var(--recovery) 40%,var(--line))}
+.fday .fc-x{flex:1;min-width:0}
+.fday .fc-t{font-size:14px;font-weight:600;display:block}
+.fday .fc-s{font-size:12px;color:var(--ink3);margin-top:2px;display:block}
+.fday .fc-st{font-size:12px;font-weight:600;flex:0 0 auto}
+.fday .fc-st.ok{color:var(--recovery)}
+.fday .fc-st.rev{color:var(--core)}
+
+/* learning state */
+.fday.learning .finsight,.fday.learning .fcommits,.fday.learning .fsegs{opacity:.35;pointer-events:none}
 </style>
 
 <div class="stage">
@@ -549,202 +669,146 @@ button.tapq{padding:6px}
         <div class="viewport" id="viewport">
 
           <!-- ============ DAY ============ -->
-          <section class="view active home" id="view-day" role="tabpanel" aria-label="Day">
-            <div class="hhead">
-              <button class="hname" id="profileBtn" aria-label="Switch profile and open settings">Layla
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-              </button>
-              <div class="hactions">
-                <button class="iconbtn spark" id="askShortcut" aria-label="Ask TAVI">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 4.8 4.8 1.7-4.8 1.7L12 15l-1.7-4.8L5.5 8.5l4.8-1.7z"/><path d="M18.5 13l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z"/></svg>
+          <section class="view active fday" id="view-day" role="tabpanel" aria-label="Day">
+            <div class="fhead">
+              <div class="fhead-l">
+                <button class="fdate" data-metric="Switch day">Mon · Sun 14 Sep
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
                 </button>
-                <button class="iconbtn" id="shareDay" data-share="My Day" aria-label="Share my day">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M12 15V3M8 7l4-4 4 4"/></svg>
+                <div class="fsync" id="syncLine"><span class="fbatt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="16" height="9" rx="2.5"/><path d="M21 11v3"/><rect x="4" y="10" width="9" height="5" rx="1" fill="currentColor" stroke="none"/></svg>84%</span><span class="fsep">·</span>Sync 2 min ago</div>
+              </div>
+              <div class="fhead-r">
+                <button class="ficon" id="shareDay" data-share="My Day" aria-label="Share my day">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
                 </button>
+                <button class="favatar" id="profileBtn" aria-label="Open profile">LH</button>
               </div>
             </div>
-
-            <!-- weekday strip -->
-            <div class="wkstrip" role="group" aria-label="This week">
-              <button class="wk"><span class="wl">M</span><span class="wd" style="background:var(--recovery)"></span></button>
-              <button class="wk"><span class="wl">T</span><span class="wd" style="background:var(--core)"></span></button>
-              <button class="wk"><span class="wl">W</span><span class="wd" style="background:var(--recovery)"></span></button>
-              <button class="wk"><span class="wl">T</span><span class="wd" style="background:var(--recovery)"></span></button>
-              <button class="wk"><span class="wl">F</span><span class="wd" style="background:var(--sleep)"></span></button>
-              <button class="wk on" aria-current="date"><span class="wl">S</span><span class="wd" style="background:var(--core)"></span></button>
-              <button class="wk"><span class="wl">S</span><span class="wd"></span></button>
-            </div>
-
-            <button class="startact" id="startAct">
-              <span class="l"><b>Start Activity</b><span>Run · Ride · Strength · Pilates · more</span></span>
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z"/></svg></span>
-            </button>
 
             <div class="sample-tag" id="sampleTag">Sample data · Layla Haddad</div>
 
-            <!-- hero: readiness tick-gauge -->
-            <div class="hcard herocard" data-metric="Readiness detail">
-              <div class="gauge">
-                <svg class="gauge-svg" viewBox="0 0 260 158" role="img" aria-label="Readiness 82, in range">
-                  <defs>
-                    <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0" stop-color="var(--recovery)"/>
-                      <stop offset=".5" stop-color="var(--core)"/>
-                      <stop offset="1" stop-color="var(--sleep)"/>
-                    </linearGradient>
-                  </defs>
-                  <g id="gaugeTicks"></g>
-                </svg>
-                <div class="gauge-center">
-                  <div class="gauge-num" id="gaugeNum">82</div>
-                  <div class="gauge-status"><i></i> In range</div>
+            <!-- three rings: Recovery · Core (dominant) · Sleep -->
+            <div class="frings">
+              <button class="fring" data-metric="Recovery">
+                <div class="fring-viz sm">
+                  <svg viewBox="0 0 88 88" role="img" aria-label="Recovery 82 percent">
+                    <circle cx="44" cy="44" r="36" fill="none" stroke="var(--track)" stroke-width="7"/>
+                    <circle id="recArc" cx="44" cy="44" r="36" fill="none" stroke="var(--recovery)" stroke-width="7" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="40.7" transform="rotate(-90 44 44)"/>
+                    <g transform="translate(44 44)" stroke="var(--recovery)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M-4.5 0a4.5 4.5 0 1 0 1.3-3.2"/><path d="M-4.6 -3.4l.1 2.9 2.9-.1"/></g>
+                  </svg>
                 </div>
-              </div>
-              <div class="gauge-title">Readiness</div>
-              <div class="gauge-sub" id="gaugeSub">Today · synced 5 minutes ago</div>
-              <div class="mtrio">
-                <div class="mcell"><div class="ml">Recovery</div><div class="mv" id="mRecovery"><i></i>84%</div></div>
-                <div class="mcell"><div class="ml">Sleep</div><div class="mv" id="mSleep"><i></i>7h 12m</div></div>
-                <div class="mcell"><div class="ml">Load</div><div class="mv" id="mLoad"><i></i>72%</div></div>
-              </div>
-            </div>
-
-            <!-- score cards: Recovery / Core / Sleep -->
-            <div class="hlabel">Today's scores <a data-metric="Body overview">Body</a></div>
-            <div class="scardrow">
-              <button class="scard" data-metric="Recovery">
-                <svg viewBox="0 0 72 72" width="72" height="72" aria-label="Recovery 84">
-                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--track)" stroke-width="6"/>
-                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--recovery)" stroke-width="6" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="26.1" transform="rotate(-90 36 36)"/>
-                  <text x="36" y="42" text-anchor="middle" font-size="20" fill="var(--ink)">84</text>
-                </svg>
-                <div class="sl">Recovery</div><div class="sm">Ready for load</div>
+                <div class="fring-num" id="recNum">82<span>%</span></div>
+                <div class="fring-nm">Recovery</div>
               </button>
-              <button class="scard dom" data-metric="Core">
-                <svg viewBox="0 0 72 72" width="72" height="72" aria-label="Core 82">
-                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--track)" stroke-width="7"/>
-                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--core)" stroke-width="7" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="29.4" transform="rotate(-90 36 36)"/>
-                  <text x="36" y="42" text-anchor="middle" font-size="21" fill="var(--ink)">82</text>
-                </svg>
-                <div class="sl">Core</div><div class="sm">Moderate demand</div>
+              <button class="fring dom" data-metric="Core">
+                <div class="fring-viz lg">
+                  <svg viewBox="0 0 120 120" role="img" aria-label="Core 64 percent">
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="var(--track)" stroke-width="9"/>
+                    <circle id="coreArc" cx="60" cy="60" r="50" fill="none" stroke="var(--core)" stroke-width="9" stroke-linecap="round" stroke-dasharray="314.2" stroke-dashoffset="113.1" transform="rotate(-90 60 60)"/>
+                    <circle cx="60" cy="60" r="7" fill="none" stroke="var(--core)" stroke-width="2"/>
+                    <circle cx="60" cy="60" r="2.2" fill="var(--core)"/>
+                  </svg>
+                </div>
+                <div class="fring-num" id="coreNum">64<span>%</span></div>
+                <div class="fring-nm">Core</div>
               </button>
-              <button class="scard" data-metric="Sleep">
-                <svg viewBox="0 0 72 72" width="72" height="72" aria-label="Sleep 72">
-                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--track)" stroke-width="6"/>
-                  <circle cx="36" cy="36" r="26" fill="none" stroke="var(--sleep)" stroke-width="6" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="45.8" transform="rotate(-90 36 36)"/>
-                  <text x="36" y="42" text-anchor="middle" font-size="20" fill="var(--ink)">72</text>
-                </svg>
-                <div class="sl">Sleep</div><div class="sm">7h 12m</div>
+              <button class="fring" data-metric="Sleep">
+                <div class="fring-viz sm">
+                  <svg viewBox="0 0 88 88" role="img" aria-label="Sleep 78 percent">
+                    <circle cx="44" cy="44" r="36" fill="none" stroke="var(--track)" stroke-width="7"/>
+                    <circle id="slpArc" cx="44" cy="44" r="36" fill="none" stroke="var(--sleep)" stroke-width="7" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="49.8" transform="rotate(-90 44 44)"/>
+                    <path d="M50 44.5A6.4 6.4 0 1 1 43.5 38 5 5 0 0 0 50 44.5Z" fill="none" stroke="var(--sleep)" stroke-width="1.8" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="fring-num" id="slpNum">78<span>%</span></div>
+                <div class="fring-nm">Sleep</div>
               </button>
             </div>
 
-            <!-- learning note (hidden unless learning state) -->
-            <div class="learnnote" id="learnNote" hidden>
+            <button class="fstart" id="startAct"><b>Start Activity</b><span class="fstart-sub" hidden></span></button>
+
+            <!-- learning note -->
+            <div class="learnnote flearn" id="learnNote" hidden>
               <div class="ln-h">TAVI is learning your usual patterns</div>
               <p>Your first few days help TAVI learn your baseline. Keep wearing your band during daily life and sleep. Vitals, activities and captures stay available while it learns.</p>
             </div>
 
-            <!-- recap / today's insight (tinted) -->
-            <button class="recap" id="dayInsight" data-metric="Sleep detail">
-              <div class="re">Today's recap</div>
-              <div class="rt">While you slept, recovery rose. Your sleep ran <b>45 minutes longer</b> than usual — a good window to take on load today.</div>
-              <div class="rstats">
-                <span class="rstat">Deep sleep <span class="up">↑ 20%</span></span>
-                <span class="rstat">Recovery <span class="up">↑ 12%</span></span>
-              </div>
+            <!-- today's insight -->
+            <button class="finsight" id="dayInsight" data-metric="Sleep detail">
+              <div class="fi-h">Today's Insight</div>
+              <div class="fi-b">Your sleep ran <b>45 minutes</b> longer than your usual a good window to take on load today.</div>
+              <span class="fi-ev">View evidence <span class="fi-arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></span>
             </button>
 
-            <!-- vitals grid -->
-            <div class="hlabel">Vitals <a data-metric="All vitals">See all</a></div>
-            <div class="vgrid">
-              <button class="vcard" data-metric="Heart rate">
-                <div class="vc-h">
-                  <div><div class="vc-t">Heart rate</div><div class="vc-s">Now</div></div>
-                  <div class="vc-badge" style="background:color-mix(in srgb,#e5484d 20%,transparent);color:#e5484d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-7 4 14 2.5-7H21"/></svg></div>
+            <!-- vitals -->
+            <div class="flabel">Vitals</div>
+            <div class="fvitals">
+              <button class="fvcard" data-metric="Heart rate">
+                <div class="fv-h">
+                  <div><div class="fv-t">Heart Rate</div><div class="fv-s">Now</div></div>
+                  <span class="fv-ic" style="color:var(--recovery)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.2 12H8l1-2 2 4 1.4-2.5.8 1h5.4"/></svg></span>
                 </div>
-                <div class="vc-chart"><svg viewBox="0 0 120 42" preserveAspectRatio="none"><defs><linearGradient id="hrFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e5484d" stop-opacity=".35"/><stop offset="1" stop-color="#e5484d" stop-opacity="0"/></linearGradient></defs><path d="M0,30 8,28 16,22 24,31 32,14 40,26 48,20 56,33 64,10 72,24 80,18 88,28 96,16 104,26 112,20 120,24 V42 H0 Z" fill="url(#hrFill)"/><polyline fill="none" stroke="#e5484d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="0,30 8,28 16,22 24,31 32,14 40,26 48,20 56,33 64,10 72,24 80,18 88,28 96,16 104,26 112,20 120,24"/></svg></div>
-                <div class="vc-v">72<small>bpm</small></div>
+                <div class="fv-chart"><svg viewBox="0 0 154 46" preserveAspectRatio="none"><g fill="var(--recovery)"><rect x="2" y="24" width="14" height="22" rx="4" opacity=".5"/><rect x="24" y="16" width="14" height="30" rx="4" opacity=".5"/><rect x="46" y="26" width="14" height="20" rx="4" opacity=".5"/><rect x="68" y="12" width="14" height="34" rx="4" opacity=".5"/><rect x="90" y="20" width="14" height="26" rx="4" opacity=".5"/><rect x="112" y="22" width="14" height="24" rx="4" opacity=".5"/><rect x="134" y="6" width="14" height="40" rx="4"/></g></svg></div>
+                <div class="fv-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class="on">S</span></div>
+                <div class="fv-v">72<small>bpm</small></div>
               </button>
-
-              <button class="vcard" data-metric="HRV">
-                <div class="vc-h">
-                  <div><div class="vc-t">HRV</div><div class="vc-s">Overnight</div></div>
-                  <div class="vc-badge" style="background:color-mix(in srgb,var(--sleep) 22%,transparent);color:var(--sleep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.5 0 2.5 2 5 2s2.5-2 5-2c1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1C7 13 7 11 9.5 11c2.5 0 2.5 2 5 2s2.5-2 5-2c1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1C7 19 7 17 9.5 17c2.5 0 2.5 2 5 2s2.5-2 5-2c1.3 0 1.9.5 2.5 1"/></svg></div>
+              <button class="fvcard" data-metric="Resting HR">
+                <div class="fv-h">
+                  <div><div class="fv-t">Resting HR</div><div class="fv-s">Overnight</div></div>
+                  <span class="fv-ic" style="color:var(--core)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.7A8.5 8.5 0 1 1 11.3 3a6.6 6.6 0 0 0 9.7 9.7Z"/><path d="M9.4 8.9c.7-.9 1.9-.6 2.1.2.2-.8 1.4-1.1 2.1-.2.5.7.1 1.6-2.1 3-2.2-1.4-2.6-2.3-2.1-3Z"/></svg></span>
                 </div>
-                <div class="vc-chart"><svg viewBox="0 0 120 42" preserveAspectRatio="none"><g fill="var(--sleep)"><rect x="2" y="22" width="7" height="20" rx="2.5"/><rect x="14" y="16" width="7" height="26" rx="2.5"/><rect x="26" y="26" width="7" height="16" rx="2.5"/><rect x="38" y="12" width="7" height="30" rx="2.5"/><rect x="50" y="20" width="7" height="22" rx="2.5"/><rect x="62" y="8" width="7" height="34" rx="2.5"/><rect x="74" y="18" width="7" height="24" rx="2.5"/><rect x="86" y="14" width="7" height="28" rx="2.5"/><rect x="98" y="24" width="7" height="18" rx="2.5"/><rect x="110" y="10" width="7" height="32" rx="2.5"/></g></svg></div>
-                <div class="vc-v">45<small>ms</small></div>
-              </button>
-
-              <button class="vcard" data-metric="Resting HR">
-                <div class="vc-h">
-                  <div><div class="vc-t">Resting HR</div><div class="vc-s">Overnight</div></div>
-                  <div class="vc-badge" style="background:color-mix(in srgb,var(--core) 22%,transparent);color:var(--core)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5v14"/><path d="M2 10h16a4 4 0 0 1 4 4v5"/><path d="M2 15h20"/><path d="M6 10v5"/></svg></div>
-                </div>
-                <div class="vc-chart"><svg viewBox="0 0 120 42" preserveAspectRatio="none"><polyline fill="none" stroke="var(--core)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="0,26 20,22 40,28 60,20 80,24 100,16 120,18"/><circle cx="120" cy="18" r="3" fill="var(--core)"/></svg></div>
-                <div class="vc-v">58<small>bpm</small></div>
-              </button>
-
-              <button class="vcard" data-metric="Average HR">
-                <div class="vc-h">
-                  <div><div class="vc-t">Average</div><div class="vc-s">Overnight</div></div>
-                  <div class="vc-badge" style="background:color-mix(in srgb,var(--recovery) 22%,transparent);color:var(--recovery)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 15.5 4 9.5A4.5 4.5 0 0 1 12 6.5A4.5 4.5 0 0 1 20 9.5C20 15.5 12 21 12 21Z"/><path d="M8 11.5h8"/></svg></div>
-                </div>
-                <div class="vc-chart"><svg viewBox="0 0 120 42" preserveAspectRatio="none"><g fill="var(--recovery)"><rect x="2" y="30" width="7" height="12" rx="2.5"/><rect x="14" y="24" width="7" height="18" rx="2.5"/><rect x="26" y="18" width="7" height="24" rx="2.5"/><rect x="38" y="28" width="7" height="14" rx="2.5"/><rect x="50" y="12" width="7" height="30" rx="2.5"/><rect x="62" y="22" width="7" height="20" rx="2.5"/><rect x="74" y="16" width="7" height="26" rx="2.5"/><rect x="86" y="26" width="7" height="16" rx="2.5"/><rect x="98" y="20" width="7" height="22" rx="2.5"/><rect x="110" y="14" width="7" height="28" rx="2.5"/></g></svg></div>
-                <div class="vc-v">54<small>bpm</small></div>
+                <div class="fv-chart"><svg viewBox="0 0 154 46" preserveAspectRatio="none"><g fill="var(--core)"><rect x="2" y="20" width="14" height="26" rx="4" opacity=".5"/><rect x="24" y="24" width="14" height="22" rx="4" opacity=".5"/><rect x="46" y="14" width="14" height="32" rx="4" opacity=".5"/><rect x="68" y="22" width="14" height="24" rx="4" opacity=".5"/><rect x="90" y="18" width="14" height="28" rx="4" opacity=".5"/><rect x="112" y="26" width="14" height="20" rx="4" opacity=".5"/><rect x="134" y="10" width="14" height="36" rx="4"/></g></svg></div>
+                <div class="fv-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class="on">S</span></div>
+                <div class="fv-v">58<small>bpm</small></div>
               </button>
             </div>
-
-            <!-- from today: captures -->
-            <div class="hlabel">From today <a data-metric="Capture library">Captures</a></div>
-            <div class="listcard">
-              <button class="litem" data-metric="Capture: Team Meeting">
-                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 19v3"/></svg></span>
-                <span class="lx"><span class="lt">Team Meeting</span><span class="ls">10:30 AM · discussed the launch timeline</span></span>
-                <span class="llink" data-metric="Capture: Team Meeting">Open</span>
-              </button>
-            </div>
+            <button class="fvcard fwide" data-metric="HRV">
+              <div class="fv-h">
+                <div><div class="fv-t">HRV HR</div><div class="fv-s">Overnight</div></div>
+                <span class="fv-ic" style="color:var(--sleep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-5 3 10 2-7 2 4h3l2-2h3"/></svg></span>
+              </div>
+              <div class="fv-area"><svg viewBox="0 0 320 74" preserveAspectRatio="none"><defs><linearGradient id="hrvFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sleep)" stop-opacity=".38"/><stop offset="1" stop-color="var(--sleep)" stop-opacity="0"/></linearGradient></defs><path d="M0,50 46,44 92,52 137,30 183,40 229,22 274,34 320,10 V74 H0 Z" fill="url(#hrvFill)"/><polyline fill="none" stroke="var(--sleep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points="0,50 46,44 92,52 137,30 183,40 229,22 274,34 320,10"/><circle cx="320" cy="10" r="4" fill="var(--sleep)"/></svg></div>
+              <div class="fv-days wide"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class="on">S</span></div>
+              <div class="fv-v">45<small>ms</small></div>
+            </button>
 
             <!-- commitments -->
-            <div class="hlabel">Today's commitments <a data-metric="Commitments: Today · Upcoming · Overdue">Today</a></div>
-            <div class="listcard">
-              <button class="litem" data-metric="Commitment: proposal for Ahmed">
-                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                <span class="lx"><span class="lt">Send proposal to Ahmed</span><span class="ls">Due today 4:00 PM · from Team Meeting</span></span>
-                <span class="lchip ok">Confirmed</span>
+            <div class="flabel">Today Commitments</div>
+            <div class="fsegs" role="tablist" aria-label="Commitment filter">
+              <button class="fseg on" id="segOpen" role="tab" aria-selected="true">Open</button>
+              <button class="fseg" id="segDone" role="tab" aria-selected="false">Completed</button>
+            </div>
+            <div class="fcommits" id="commitsOpen">
+              <button class="fcommit" data-metric="Commitment: proposal for Ahmed">
+                <span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Due today Meeting</span><span class="fc-s">Today · 12:55 PM</span></span>
+                <span class="fc-st ok">Confirmed</span>
               </button>
-              <button class="litem" data-metric="Commitment: reply to Sara">
-                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                <span class="lx"><span class="lt">Reply to Sara about the venue</span><span class="ls">Due today 2:00 PM · from Morning standup</span></span>
-                <span class="lchip ok">Confirmed</span>
+              <button class="fcommit" data-metric="Commitment: Book Yas HQ room">
+                <span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Book a Yas HQ Room</span><span class="fc-s">Today · 12:55 PM</span></span>
+                <span class="fc-st ok">Confirmed</span>
               </button>
-              <button class="litem" data-metric="Commitment: share design specs">
-                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                <span class="lx"><span class="lt">Share design specs with the dev team</span><span class="ls">Due today 5:30 PM · from Call with supplier</span></span>
-                <span class="lchip ok">Confirmed</span>
+              <button class="fcommit" data-metric="Commitment needs review: invoice">
+                <span class="fc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Follow up for the invoice</span><span class="fc-s">Today · 12:55 PM</span></span>
+                <span class="fc-st rev">Need Review</span>
               </button>
-              <button class="litem" data-metric="Commitment needs review">
-                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
-                <span class="lx"><span class="lt">Book the Yas HQ room</span><span class="ls">Proposed · confirm a time to schedule a reminder</span></span>
-                <span class="lchip rev">Needs review</span>
+            </div>
+            <div class="fcommits" id="commitsDone" hidden>
+              <button class="fcommit" data-metric="Commitment: proposal sent">
+                <span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Send proposal to Ahmed</span><span class="fc-s">Today · 10:00 AM</span></span>
+                <span class="fc-st ok">Completed</span>
               </button>
-              <button class="litem" data-metric="Commitment needs review: follow up invoice">
-                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
-                <span class="lx"><span class="lt">Follow up on the supplier invoice</span><span class="ls">Proposed · confirm to add a reminder</span></span>
-                <span class="lchip rev">Needs review</span>
+              <button class="fcommit" data-metric="Commitment: standup reply">
+                <span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Reply to Sara about the venue</span><span class="fc-s">Today · 09:20 AM</span></span>
+                <span class="fc-st ok">Completed</span>
               </button>
             </div>
 
-            <!-- completed -->
-            <div class="hlabel">Completed today</div>
-            <div class="listcard">
-              <button class="litem" data-metric="Activity: Morning Run">
-                <span class="lic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M7 21l3-6 3 2 1-4M14 13l4 1M8 9l3-1 2 3"/></svg></span>
-                <span class="lx"><span class="lt">Morning Run · 5.0 km</span><span class="ls">32 min · 6:24 /km avg</span></span>
-                <span class="llink" data-metric="Activity result">View result</span>
-              </button>
-            </div>
-
-            <div class="footce">Home, in the mandated order: <b>readiness → recap → vitals → follow-through.</b><br>Try the <b>Learning state</b> toggle above.</div>
+            <div class="footce">Day home — built to match the TAVI Figma design. Try the <b>Learning state</b> toggle above.</div>
           </section>
 
           <!-- ============ BODY ============ -->
@@ -839,8 +903,8 @@ button.tapq{padding:6px}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><path d="M12 8v7M12 15l-4 6M12 15l4 6M6 10l6 1 6-1"/></svg>Body</button>
           <button class="tab" role="tab" aria-selected="false" data-view="capture">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 19v3"/></svg>Capture</button>
-          <button class="tab" role="tab" aria-selected="false" data-view="ask">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 4.5 16.8L21 21l-1.2-4.5A9 9 0 0 0 12 3z"/></svg>Ask</button>
+          <button class="tab taborb" role="tab" aria-selected="false" data-view="ask" aria-label="Ask TAVI">
+            <span class="orb"></span></button>
         </nav>
       </div>
     </div>
@@ -887,25 +951,20 @@ button.tapq{padding:6px}
     vp.scrollTop=0;
   }
   tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.view);});});
-  var askShortcut=document.getElementById('askShortcut');
-  if(askShortcut){askShortcut.addEventListener('click',function(){show('ask');});}
 
-  // readiness tick-gauge (top semicircle of radial ticks)
-  function buildGauge(pct){
-    var g=document.getElementById('gaugeTicks'); if(!g) return;
-    var N=44, cx=130, cy=132, rOuter=118, len=15;
-    var lit = (pct==null) ? 0 : Math.round(pct/100*N);
-    var out='';
-    for(var i=0;i<N;i++){
-      var a=(180 + i/(N-1)*180)*Math.PI/180;
-      var x1=(cx+Math.cos(a)*rOuter).toFixed(1), y1=(cy+Math.sin(a)*rOuter).toFixed(1);
-      var x2=(cx+Math.cos(a)*(rOuter-len)).toFixed(1), y2=(cy+Math.sin(a)*(rOuter-len)).toFixed(1);
-      var on=i<lit;
-      out+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+(on?'url(#gaugeGrad)':'var(--track)')+'" stroke-width="2.6" stroke-linecap="round"'+(on?'':' opacity=".6"')+'/>';
+  // commitments Open / Completed segmented control
+  (function(){
+    var so=document.getElementById('segOpen'),sd=document.getElementById('segDone'),
+        co=document.getElementById('commitsOpen'),cd=document.getElementById('commitsDone');
+    if(!so||!sd||!co||!cd)return;
+    function seg(open){
+      so.classList.toggle('on',open);sd.classList.toggle('on',!open);
+      so.setAttribute('aria-selected',open?'true':'false');sd.setAttribute('aria-selected',open?'false':'true');
+      co.hidden=!open;cd.hidden=open;
     }
-    g.innerHTML=out;
-  }
-  buildGauge(82);
+    so.addEventListener('click',function(){seg(true);});
+    sd.addEventListener('click',function(){seg(false);});
+  })();
 
   // toast
   var toast=document.getElementById('toast'),tmr;
@@ -927,12 +986,16 @@ button.tapq{padding:6px}
 
   // learning-state toggle
   var day=document.getElementById('view-day');
-  var gaugeNum=document.getElementById('gaugeNum'),gaugeSub=document.getElementById('gaugeSub');
-  var mRec=document.getElementById('mRecovery'),mSlp=document.getElementById('mSleep'),mLoad=document.getElementById('mLoad');
+  var rings=[
+    {num:document.getElementById('recNum'),arc:document.getElementById('recArc'),full:'226.2'},
+    {num:document.getElementById('coreNum'),arc:document.getElementById('coreArc'),full:'314.2'},
+    {num:document.getElementById('slpNum'),arc:document.getElementById('slpArc'),full:'226.2'}
+  ];
+  var syncLine=document.getElementById('syncLine');
   var learnNote=document.getElementById('learnNote'),sampleTag=document.getElementById('sampleTag');
   var learnBtn=document.getElementById('learnBtn'),learnLabel=document.getElementById('learnLabel');
-  var HERO_SCORE=82;
-  var orig={num:gaugeNum.textContent,sub:gaugeSub.innerHTML,rec:mRec.innerHTML,slp:mSlp.innerHTML,load:mLoad.innerHTML,tag:sampleTag.textContent};
+  var orig={sync:syncLine.innerHTML,tag:sampleTag.textContent,
+    rings:rings.map(function(r){return {num:r.num.innerHTML,off:r.arc.getAttribute('stroke-dashoffset')};})};
   var learning=false;
   function setLearning(on){
     learning=on;
@@ -940,24 +1003,17 @@ button.tapq{padding:6px}
     learnNote.hidden=!on;
     learnBtn.setAttribute('aria-pressed',on?'true':'false');
     learnLabel.textContent=on?'Populated':'Learning state';
+    rings.forEach(function(r,i){
+      if(on){ r.num.innerHTML='—'; r.arc.setAttribute('stroke-dashoffset',r.full); }
+      else{ r.num.innerHTML=orig.rings[i].num; r.arc.setAttribute('stroke-dashoffset',orig.rings[i].off); }
+    });
     if(on){
-      gaugeNum.textContent='—';buildGauge(null);
-      mRec.innerHTML='—';mSlp.innerHTML='—';mLoad.innerHTML='—';
-      gaugeSub.innerHTML='Getting to know your usual · day 3 of 7';
+      syncLine.innerHTML='Getting to know your usual · day 3 of 7';
       sampleTag.textContent='Sample data · learning state';
     }else{
-      gaugeNum.textContent=orig.num;buildGauge(HERO_SCORE);
-      mRec.innerHTML=orig.rec;mSlp.innerHTML=orig.slp;mLoad.innerHTML=orig.load;
-      gaugeSub.innerHTML=orig.sub;
+      syncLine.innerHTML=orig.sync;
       sampleTag.textContent=orig.tag;
     }
-    document.querySelectorAll('#view-day .scard').forEach(function(c){
-      var t=c.querySelector('text'),arc=c.querySelectorAll('circle')[1];
-      if(!t||!arc)return;
-      if(on){ if(!t.dataset.orig){t.dataset.orig=t.textContent;arc.dataset.orig=arc.getAttribute('stroke-dashoffset');}
-        t.textContent='—';arc.setAttribute('stroke-dashoffset','163.4'); }
-      else if(t.dataset.orig){ t.textContent=t.dataset.orig;arc.setAttribute('stroke-dashoffset',arc.dataset.orig); }
-    });
   }
   learnBtn.addEventListener('click',function(){setLearning(!learning);});
 
@@ -965,11 +1021,10 @@ button.tapq{padding:6px}
   var sa=document.getElementById('startAct'),returning=false;
   sa.addEventListener('click',function(){
     returning=!returning;
-    if(returning){sa.classList.add('returning');sa.querySelector('b').textContent='Return to activity';
-      sa.querySelector('span span').textContent='Run · 00:14 · timer running (no pause)';
+    var b=sa.querySelector('b');
+    if(returning){sa.classList.add('returning');b.textContent='Return to activity · 00:14';
       openToast('Activity started — leaving Day keeps it running');}
-    else{sa.classList.remove('returning');sa.querySelector('b').textContent='Start Activity';
-      sa.querySelector('span span').textContent='Run · Ride · Strength · Pilates · more';
+    else{sa.classList.remove('returning');b.textContent='Start Activity';
       openToast('Finish → confirm → result saved to Body & Day');}
   });
 
