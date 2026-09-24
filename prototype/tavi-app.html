@@ -703,6 +703,12 @@ button.tapq{padding:6px}
 .fbody .fb-cbar span{display:block;height:100%;border-radius:4px}
 .fbody .fb-cn{font-size:11px;color:var(--ink3);width:78px;flex:0 0 auto;text-align:right}
 .fbody .fb-open{font-size:12px;font-weight:700;color:var(--core);flex:0 0 auto;margin-left:10px}
+.fbody .fb-trends{cursor:pointer}
+.fbody .ft-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.fbody .ft-chip{font-size:12.5px;font-weight:600;color:var(--ink);background:var(--surface2);
+  border:1px solid var(--line2);border-radius:999px;padding:8px 14px;cursor:pointer;transition:.15s}
+.fbody .ft-chip:hover{transform:translateY(-1px);border-color:var(--ink3)}
+.fbody .ft-chip:focus-visible{outline:2px solid var(--core);outline-offset:2px}
 
 /* ============================================================
    DETAIL OVERLAY — reusable pushed detail screen
@@ -1043,15 +1049,16 @@ button.tapq{padding:6px}
 
             <!-- trends -->
             <div class="flabel">Trends</div>
-            <div class="fsegs" role="tablist" aria-label="Trend range">
-              <button class="fseg on" id="trend7" role="tab" aria-selected="true">7 Days</button>
-              <button class="fseg" id="trend30" role="tab" aria-selected="false">30 Days</button>
+            <div class="fb-card fb-trends" id="trendsCard" role="button" tabindex="0" aria-haspopup="dialog">
+              <div class="fb-row" style="align-items:center"><div class="fb-rtitle">Explore trends</div><span class="fb-open">View detail ›</span></div>
+              <div class="fb-sub" style="margin-top:6px">Averages and change over 7 or 30 days, with honest coverage. Pick a metric:</div>
+              <div class="ft-chips">
+                <button class="ft-chip" data-open="rhr">Resting HR</button>
+                <button class="ft-chip" data-open="hrv">HRV</button>
+                <button class="ft-chip" data-open="steps">Steps</button>
+                <button class="ft-chip" data-open="sleep">Sleep</button>
+              </div>
             </div>
-            <button class="fb-card" id="trendsCard" aria-haspopup="dialog">
-              <div class="fb-row"><div><div class="fv-v" style="margin-top:0"><span id="trendVal">68</span><small>bpm</small></div><div class="fb-sub" id="trendLbl">Resting HR · 7-day average</div></div><span class="fb-badge" id="trendObs" style="color:var(--ink2);background:var(--surface2)">7 valid days</span></div>
-              <div class="fv-area" style="height:56px"><svg viewBox="0 0 320 60" preserveAspectRatio="none"><polyline fill="none" stroke="var(--core)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="0,40 46,34 92,38 137,30 183,32 229,22 274,26 320,20"/><circle cx="320" cy="20" r="3.5" fill="var(--core)"/></svg></div>
-              <div class="fb-row" style="align-items:center"><div class="fb-meta" id="trendCmp" style="margin-top:0">Compared with the previous 7 days · trending down 3 bpm</div><span class="fb-open">View detail ›</span></div>
-            </button>
 
             <!-- 30-day report -->
             <div class="flabel">30-Day Report</div>
@@ -1308,25 +1315,6 @@ button.tapq{padding:6px}
     sd.addEventListener('click',function(){seg(false);});
   })();
 
-  // Body trends 7 / 30 day toggle
-  (function(){
-    var t7=document.getElementById('trend7'),t30=document.getElementById('trend30'),
-        val=document.getElementById('trendVal'),lbl=document.getElementById('trendLbl'),
-        obs=document.getElementById('trendObs'),cmp=document.getElementById('trendCmp');
-    if(!t7||!t30)return;
-    function set(is7){
-      t7.classList.toggle('on',is7);t30.classList.toggle('on',!is7);
-      t7.setAttribute('aria-selected',is7?'true':'false');t30.setAttribute('aria-selected',is7?'false':'true');
-      val.textContent=is7?'68':'66';
-      lbl.textContent=is7?'Resting HR · 7-day average':'Resting HR · 30-day average';
-      obs.textContent=is7?'7 valid days':'26 valid days';
-      cmp.textContent=is7?'Compared with the previous 7 days · trending down 3 bpm'
-                          :'Compared with the previous 30 days · trending down 2 bpm';
-    }
-    t7.addEventListener('click',function(){set(true);});
-    t30.addEventListener('click',function(){set(false);});
-  })();
-
   // Body → Trends detail overlay
   (function(){
     var card=document.getElementById('trendsCard'),ov=document.getElementById('detailTrends');
@@ -1390,9 +1378,13 @@ button.tapq{padding:6px}
       var when=is7?days[i]:'Day '+(i*4+2);
       readout.innerHTML='<b>'+v+'</b> · '+when+' · TAVI Band';
     });
-    function open(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');setChip('rhr');setRange(true);}
+    function open(metric){ov.classList.add('open');ov.setAttribute('aria-hidden','false');setChip(DATA[metric]?metric:'rhr');setRange(true);ov.querySelector('.d-body').scrollTop=0;}
     function close(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}
-    card.addEventListener('click',open);
+    card.addEventListener('click',function(){open('rhr');});
+    card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open('rhr');}});
+    [].forEach.call(card.querySelectorAll('.ft-chip'),function(ch){
+      ch.addEventListener('click',function(e){e.stopPropagation();open(ch.dataset.open);});
+    });
     back.addEventListener('click',close);
     ask.addEventListener('click',function(){openToast('Ask opens with context · '+ ({rhr:'Resting HR',hrv:'HRV',steps:'Steps',sleep:'Sleep'}[cur]) +' · '+(is7?'7 days':'30 days'));});
     render();
