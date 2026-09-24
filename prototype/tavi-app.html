@@ -720,7 +720,7 @@ button.tapq{padding:6px}
 .d-ask{font-size:12.5px;font-weight:600;color:var(--teal);background:color-mix(in srgb,var(--teal) 14%,transparent);
   border:1px solid color-mix(in srgb,var(--teal) 30%,var(--line));border-radius:999px;padding:8px 14px;cursor:pointer}
 .d-back:focus-visible,.d-ask:focus-visible{outline:2px solid var(--core);outline-offset:2px}
-.d-body{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;padding:6px 18px 40px}
+.d-body{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;padding:6px 18px 40px}
 .d-body::-webkit-scrollbar{display:none}
 .d-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .d-chips::-webkit-scrollbar{display:none}
@@ -755,6 +755,13 @@ button.tapq{padding:6px}
 .detail .fc-s{font-size:12px;color:var(--ink3);margin-top:2px;display:block}
 .detail .fc-st{color:var(--ink3);font-weight:700;flex:0 0 auto}
 .d-note{font-size:12.5px;color:var(--ink2);line-height:1.55;margin:8px 0 0}
+.d-covs{margin-top:8px}
+.d-cov{display:flex;align-items:center;gap:10px;padding:9px 0}
+.d-cl{font-size:12.5px;color:var(--ink2);width:80px;flex:0 0 auto;font-weight:500}
+.d-cbar{flex:1;height:7px;border-radius:4px;background:var(--track);overflow:hidden}
+.d-cbar span{display:block;height:100%;border-radius:4px}
+.d-cn{font-size:11.5px;color:var(--ink3);width:82px;flex:0 0 auto;text-align:right}
+.d-swatch{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle}
 </style>
 
 <div class="stage">
@@ -1048,7 +1055,7 @@ button.tapq{padding:6px}
 
             <!-- 30-day report -->
             <div class="flabel">30-Day Report</div>
-            <button class="fb-report" data-metric="30-day Report">
+            <button class="fb-report" id="reportCard" aria-haspopup="dialog">
               <div class="fb-row"><div class="fb-rtitle">Aug 16 – Sep 14</div><svg class="fb-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
               <div class="fb-cov"><span class="fb-cl">Sleep</span><span class="fb-cbar"><span style="width:87%;background:var(--sleep)"></span></span><span class="fb-cn">26 valid days</span></div>
               <div class="fb-cov"><span class="fb-cl">Movement</span><span class="fb-cbar"><span style="width:93%;background:var(--recovery)"></span></span><span class="fb-cn">28 valid days</span></div>
@@ -1168,6 +1175,64 @@ button.tapq{padding:6px}
 
             <div class="d-label">How it is measured</div>
             <p class="d-note">Resting HR is the lowest sustained heart rate detected during overnight wear. The trend is the average across valid nights in the selected range. Ranges with too few valid nights are shown honestly, not filled in.</p>
+          </div>
+        </section>
+
+        <!-- ============ 30-DAY REPORT DETAIL (overlay) ============ -->
+        <section class="detail" id="detailReport" role="dialog" aria-modal="true" aria-label="30-day report" aria-hidden="true">
+          <div class="d-head">
+            <button class="d-back" id="reportBack" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="d-title">30-Day Report</div>
+            <button class="d-ask" id="reportShare" data-metric="Share 30-day report">Share</button>
+          </div>
+          <div class="d-body">
+            <div class="d-hero">
+              <div class="d-val" style="font-size:34px">Aug 16 – Sep 14</div>
+              <div class="d-sub">30 days · coverage shown honestly, not filled in</div>
+            </div>
+
+            <div class="d-label">Data coverage</div>
+            <div class="d-covs">
+              <div class="d-cov"><span class="d-cl">Sleep</span><span class="d-cbar"><span style="width:87%;background:var(--sleep)"></span></span><span class="d-cn">26 / 30 days</span></div>
+              <div class="d-cov"><span class="d-cl">Movement</span><span class="d-cbar"><span style="width:93%;background:var(--recovery)"></span></span><span class="d-cn">28 / 30 days</span></div>
+              <div class="d-cov"><span class="d-cl">Activities</span><span class="d-cbar"><span style="width:47%;background:var(--core)"></span></span><span class="d-cn">14 recorded</span></div>
+              <div class="d-cov"><span class="d-cl">Recovery</span><span class="d-cbar"><span style="width:80%;background:var(--recovery)"></span></span><span class="d-cn">24 / 30 days</span></div>
+            </div>
+
+            <div class="d-label">Sleep</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Average time asleep</span><span class="d-v">7h 18m</span></div>
+              <div class="d-row"><span class="d-k">Average sleep score</span><span class="d-v">76</span></div>
+              <div class="d-row"><span class="d-k">Valid nights</span><span class="d-v">26 of 30</span></div>
+            </div>
+
+            <div class="d-label">Movement</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Total steps</span><span class="d-v">236,480</span></div>
+              <div class="d-row"><span class="d-k">Activity distance</span><span class="d-v">42.6 km</span></div>
+              <div class="d-row"><span class="d-k">Workout time</span><span class="d-v">11h 20m</span></div>
+            </div>
+
+            <div class="d-label">Activities · 14 recorded</div>
+            <div class="fcommits">
+              <button class="fcommit" data-metric="Activity results: Run"><span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M7 21l3-6 3 2 1-4M14 13l4 1M8 9l3-1 2 3"/></svg></span><span class="fc-x"><span class="fc-t">Run · 6 sessions</span><span class="fc-s">38.4 km · avg 6:10 /km</span></span><span class="fc-st">›</span></button>
+              <button class="fcommit" data-metric="Activity results: Walk"><span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M9 21l2-5 2 2 1-4M14 12l4 1"/></svg></span><span class="fc-x"><span class="fc-t">Walk · 5 sessions</span><span class="fc-s">15.2 km · verified steps</span></span><span class="fc-st">›</span></button>
+              <button class="fcommit" data-metric="Activity results: Strength"><span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5l11 11M4 9l-1.5 1.5 2 2M20 15l1.5-1.5-2-2"/></svg></span><span class="fc-x"><span class="fc-t">Strength · 3 sessions</span><span class="fc-s">2h 15m · avg HR 126 bpm</span></span><span class="fc-st">›</span></button>
+            </div>
+
+            <div class="d-label">Approved scores</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k"><span class="d-swatch" style="background:var(--recovery)"></span>Recovery average</span><span class="d-v">79</span></div>
+              <div class="d-row"><span class="d-k"><span class="d-swatch" style="background:var(--core)"></span>Core average</span><span class="d-v">61</span></div>
+              <div class="d-row"><span class="d-k"><span class="d-swatch" style="background:var(--sleep)"></span>Sleep average</span><span class="d-v">76</span></div>
+            </div>
+
+            <div class="d-label">Sources</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">TAVI Band</span><span class="d-v">Heart, HRV, sleep, movement</span></div>
+              <div class="d-row"><span class="d-k">Apple Health</span><span class="d-v">Steps, workouts</span></div>
+            </div>
+            <p class="d-note">Days without valid wear are left out rather than estimated. 4 days had no overnight sleep record; those are excluded from the sleep averages above.</p>
           </div>
         </section>
 
@@ -1331,6 +1396,15 @@ button.tapq{padding:6px}
     back.addEventListener('click',close);
     ask.addEventListener('click',function(){openToast('Ask opens with context · '+ ({rhr:'Resting HR',hrv:'HRV',steps:'Steps',sleep:'Sleep'}[cur]) +' · '+(is7?'7 days':'30 days'));});
     render();
+  })();
+
+  // Body → 30-day Report detail overlay
+  (function(){
+    var card=document.getElementById('reportCard'),ov=document.getElementById('detailReport');
+    if(!card||!ov)return;
+    var back=document.getElementById('reportBack');
+    card.addEventListener('click',function(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');});
+    back.addEventListener('click',function(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');});
   })();
 
   // toast
