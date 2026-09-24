@@ -798,6 +798,7 @@ button.tapq{padding:6px}
 .dc-v{font-size:13.5px;font-weight:600;color:var(--ink2);flex:0 0 auto}
 .dc-bar{display:block;height:5px;border-radius:3px;background:var(--track);overflow:hidden;margin-top:8px}
 .dc-bar span{display:block;height:100%;border-radius:3px}
+.dc-sub{display:block;font-size:10.5px;color:var(--ink3);margin-top:6px;text-align:right}
 .d-compare{background:color-mix(in srgb,var(--sleep) 14%,var(--surface));
   border:1px solid color-mix(in srgb,var(--sleep) 30%,var(--line));border-radius:18px;padding:16px 18px;margin-top:18px}
 .dcmp-h{font-size:12px;font-weight:700;color:var(--sleep);letter-spacing:.02em}
@@ -878,7 +879,7 @@ button.tapq{padding:6px}
                 <div class="fring-num" id="recNum">82<span>%</span></div>
                 <div class="fring-nm">Recovery</div>
               </button>
-              <button class="fring dom" data-metric="Core">
+              <button class="fring dom js-core">
                 <div class="fring-viz lg">
                   <svg viewBox="0 0 120 120" role="img" aria-label="Core 64 percent">
                     <circle cx="60" cy="60" r="50" fill="none" stroke="var(--track)" stroke-width="9"/>
@@ -1008,7 +1009,7 @@ button.tapq{padding:6px}
                 <div class="fring-viz sm"><svg viewBox="0 0 88 88" role="img" aria-label="Recovery 82"><circle cx="44" cy="44" r="36" fill="none" stroke="var(--track)" stroke-width="7"/><circle cx="44" cy="44" r="36" fill="none" stroke="var(--recovery)" stroke-width="7" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="40.7" transform="rotate(-90 44 44)"/><g transform="translate(44 44)" stroke="var(--recovery)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M-4.5 0a4.5 4.5 0 1 0 1.3-3.2"/><path d="M-4.6 -3.4l.1 2.9 2.9-.1"/></g></svg></div>
                 <div class="fring-num">82<span>%</span></div><div class="fring-nm">Recovery</div>
               </button>
-              <button class="fring dom" data-metric="Core detail">
+              <button class="fring dom js-core">
                 <div class="fring-viz lg"><svg viewBox="0 0 120 120" role="img" aria-label="Core 64"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--track)" stroke-width="9"/><circle cx="60" cy="60" r="50" fill="none" stroke="var(--core)" stroke-width="9" stroke-linecap="round" stroke-dasharray="314.2" stroke-dashoffset="113.1" transform="rotate(-90 60 60)"/><circle cx="60" cy="60" r="7" fill="none" stroke="var(--core)" stroke-width="2"/><circle cx="60" cy="60" r="2.2" fill="var(--core)"/></svg></div>
                 <div class="fring-num">64<span>%</span></div><div class="fring-nm">Core</div>
               </button>
@@ -1416,6 +1417,75 @@ button.tapq{padding:6px}
           </div>
         </section>
 
+        <!-- ============ CORE DETAIL (overlay) ============ -->
+        <section class="detail" id="detailCore" role="dialog" aria-modal="true" aria-label="Core detail" aria-hidden="true">
+          <div class="d-head">
+            <button class="d-back" id="coreBack" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="d-title">Core</div>
+            <button class="d-ask" data-metric="Share Core">Share</button>
+          </div>
+          <div class="d-body">
+            <div class="d-datenav">
+              <button class="d-nav" id="corePrev" aria-label="Previous day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+              <div class="d-date" id="coreDate">Today · 14 Sep</div>
+              <button class="d-nav" id="coreNext" aria-label="Next day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+            </div>
+
+            <div class="d-gauge">
+              <svg viewBox="0 0 200 132" role="img" aria-label="Core 64 percent">
+                <circle cx="100" cy="96" r="62" fill="none" stroke="var(--track)" stroke-width="13" stroke-linecap="round" stroke-dasharray="292.2 97.4" transform="rotate(135 100 96)"/>
+                <circle cx="100" cy="96" r="62" fill="none" stroke="var(--core)" stroke-width="13" stroke-linecap="round" stroke-dasharray="187 205" transform="rotate(135 100 96)"/>
+              </svg>
+              <div class="d-gnum">64<span>%</span></div>
+            </div>
+            <p class="d-mean">Core is how much physical demand your body has taken on today. At <b>64%</b> you're moderately loaded — room for more, but recovery matters tonight.</p>
+
+            <div class="d-label">Contributors</div>
+            <div class="d-contribs">
+              <button class="d-contrib" data-metric="Activity result: Evening Run">
+                <span class="dc-ic" style="color:var(--core)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M7 21l3-6 3 2 1-4M14 13l4 1M8 9l3-1 2 3"/></svg></span>
+                <span class="dc-x"><span class="dc-top"><span class="dc-t">Evening Run</span><span class="dc-v" style="color:var(--core)">+38</span></span><span class="dc-bar"><span style="width:80%;background:var(--core)"></span></span><span class="dc-sub">5.2 km</span></span>
+              </button>
+              <button class="d-contrib" data-metric="Active hours">
+                <span class="dc-ic" style="color:var(--core)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+                <span class="dc-x"><span class="dc-top"><span class="dc-t">Active hours</span><span class="dc-v" style="color:var(--core)">+18</span></span><span class="dc-bar"><span style="width:48%;background:var(--core)"></span></span><span class="dc-sub">4h 20m</span></span>
+              </button>
+              <button class="d-contrib" data-metric="Steps">
+                <span class="dc-ic" style="color:var(--core)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v-2.4C4 11.5 3 10.5 3 8c0-2.7 1.5-6 4.5-6C9.4 2 10 3.8 10 5.5c0 3.1-2 5.7-2 8.7V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.4c0-2.1 1-3.1 1-5.6 0-2.7-1.5-6-4.5-6C14.6 6 14 7.8 14 9.5c0 3.1 2 5.7 2 8.7V20a2 2 0 1 0 4 0Z"/></svg></span>
+                <span class="dc-x"><span class="dc-top"><span class="dc-t">Steps</span><span class="dc-v" style="color:var(--core)">+8</span></span><span class="dc-bar"><span style="width:22%;background:var(--core)"></span></span><span class="dc-sub">7,420 steps</span></span>
+              </button>
+            </div>
+
+            <div class="d-label">Last 7 days</div>
+            <div class="d-chart">
+              <svg id="coreChart" viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Core, last 7 days">
+                <g stroke="var(--line)" stroke-width="1"><line x1="0" y1="30" x2="320" y2="30"/><line x1="0" y1="70" x2="320" y2="70"/><line x1="0" y1="110" x2="320" y2="110"/></g>
+                <path id="coreFill" fill="url(#coreGrad)" d=""/>
+                <polyline id="coreLine" fill="none" stroke="var(--core)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points=""/>
+                <circle id="coreDot" r="4" fill="var(--core)" cx="0" cy="0"/>
+                <defs><linearGradient id="coreGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--core)" stop-opacity=".34"/><stop offset="1" stop-color="var(--core)" stop-opacity="0"/></linearGradient></defs>
+              </svg>
+              <div class="d-axis"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+            </div>
+            <div class="d-readout" id="coreReadout">Tap a day to read its exact Core.</div>
+
+            <div class="d-compare" style="background:color-mix(in srgb,var(--core) 13%,var(--surface));border-color:color-mix(in srgb,var(--core) 28%,var(--line))">
+              <div class="dcmp-h" style="color:var(--core)">Compared to you</div>
+              <div class="dcmp-b">Today is higher than <b>4 of your last 7 days</b>. Your usual weekday Core sits around 52%.</div>
+            </div>
+
+            <div class="d-label">Source &amp; window</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Source</span><span class="d-v">TAVI Band + Health</span></div>
+              <div class="d-row"><span class="d-k">Window</span><span class="d-v">Today · 12:00 AM – Now</span></div>
+              <div class="d-row"><span class="d-k">Coverage</span><span class="d-v">Valid data available</span></div>
+            </div>
+
+            <div class="d-label">How this is measured</div>
+            <p class="d-note">Core represents your daily physical demand, based on the supported activity and body data available for this period. It is not core temperature.</p>
+          </div>
+        </section>
+
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
         <nav class="tabbar" role="tablist" aria-label="Main">
@@ -1633,6 +1703,39 @@ button.tapq{padding:6px}
     ask.addEventListener('click',function(){openToast('Ask opens with context · Heart rate · Today');});
     [].forEach.call(document.querySelectorAll('.js-heart'),function(el){el.addEventListener('click',open);});
     draw();
+  })();
+
+  // Core detail overlay
+  (function(){
+    var ov=document.getElementById('detailCore');if(!ov)return;
+    var back=document.getElementById('coreBack'),chart=document.getElementById('coreChart'),
+        line=document.getElementById('coreLine'),fill=document.getElementById('coreFill'),dot=document.getElementById('coreDot'),
+        readout=document.getElementById('coreReadout'),dateEl=document.getElementById('coreDate'),
+        prev=document.getElementById('corePrev'),next=document.getElementById('coreNext');
+    var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    var vals=[46,78,42,64,38,82,64];
+    var pc=(function(){var mn=Math.min.apply(null,vals),mx=Math.max.apply(null,vals),rng=(mx-mn)||1;
+      return vals.map(function(v,i){return [i/(vals.length-1)*320,130-((v-mn)/rng)*100];});})();
+    function draw(){
+      line.setAttribute('points',pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' '));
+      fill.setAttribute('d','M'+pc.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ')+' L320,150 L0,150 Z');
+      var l=pc[pc.length-1];dot.setAttribute('cx',l[0].toFixed(1));dot.setAttribute('cy',l[1].toFixed(1));
+    }
+    chart.addEventListener('click',function(e){
+      var rect=chart.getBoundingClientRect();
+      var i=Math.round((e.clientX-rect.left)/rect.width*(vals.length-1));i=Math.max(0,Math.min(vals.length-1,i));
+      dot.setAttribute('cx',pc[i][0].toFixed(1));dot.setAttribute('cy',pc[i][1].toFixed(1));
+      readout.innerHTML='<b>'+vals[i]+'% Core</b> · '+days[i]+' · TAVI Band';
+    });
+    var dates=['Fri · 12 Sep','Sat · 13 Sep','Today · 14 Sep'],di=2;
+    function setDate(){dateEl.textContent=dates[di];prev.style.opacity=di<=0?'.4':'';next.style.opacity=di>=dates.length-1?'.4':'';}
+    prev.addEventListener('click',function(){if(di>0){di--;setDate();}});
+    next.addEventListener('click',function(){if(di<dates.length-1){di++;setDate();}});
+    function open(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');ov.querySelector('.d-body').scrollTop=0;di=2;setDate();draw();readout.innerHTML='Tap a day to read its exact Core.';}
+    function close(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}
+    back.addEventListener('click',close);
+    [].forEach.call(document.querySelectorAll('.js-core'),function(el){el.addEventListener('click',open);});
+    draw();setDate();
   })();
 
   // toast
