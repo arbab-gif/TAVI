@@ -768,6 +768,12 @@ button.tapq{padding:6px}
 .d-cbar span{display:block;height:100%;border-radius:4px}
 .d-cn{font-size:11.5px;color:var(--ink3);width:82px;flex:0 0 auto;text-align:right}
 .d-swatch{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle}
+.d-link{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:none;border:none;
+  cursor:pointer;text-align:left;font-family:var(--font-u);padding:13px 0;border-bottom:1px solid var(--line)}
+.d-link:focus-visible{outline:2px solid var(--core);outline-offset:-2px;border-radius:8px}
+.d-link .d-k{color:var(--ink);font-weight:600}
+.d-lk{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--teal);font-weight:600;flex:0 0 auto}
+.d-lk svg{width:13px;height:13px}
 
 /* sleep detail specifics */
 .d-datenav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
@@ -1247,6 +1253,11 @@ button.tapq{padding:6px}
               <div class="d-sub">30 days · coverage shown honestly, not filled in</div>
             </div>
 
+            <div class="d-compare" style="margin-top:16px">
+              <div class="dcmp-h">Summary</div>
+              <div class="dcmp-b">Over the last 30 days you recorded <b>26 nights of sleep</b> (avg 7h 18m), moved <b>236,480 steps</b> and <b>42.6 km</b> across <b>14 activities</b>, and your <b>Recovery averaged 79</b>. Sleep and movement coverage was strong; activities and a few nights are partial — read on for exactly what's included.</div>
+            </div>
+
             <div class="d-label">Data coverage</div>
             <div class="d-covs">
               <div class="d-cov"><span class="d-cl">Sleep</span><span class="d-cbar"><span style="width:87%;background:var(--sleep)"></span></span><span class="d-cn">26 / 30 days</span></div>
@@ -1285,8 +1296,9 @@ button.tapq{padding:6px}
 
             <div class="d-label">Sources</div>
             <div class="d-rows">
-              <div class="d-row"><span class="d-k">TAVI Band</span><span class="d-v">Heart, HRV, sleep, movement</span></div>
-              <div class="d-row"><span class="d-k">Apple Health</span><span class="d-v">Steps, workouts</span></div>
+              <button class="d-link" data-metric="Source: TAVI Band"><span class="d-k">TAVI Band</span><span class="d-lk">Heart, HRV, sleep, movement <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></button>
+              <button class="d-link" data-metric="Source: Apple Health"><span class="d-k">Apple Health</span><span class="d-lk">Steps, workouts <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></button>
+              <button class="d-link" data-metric="Source: Calendar"><span class="d-k">Calendar</span><span class="d-lk">Activity context <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></button>
             </div>
             <p class="d-note">Days without valid wear are left out rather than estimated. 4 days had no overnight sleep record; those are excluded from the sleep averages above.</p>
           </div>
