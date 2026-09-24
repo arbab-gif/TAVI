@@ -823,6 +823,75 @@ button.tapq{padding:6px}
 .d-stats.three{grid-template-columns:repeat(3,1fr)}
 .d-stats.three .d-stat{padding:14px 10px 12px}
 .d-stats.three .ds-v{font-size:20px}
+
+/* ============================================================
+   ACTIVITY FLOW
+   ============================================================ */
+.actflow .act-view{display:none;flex-direction:column;height:100%}
+.actflow.step-choose .v-choose,.actflow.step-ready .v-choose,
+.actflow.step-track .v-track,.actflow.step-finish .v-track,
+.actflow.step-result .v-result{display:flex}
+/* chooser grid */
+.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.act-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;height:118px;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line2);border-radius:18px;color:var(--ink);font-family:var(--font-u);
+  font-size:14px;font-weight:600;transition:transform .15s,border-color .2s,background .2s}
+.act-card:hover{transform:translateY(-2px);border-color:var(--ink3);background:var(--surface2)}
+.act-card:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.act-card svg{width:26px;height:26px}
+/* bottom sheets */
+.act-sheet{position:absolute;left:0;right:0;bottom:0;z-index:5;background:var(--surface2);
+  border-top:1px solid var(--line2);border-radius:26px 26px 0 0;padding:10px 20px calc(20px + env(safe-area-inset-bottom));
+  transform:translateY(110%);transition:transform .3s cubic-bezier(.2,.7,.2,1);box-shadow:0 -18px 44px rgba(0,0,0,.5)}
+.act-sheet.open{transform:translateY(0)}
+.act-grab{width:38px;height:4px;border-radius:2px;background:var(--line2);margin:0 auto 14px}
+.act-sheet-h{font-family:var(--font-d);font-weight:600;font-size:19px;text-align:center}
+.act-sheet-sub{font-size:12.5px;color:var(--ink3);text-align:center;margin-top:6px}
+.act-sel{display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);
+  border-radius:18px;padding:20px;margin-top:16px}
+.act-sel-ic svg{width:30px;height:30px;color:var(--ink)}
+.act-sel-n{font-size:15px;font-weight:600}
+.act-status{margin-top:16px}
+.act-st{display:flex;align-items:center;justify-content:space-between;padding:14px 2px;border-top:1px solid var(--line)}
+.act-st-l{display:flex;align-items:center;gap:11px;font-size:14px;font-weight:600}
+.act-st-l svg{width:19px;height:19px;color:var(--ink3)}
+.act-badge{font-size:12.5px;font-weight:700}
+.act-badge.ok{color:var(--recovery)}
+.act-badge.warn{color:var(--core)}
+.act-start{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:18px;cursor:pointer;
+  background:#fff;color:#0a0a0a;border:none;border-radius:16px;padding:16px;font-family:var(--font-u);font-size:15px;font-weight:700;
+  transition:transform .15s}
+.act-start:hover{transform:translateY(-1px)}
+.act-start svg{width:18px;height:18px}
+.act-return{display:block;width:100%;margin-top:10px;background:none;border:none;cursor:pointer;color:var(--ink2);
+  font-family:var(--font-u);font-size:13.5px;font-weight:600;padding:12px}
+.act-return:hover{color:var(--ink)}
+/* tracking */
+.v-track{background:linear-gradient(180deg,#0e1512,var(--app));position:relative}
+.act-track-top{display:flex;align-items:center;gap:12px;padding:16px 18px 6px}
+.act-track-title{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;margin-right:38px;
+  font-family:var(--font-d);font-weight:600;font-size:16px}
+.act-track-title svg{width:18px;height:18px}
+.act-track-hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.act-timer{font-family:var(--font-d);font-weight:200;font-size:56px;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.act-live{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink2);font-weight:600}
+.act-live-dot{width:8px;height:8px;border-radius:50%;background:#e5675f;animation:actpulse 1.4s ease-in-out infinite}
+@keyframes actpulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.act-live-dot{animation:none}}
+.act-track-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px}
+.act-tstat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.act-tstat .k{font-size:12px;color:var(--ink3);font-weight:600}
+.act-tstat .v{font-family:var(--font-d);font-weight:300;font-size:26px;margin-top:8px;font-variant-numeric:tabular-nums}
+.act-tstat .v small{font-size:12px;color:var(--ink3);font-family:var(--font-u)}
+.act-finish{margin:18px 18px calc(18px + env(safe-area-inset-bottom));cursor:pointer;background:#fff;color:#0a0a0a;border:none;
+  border-radius:16px;padding:17px;font-family:var(--font-u);font-size:15px;font-weight:700;transition:transform .15s}
+.act-finish:hover{transform:translateY(-1px)}
+/* result */
+.act-res-head{display:flex;align-items:center;gap:14px;margin-top:6px}
+.act-res-ic{width:48px;height:48px;border-radius:14px;background:var(--surface2);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.act-res-ic svg{width:24px;height:24px}
+.act-res-t{font-family:var(--font-d);font-weight:600;font-size:20px}
+.act-res-s{font-size:12.5px;color:var(--ink3);margin-top:3px}
 </style>
 
 <div class="stage">
@@ -1685,6 +1754,107 @@ button.tapq{padding:6px}
           </div>
         </section>
 
+        <!-- ============ ACTIVITY FLOW (overlay) ============ -->
+        <section class="detail actflow step-choose" id="detailAct" role="dialog" aria-modal="true" aria-label="Activity" aria-hidden="true">
+
+          <!-- STEP: chooser -->
+          <div class="act-view v-choose">
+            <div class="d-head">
+              <button class="d-back" id="actClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+              <div class="d-title" style="flex:1;text-align:center;margin-right:38px">Activity</div>
+            </div>
+            <div class="d-body">
+              <div class="act-grid">
+                <button class="act-card" data-act="Run"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M7 21l3-6 3 2 1-4M14 13l4 1M8 9l3-1 2 3"/></svg><span>Run</span></button>
+                <button class="act-card" data-act="Ride"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M6 17.5l4-8h5l-2 8M9 6h3l3 3"/></svg><span>Ride</span></button>
+                <button class="act-card" data-act="Walk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M9 21l2-6 2 1 1-4M12 11l3 1M10 8l3-1 1 3"/></svg><span>Walk</span></button>
+                <button class="act-card" data-act="Strength"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5l11 11M4 9l-1.5 1.5 2 2M20 15l1.5-1.5-2-2M9 4L7.5 5.5M15 20l1.5-1.5"/></svg><span>Strength</span></button>
+                <button class="act-card" data-act="HIIT"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M10 2h4M18 6l1.5-1.5"/></svg><span>HIIT</span></button>
+                <button class="act-card" data-act="Pilates"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a1.6 1.6 0 1 0 0-.01M4 20c3-1 5-4 8-4s4 2 8 1M10 12l2-3 3 2"/></svg><span>Pilates</span></button>
+                <button class="act-card" data-act="Barry's"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M5 15l4-2 2 3 3-1 2 4M9 9l3 1 2-2"/></svg><span>Barry's</span></button>
+                <button class="act-card" data-act="Motion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a2 2 0 1 0 0-.01M6 20l3-5 3 1 1 4M8 11l4-1 3 3M4 21h6"/></svg><span>Motion</span></button>
+                <button class="act-card" data-act="More"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg><span>More</span></button>
+              </div>
+            </div>
+
+            <!-- READY sheet -->
+            <div class="act-sheet" id="actReady">
+              <div class="act-grab"></div>
+              <div class="act-sheet-h">Ready to start?</div>
+              <div class="act-sel"><span class="act-sel-ic" id="readyIc"></span><span class="act-sel-n" id="readyName">Run</span></div>
+              <div class="act-status">
+                <div class="act-st"><span class="act-st-l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="3"/><path d="M11 6h2"/></svg>Band</span><span class="act-badge ok">Connected</span></div>
+                <div class="act-st"><span class="act-st-l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-5 3 10 2-7 2 4h5"/></svg>Heart Rate</span><span class="act-badge ok">Connected</span></div>
+                <div class="act-st" id="gpsRow"><span class="act-st-l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>GPS</span><span class="act-badge warn" id="gpsStat">Acquiring</span></div>
+              </div>
+              <button class="act-start" id="actStart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Start</button>
+            </div>
+          </div>
+
+          <!-- STEP: tracking -->
+          <div class="act-view v-track">
+            <div class="act-track-top">
+              <button class="d-back" id="actMinimize" aria-label="Back to Day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+              <div class="act-track-title"><span id="trackIc"></span><span id="trackName">Run</span></div>
+            </div>
+            <div class="act-track-hero">
+              <div class="act-timer" id="actTimer">00:00:00</div>
+              <div class="act-live"><span class="act-live-dot"></span>Recording · no pause</div>
+            </div>
+            <div class="act-track-stats">
+              <div class="act-tstat"><div class="k">Distance</div><div class="v"><span id="trackDist">0.00</span><small> km</small></div></div>
+              <div class="act-tstat"><div class="k">Pace</div><div class="v"><span id="trackPace">--:--</span><small> /km</small></div></div>
+            </div>
+            <button class="act-finish" id="actFinishBtn">Finish</button>
+
+            <!-- FINISH sheet -->
+            <div class="act-sheet" id="actFinishSheet">
+              <div class="act-grab"></div>
+              <div class="act-sheet-h">Finish this activity?</div>
+              <div class="act-sheet-sub">The timer keeps running until you confirm.</div>
+              <button class="act-start" id="actConfirmFinish">Finish</button>
+              <button class="act-return" id="actReturn">Return to activity</button>
+            </div>
+          </div>
+
+          <!-- STEP: result -->
+          <div class="act-view v-result">
+            <div class="d-head">
+              <button class="d-back" id="actResultClose" aria-label="Done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+              <div class="d-title" style="flex:1">Result</div>
+              <button class="d-ask" data-metric="Share activity">Share</button>
+            </div>
+            <div class="d-body">
+              <div class="act-res-head">
+                <span class="act-res-ic" id="resIc"></span>
+                <div><div class="act-res-t" id="resName">Run</div><div class="act-res-s">Today · saved on this phone</div></div>
+              </div>
+              <div class="d-stats" style="margin-top:14px">
+                <div class="d-stat"><div class="ds-k">Duration</div><div class="ds-v" id="resDur">00:38:12</div><div class="ds-w">total elapsed</div></div>
+                <div class="d-stat"><div class="ds-k">Distance</div><div class="ds-v" id="resDist">6.20<small>km</small></div><div class="ds-w">supported track</div></div>
+                <div class="d-stat"><div class="ds-k">Avg pace</div><div class="ds-v" id="resPace">6:10<small>/km</small></div><div class="ds-w">elapsed-based</div></div>
+                <div class="d-stat"><div class="ds-k">Avg HR</div><div class="ds-v">148<small>bpm</small></div><div class="ds-w">from band</div></div>
+              </div>
+
+              <div class="d-compare" style="margin-top:16px">
+                <div class="dcmp-h" style="color:var(--recovery)">Insight</div>
+                <div class="dcmp-b">Faster than usual — your quickest 5K in TAVI this month. Tap to see the compared runs.</div>
+              </div>
+
+              <div class="d-label">Heart rate</div>
+              <div class="d-chart">
+                <svg viewBox="0 0 320 120" preserveAspectRatio="none"><defs><linearGradient id="resHrFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e5675f" stop-opacity=".28"/><stop offset="1" stop-color="#e5675f" stop-opacity="0"/></linearGradient></defs><path d="M0,90 40,70 80,78 120,50 160,58 200,40 240,52 280,34 320,44 V120 H0 Z" fill="url(#resHrFill)"/><polyline fill="none" stroke="#e5675f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="0,90 40,70 80,78 120,50 160,58 200,40 240,52 280,34 320,44"/></svg>
+                <div class="d-axis"><span>0</span><span>10</span><span>20</span><span>30</span><span>min</span></div>
+              </div>
+
+              <button class="act-start" id="actSave" style="margin-top:20px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Save</button>
+              <button class="act-return" id="actDiscard">Discard</button>
+              <p class="d-note" style="text-align:center">Once finished, the session does not resume. Stops are included in duration.</p>
+            </div>
+          </div>
+        </section>
+
+
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
         <nav class="tabbar" role="tablist" aria-label="Main">
@@ -2098,15 +2268,83 @@ button.tapq{padding:6px}
   learnBtn.addEventListener('click',function(){setLearning(!learning);});
 
   // start activity
-  var sa=document.getElementById('startAct'),returning=false;
-  sa.addEventListener('click',function(){
-    returning=!returning;
-    var b=sa.querySelector('b');
-    if(returning){sa.classList.add('returning');b.textContent='Return to activity · 00:14';
-      openToast('Activity started — leaving Day keeps it running');}
-    else{sa.classList.remove('returning');b.textContent='Start Activity';
-      openToast('Finish → confirm → result saved to Body & Day');}
-  });
+  // ===== Activity flow (chooser -> ready -> tracking -> finish -> result) =====
+  (function(){
+    var ov=document.getElementById('detailAct');if(!ov)return;
+    var sa=document.getElementById('startAct'),saB=sa.querySelector('b');
+    var ICONS={
+      Run:'<path d="M13 4a2 2 0 1 0 0-.001M7 21l3-6 3 2 1-4M14 13l4 1M8 9l3-1 2 3"/>',
+      Ride:'<circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M6 17.5l4-8h5l-2 8M9 6h3l3 3"/>',
+      Walk:'<path d="M13 4a2 2 0 1 0 0-.001M9 21l2-6 2 1 1-4M12 11l3 1M10 8l3-1 1 3"/>',
+      Strength:'<path d="M6.5 6.5l11 11M4 9l-1.5 1.5 2 2M20 15l1.5-1.5-2-2M9 4L7.5 5.5M15 20l1.5-1.5"/>',
+      HIIT:'<circle cx="12" cy="13" r="8"/><path d="M12 13V9M10 2h4M18 6l1.5-1.5"/>',
+      Pilates:'<path d="M12 5a1.6 1.6 0 1 0 0-.01M4 20c3-1 5-4 8-4s4 2 8 1M10 12l2-3 3 2"/>',
+      "Barry's":'<path d="M13 4a2 2 0 1 0 0-.001M5 15l4-2 2 3 3-1 2 4M9 9l3 1 2-2"/>',
+      Motion:'<path d="M12 4a2 2 0 1 0 0-.01M6 20l3-5 3 1 1 4M8 11l4-1 3 3M4 21h6"/>'
+    };
+    function iconSvg(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICONS[name]||ICONS.Run)+'</svg>';}
+    var readyIc=document.getElementById('readyIc'),readyName=document.getElementById('readyName'),
+        trackIc=document.getElementById('trackIc'),trackName=document.getElementById('trackName'),
+        resIc=document.getElementById('resIc'),resName=document.getElementById('resName'),
+        timerEl=document.getElementById('actTimer'),distEl=document.getElementById('trackDist'),paceEl=document.getElementById('trackPace'),
+        readySheet=document.getElementById('actReady'),finishSheet=document.getElementById('actFinishSheet');
+    var current='Run',secs=0,timer=null,running=false;
+
+    function step(s){ov.className='detail actflow step-'+s+(ov.classList.contains('open')?' open':'');}
+    function openOv(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');}
+    function closeOv(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}
+    function fmt(t){var h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;function p(n){return n<10?'0'+n:''+n;}return p(h)+':'+p(m)+':'+p(s);}
+    function paceFmt(mps){if(!mps)return '--:--';var spk=1000/mps,m=Math.floor(spk/60),s=Math.round(spk%60);return m+':'+(s<10?'0'+s:s);}
+    function tick(){secs++;timerEl.textContent=fmt(secs);
+      var speed=2.75; // ~m/s jog
+      var dist=secs*speed; distEl.textContent=(dist/1000).toFixed(2); paceEl.textContent=paceFmt(speed);}
+    function startTimer(){if(timer)return;timer=setInterval(tick,1000);}
+    function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
+
+    // Start Activity button on Day
+    function refreshSA(){ if(running){sa.classList.add('returning');saB.textContent='Return to activity · '+fmt(secs).replace(/^00:/,'');}
+      else{sa.classList.remove('returning');saB.textContent='Start Activity';} }
+    sa.addEventListener('click',function(){
+      if(running){ step('track'); openOv(); }        // resume live view
+      else { current='Run'; step('choose'); openOv(); }
+    });
+
+    // choose an activity -> ready sheet
+    [].forEach.call(ov.querySelectorAll('.act-card'),function(c){
+      c.addEventListener('click',function(){
+        if(c.dataset.act==='More'){openToast('More activities → additional supported types');return;}
+        current=c.dataset.act;
+        readyIc.innerHTML=iconSvg(current); readyName.textContent=current;
+        step('ready'); requestAnimationFrame(function(){readySheet.classList.add('open');});
+      });
+    });
+    // Start -> tracking
+    document.getElementById('actStart').addEventListener('click',function(){
+      readySheet.classList.remove('open');
+      trackIc.innerHTML=iconSvg(current); trackName.textContent=current;
+      secs=0;timerEl.textContent='00:00:00';distEl.textContent='0.00';paceEl.textContent='--:--';
+      running=true; step('track'); startTimer(); refreshSA();
+    });
+    // minimize (back) from tracking -> Day, keep running
+    document.getElementById('actMinimize').addEventListener('click',function(){closeOv();openToast('Activity still running — Return to activity on Day');});
+    // Finish -> confirm sheet (timer keeps running)
+    document.getElementById('actFinishBtn').addEventListener('click',function(){step('finish');requestAnimationFrame(function(){finishSheet.classList.add('open');});});
+    document.getElementById('actReturn').addEventListener('click',function(){finishSheet.classList.remove('open');step('track');});
+    // Confirm finish -> result
+    document.getElementById('actConfirmFinish').addEventListener('click',function(){
+      finishSheet.classList.remove('open'); stopTimer(); running=false; refreshSA();
+      resIc.innerHTML=iconSvg(current); resName.textContent=current;
+      document.getElementById('resDur').textContent=fmt(secs);
+      step('result');
+    });
+    // Save / discard / close
+    function done(msg){closeOv();step('choose');openToast(msg);}
+    document.getElementById('actSave').addEventListener('click',function(){done('Saved to Body & Day — same result opens everywhere');});
+    document.getElementById('actDiscard').addEventListener('click',function(){done('Discarded');});
+    document.getElementById('actResultClose').addEventListener('click',function(){done('Saved on this phone');});
+    document.getElementById('actClose').addEventListener('click',function(){readySheet.classList.remove('open');closeOv();step('choose');});
+    refreshSA();
+  })();
 
   document.getElementById('profileBtn').addEventListener('click',function(){openToast('Profile (top corner) → account, band, connections, privacy, settings');});
   document.getElementById('restartBtn').addEventListener('click',function(){setLearning(false);show('day');openToast('Restarted at Day');});
