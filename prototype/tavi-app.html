@@ -14,7 +14,7 @@
   --recovery:#5f9a80; --recovery-soft:#a9cdbd;
   --sleep:#6f74b8; --sleep-soft:#b3b6df;
   --track:#e4ded3;
-  --accent:#16161a;
+  --accent:#16161a; --teal:#2bb3a3; --teal-soft:#8fd8ce; --green-strong:#16b364;
   --hairline:rgba(20,18,14,.04);
   --ambient:13%;
   --shadow:0 1px 2px rgba(20,18,14,.05),0 8px 24px rgba(20,18,14,.06);
@@ -27,14 +27,14 @@
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --ground:#050506; --ground2:#0b0b0f;
-    --app:#08080a; --surface:#101013; --surface2:#161619;
+    --app:#08080a; --surface:#141416; --surface2:#1c1c1f;
     --ink:#f5f3ef; --ink2:#96949d; --ink3:#5b5963;
     --line:#1b1b1f; --line2:#292930;
-    --core:#e2ab61; --core-soft:#4a3921;
-    --recovery:#7cc2a3; --recovery-soft:#1f453a;
-    --sleep:#989cdb; --sleep-soft:#2b2c53;
-    --track:#191a1e;
-    --accent:#f5f3ef;
+    --core:#e3a24c; --core-soft:#4a3921;
+    --recovery:#73e2a3; --recovery-soft:#1f453a;
+    --sleep:#9095cf; --sleep-soft:#2b2c53;
+    --track:#232327;
+    --accent:#f5f3ef; --teal:#71d7cb; --teal-soft:#a5eade; --green-strong:#16b364;
     --hairline:rgba(255,255,255,.055);
     --ambient:26%;
     --shadow:0 1px 0 rgba(255,255,255,.03),0 14px 38px rgba(0,0,0,.6);
@@ -44,14 +44,14 @@
 
 :root[data-theme="dark"]{
   --ground:#050506; --ground2:#0b0b0f;
-  --app:#08080a; --surface:#101013; --surface2:#161619;
+  --app:#08080a; --surface:#141416; --surface2:#1c1c1f;
   --ink:#f5f3ef; --ink2:#96949d; --ink3:#5b5963;
   --line:#1b1b1f; --line2:#292930;
-  --core:#e2ab61; --core-soft:#4a3921;
-  --recovery:#7cc2a3; --recovery-soft:#1f453a;
-  --sleep:#989cdb; --sleep-soft:#2b2c53;
-  --track:#191a1e;
-  --accent:#f5f3ef;
+  --core:#e3a24c; --core-soft:#4a3921;
+  --recovery:#73e2a3; --recovery-soft:#1f453a;
+  --sleep:#9095cf; --sleep-soft:#2b2c53;
+  --track:#232327;
+  --accent:#f5f3ef; --teal:#71d7cb; --teal-soft:#a5eade; --green-strong:#16b364;
   --hairline:rgba(255,255,255,.055);
   --ambient:26%;
   --shadow:0 1px 0 rgba(255,255,255,.03),0 14px 38px rgba(0,0,0,.6);
@@ -383,8 +383,8 @@ button.tapq{padding:6px}
 .tab[aria-selected="true"]{color:var(--recovery);background:color-mix(in srgb,var(--recovery) 16%,transparent)}
 .tab.taborb{gap:0}
 .tab.taborb .orb{width:30px;height:30px;border-radius:50%;
-  background:conic-gradient(from 210deg,var(--core),var(--recovery),var(--sleep),var(--core));
-  box-shadow:0 0 0 2px color-mix(in srgb,var(--sleep) 30%,transparent) inset;
+  background:conic-gradient(from 200deg,var(--core),var(--recovery),var(--teal),var(--sleep),var(--core));
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--teal) 30%,transparent) inset;
   -webkit-mask:radial-gradient(circle 8px at center,transparent 98%,#000 100%);
   mask:radial-gradient(circle 8px at center,transparent 98%,#000 100%)}
 .tab.taborb[aria-selected="true"]{background:none}
@@ -526,6 +526,13 @@ button.tapq{padding:6px}
 /* ============================================================
    FDAY — Day home rebuilt to match the TAVI Figma design
    ============================================================ */
+#view-day.fday,#view-body.fbody{position:relative}
+#view-day.fday::before,#view-body.fbody::before{content:"";position:absolute;top:-40px;left:20%;right:-10%;height:260px;
+  pointer-events:none;z-index:0;
+  background:radial-gradient(70% 100% at 78% 0%, color-mix(in srgb,var(--teal) 22%,transparent), transparent 62%),
+             radial-gradient(60% 90% at 30% 0%, color-mix(in srgb,var(--recovery) 12%,transparent), transparent 60%);
+  filter:blur(8px)}
+#view-day.fday>*,#view-body.fbody>*{position:relative;z-index:1}
 #view-day.fday{padding:4px 18px 128px}
 .fday .fhead{display:flex;align-items:flex-start;justify-content:space-between;padding:8px 0 2px}
 .fday .fdate{display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:0;
@@ -564,7 +571,7 @@ button.tapq{padding:6px}
 
 /* start activity — white pill */
 .fday .fstart{display:flex;align-items:center;justify-content:center;width:100%;margin:18px 0 0;cursor:pointer;
-  background:#f5f3ef;color:#111;border:none;border-radius:16px;padding:16px;font-family:var(--font-u);
+  background:#ffffff;color:#0a0a0a;border:none;border-radius:16px;padding:17px;font-family:var(--font-u);
   transition:transform .15s,opacity .2s}
 .fday .fstart b{font-size:15px;font-weight:700}
 .fday .fstart .fstart-sub{font-size:12px;opacity:.6;margin-left:8px}
