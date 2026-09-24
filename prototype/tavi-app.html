@@ -635,6 +635,66 @@ button.tapq{padding:6px}
 
 /* learning state */
 .fday.learning .finsight,.fday.learning .fcommits,.fday.learning .fsegs{opacity:.35;pointer-events:none}
+
+/* ============================================================
+   FBODY — Body overview (reuses .fday component styles)
+   ============================================================ */
+#view-body.fbody{padding:8px 18px 128px}
+.fbody .fb-head{padding:6px 0 2px}
+.fbody .fb-title{font-family:var(--font-d);font-weight:600;font-size:27px;letter-spacing:-.02em;margin:6px 0 0}
+.fbody .fb-searchrow{display:flex;gap:10px;margin-top:14px}
+.fbody .fb-search{flex:1;display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line2);
+  border-radius:999px;padding:11px 16px;color:var(--ink3)}
+.fbody .fb-search svg{width:17px;height:17px;flex:0 0 auto}
+.fbody .fb-search input{flex:1;min-width:0;background:none;border:none;outline:none;color:var(--ink);font-family:var(--font-u);font-size:13.5px}
+.fbody .fb-search input::placeholder{color:var(--ink3)}
+.fbody .fb-filter{width:44px;height:44px;flex:0 0 auto;border-radius:50%;border:1px solid var(--line2);
+  background:var(--surface);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.fbody .fb-filter:hover{background:var(--surface2)}
+.fbody .fb-filter svg{width:18px;height:18px}
+.fbody .fb-filter:focus-visible,.fbody .fb-search:focus-within{outline:2px solid var(--core);outline-offset:2px}
+.fbody .fb-fresh{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink3);margin-top:14px}
+.fbody .fb-fresh .dot{width:6px;height:6px;border-radius:50%;background:var(--recovery)}
+.fbody .sample-tag{margin:10px 0 0}
+
+/* generic body card */
+.fbody .fb-card{display:block;width:100%;text-align:left;font-family:var(--font-u);color:var(--ink);cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:12px;
+  transition:transform .15s,box-shadow .2s;border-top-color:color-mix(in srgb,var(--line) 55%,var(--hairline))}
+.fbody .fb-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.fbody .fb-card:focus-visible,.fbody .fb-report:focus-visible,.fbody .fb-fact:focus-visible{outline:2px solid var(--core);outline-offset:2px}
+.fbody .fb-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.fbody .fb-sub{font-size:12.5px;color:var(--ink3);margin-top:4px}
+.fbody .fb-badge{font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px;flex:0 0 auto}
+.fbody .fb-stages{display:flex;gap:3px;height:9px;border-radius:6px;overflow:hidden;margin:14px 0 8px}
+.fbody .fb-stages span{display:block;border-radius:3px}
+.fbody .fb-legend{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:10.5px;color:var(--ink3)}
+.fbody .fb-meta{font-size:11.5px;color:var(--ink3);margin-top:12px;line-height:1.4}
+
+/* movement facts */
+.fbody .fb-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.fbody .fb-fact{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 12px;cursor:pointer;
+  text-align:left;font-family:var(--font-u);color:var(--ink);transition:transform .15s,box-shadow .2s;
+  border-top-color:color-mix(in srgb,var(--line) 55%,var(--hairline))}
+.fbody .fb-fact:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.fbody .fb-fv{font-family:var(--font-d);font-weight:300;font-size:21px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.fbody .fb-fv small{font-size:11px;color:var(--ink3);font-weight:400;font-family:var(--font-u);margin-left:2px}
+.fbody .fb-fl{font-size:11px;color:var(--ink3);margin-top:5px;font-weight:500}
+
+.fbody .fb-note{font-size:11.5px;color:var(--ink3);margin-top:10px;line-height:1.4}
+
+/* 30-day report */
+.fbody .fb-report{display:block;width:100%;text-align:left;font-family:var(--font-u);color:var(--ink);cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:12px;
+  transition:transform .15s,box-shadow .2s;border-top-color:color-mix(in srgb,var(--line) 55%,var(--hairline))}
+.fbody .fb-report:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.fbody .fb-rtitle{font-size:15px;font-weight:600}
+.fbody .fb-chev{width:18px;height:18px;color:var(--ink3)}
+.fbody .fb-cov{display:flex;align-items:center;gap:10px;margin-top:12px}
+.fbody .fb-cl{font-size:12px;color:var(--ink2);width:74px;flex:0 0 auto;font-weight:500}
+.fbody .fb-cbar{flex:1;height:6px;border-radius:4px;background:var(--track);overflow:hidden}
+.fbody .fb-cbar span{display:block;height:100%;border-radius:4px}
+.fbody .fb-cn{font-size:11px;color:var(--ink3);width:78px;flex:0 0 auto;text-align:right}
 </style>
 
 <div class="stage">
@@ -812,38 +872,132 @@ button.tapq{padding:6px}
           </section>
 
           <!-- ============ BODY ============ -->
-          <section class="view" id="view-body" role="tabpanel" aria-label="Body">
-            <div class="appbar"><div><div class="wm">TAVI</div><div class="datehead"><span class="d">Body · Sun 14 Sep</span><span class="sync"><span class="dot"></span> Last 7 days</span></div></div>
-              <button class="avatar" aria-label="Open profile" onclick="openToast('Profile → account, band, connections, privacy')">LH</button></div>
-            <div class="page-head"><span class="eyebrow">Overview</span><h1>Your body, in depth</h1><p>Tap any score, vital or contributor to open its detail with history, source and method.</p></div>
+          <section class="view fday fbody" id="view-body" role="tabpanel" aria-label="Body">
+            <div class="fb-head">
+              <h1 class="fb-title">Body</h1>
+              <div class="fb-searchrow">
+                <label class="fb-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="search" placeholder="Search title" aria-label="Search Body"></label>
+                <button class="fb-filter" data-metric="Filter" aria-label="Filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M6 12h12M10 19h4"/></svg></button>
+              </div>
+            </div>
+            <div class="fb-fresh"><span class="dot"></span> Sun 14 Sep · Updated 9:41 AM · Last 7 days</div>
+            <div class="sample-tag">Sample data · Layla Haddad</div>
 
-            <div class="sample-tag">Sample data</div>
-            <div class="scores3">
-              <button class="mini" data-metric="Recovery"><div class="mnum" style="color:var(--recovery)">84</div><div class="mlab">Recovery</div><div class="mmn">Ready for load</div></button>
-              <button class="mini" data-metric="Core"><div class="mnum" style="color:var(--core)">72</div><div class="mlab">Core</div><div class="mmn">Moderate demand</div></button>
-              <button class="mini" data-metric="Sleep"><div class="mnum" style="color:var(--sleep)">68</div><div class="mlab">Sleep</div><div class="mmn">7 h 12 m</div></button>
+            <!-- three scores -->
+            <div class="flabel">Scores</div>
+            <div class="frings">
+              <button class="fring" data-metric="Recovery detail">
+                <div class="fring-viz sm"><svg viewBox="0 0 88 88" role="img" aria-label="Recovery 82"><circle cx="44" cy="44" r="36" fill="none" stroke="var(--track)" stroke-width="7"/><circle cx="44" cy="44" r="36" fill="none" stroke="var(--recovery)" stroke-width="7" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="40.7" transform="rotate(-90 44 44)"/><g transform="translate(44 44)" stroke="var(--recovery)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M-4.5 0a4.5 4.5 0 1 0 1.3-3.2"/><path d="M-4.6 -3.4l.1 2.9 2.9-.1"/></g></svg></div>
+                <div class="fring-num">82<span>%</span></div><div class="fring-nm">Recovery</div>
+              </button>
+              <button class="fring dom" data-metric="Core detail">
+                <div class="fring-viz lg"><svg viewBox="0 0 120 120" role="img" aria-label="Core 64"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--track)" stroke-width="9"/><circle cx="60" cy="60" r="50" fill="none" stroke="var(--core)" stroke-width="9" stroke-linecap="round" stroke-dasharray="314.2" stroke-dashoffset="113.1" transform="rotate(-90 60 60)"/><circle cx="60" cy="60" r="7" fill="none" stroke="var(--core)" stroke-width="2"/><circle cx="60" cy="60" r="2.2" fill="var(--core)"/></svg></div>
+                <div class="fring-num">64<span>%</span></div><div class="fring-nm">Core</div>
+              </button>
+              <button class="fring" data-metric="Sleep detail">
+                <div class="fring-viz sm"><svg viewBox="0 0 88 88" role="img" aria-label="Sleep 78"><circle cx="44" cy="44" r="36" fill="none" stroke="var(--track)" stroke-width="7"/><circle cx="44" cy="44" r="36" fill="none" stroke="var(--sleep)" stroke-width="7" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="49.8" transform="rotate(-90 44 44)"/><path d="M50 44.5A6.4 6.4 0 1 1 43.5 38 5 5 0 0 0 50 44.5Z" fill="none" stroke="var(--sleep)" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+                <div class="fring-num">78<span>%</span></div><div class="fring-nm">Sleep</div>
+              </button>
             </div>
 
-            <div class="vitals">
-              <button class="vital" data-metric="Heart"><span class="k"><span class="pulse"></span>Heart</span><span class="v">58<small>bpm</small></span><span class="w">Latest</span></button>
-              <button class="vital" data-metric="Resting HR"><span class="k">Resting</span><span class="v">51<small>bpm</small></span><span class="w">Overnight</span></button>
-              <button class="vital hrv" data-metric="HRV"><span class="k">HRV</span><span class="v">68<small>ms</small></span><span class="w">Overnight</span></button>
+            <!-- heart & hrv -->
+            <div class="flabel">Heart &amp; HRV</div>
+            <div class="fvitals">
+              <button class="fvcard" data-metric="Heart detail">
+                <div class="fv-h"><div><div class="fv-t">Heart Rate</div><div class="fv-s">Now</div></div><span class="fv-ic" style="color:var(--recovery)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.2 12H8l1-2 2 4 1.4-2.5.8 1h5.4"/></svg></span></div>
+                <div class="fv-chart"><svg viewBox="0 0 154 46" preserveAspectRatio="none"><g fill="var(--recovery)"><rect x="2" y="24" width="14" height="22" rx="4" opacity=".5"/><rect x="24" y="16" width="14" height="30" rx="4" opacity=".5"/><rect x="46" y="26" width="14" height="20" rx="4" opacity=".5"/><rect x="68" y="12" width="14" height="34" rx="4" opacity=".5"/><rect x="90" y="20" width="14" height="26" rx="4" opacity=".5"/><rect x="112" y="22" width="14" height="24" rx="4" opacity=".5"/><rect x="134" y="6" width="14" height="40" rx="4"/></g></svg></div>
+                <div class="fv-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class="on">S</span></div>
+                <div class="fv-v">72<small>bpm</small></div>
+              </button>
+              <button class="fvcard" data-metric="Resting HR detail">
+                <div class="fv-h"><div><div class="fv-t">Resting HR</div><div class="fv-s">Overnight</div></div><span class="fv-ic" style="color:var(--core)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.7A8.5 8.5 0 1 1 11.3 3a6.6 6.6 0 0 0 9.7 9.7Z"/><path d="M9.4 8.9c.7-.9 1.9-.6 2.1.2.2-.8 1.4-1.1 2.1-.2.5.7.1 1.6-2.1 3-2.2-1.4-2.6-2.3-2.1-3Z"/></svg></span></div>
+                <div class="fv-chart"><svg viewBox="0 0 154 46" preserveAspectRatio="none"><g fill="var(--core)"><rect x="2" y="20" width="14" height="26" rx="4" opacity=".5"/><rect x="24" y="24" width="14" height="22" rx="4" opacity=".5"/><rect x="46" y="14" width="14" height="32" rx="4" opacity=".5"/><rect x="68" y="22" width="14" height="24" rx="4" opacity=".5"/><rect x="90" y="18" width="14" height="28" rx="4" opacity=".5"/><rect x="112" y="26" width="14" height="20" rx="4" opacity=".5"/><rect x="134" y="10" width="14" height="36" rx="4"/></g></svg></div>
+                <div class="fv-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class="on">S</span></div>
+                <div class="fv-v">58<small>bpm</small></div>
+              </button>
+            </div>
+            <button class="fvcard fwide" data-metric="HRV detail">
+              <div class="fv-h"><div><div class="fv-t">HRV HR</div><div class="fv-s">Overnight · measured during sleep</div></div><span class="fv-ic" style="color:var(--sleep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-5 3 10 2-7 2 4h3l2-2h3"/></svg></span></div>
+              <div class="fv-area"><svg viewBox="0 0 320 74" preserveAspectRatio="none"><defs><linearGradient id="hrvFillB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sleep)" stop-opacity=".38"/><stop offset="1" stop-color="var(--sleep)" stop-opacity="0"/></linearGradient></defs><path d="M0,50 46,44 92,52 137,30 183,40 229,22 274,34 320,10 V74 H0 Z" fill="url(#hrvFillB)"/><polyline fill="none" stroke="var(--sleep)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points="0,50 46,44 92,52 137,30 183,40 229,22 274,34 320,10"/><circle cx="320" cy="10" r="4" fill="var(--sleep)"/></svg></div>
+              <div class="fv-days wide"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span class="on">S</span></div>
+              <div class="fv-v">45<small>ms</small></div>
+            </button>
+
+            <!-- sleep -->
+            <div class="flabel">Sleep</div>
+            <button class="fb-card" data-metric="Sleep detail">
+              <div class="fb-row"><div><div class="fv-v" style="margin-top:0">7<small>h</small> 28<small>m</small></div><div class="fb-sub">Time asleep · Sleep score 78</div></div><span class="fb-badge" style="color:var(--sleep);background:color-mix(in srgb,var(--sleep) 18%,transparent)">Good</span></div>
+              <div class="fb-stages"><span style="flex:18;background:var(--sleep)"></span><span style="flex:52;background:color-mix(in srgb,var(--sleep) 55%,var(--track))"></span><span style="flex:22;background:color-mix(in srgb,var(--recovery) 60%,var(--track))"></span><span style="flex:8;background:var(--track)"></span></div>
+              <div class="fb-legend"><span>Deep 1h20</span><span>Light 3h52</span><span>REM 1h38</span><span>Awake 18m</span></div>
+              <div class="fb-meta">Start 10:42 PM · End 6:10 AM · 2 interruptions</div>
+            </button>
+
+            <!-- movement -->
+            <div class="flabel">Movement</div>
+            <div class="fb-facts">
+              <button class="fb-fact" data-metric="Steps"><div class="fb-fv">8,432</div><div class="fb-fl">Steps</div></button>
+              <button class="fb-fact" data-metric="Workout duration"><div class="fb-fv">2h 15m</div><div class="fb-fl">Workout time</div></button>
+              <button class="fb-fact" data-metric="Session distance"><div class="fb-fv">6.2<small>km</small></div><div class="fb-fl">Distance</div></button>
             </div>
 
-            <div class="section-title">HRV · 7-day trend</div>
-            <div class="card">
-              <div class="eyebrow">Overnight average · ms</div>
-              <svg class="spark" viewBox="0 0 300 54" preserveAspectRatio="none" aria-label="HRV trend, 7 days">
-                <polyline fill="none" stroke="var(--sleep)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                  points="6,38 54,30 102,34 150,22 198,26 246,18 294,14"/>
-                <circle cx="294" cy="14" r="3.5" fill="var(--sleep)"/>
-              </svg>
-              <div class="trend-legend"><span>Mon</span><span>Wed</span><span>Fri</span><span>Today</span></div>
+            <!-- activities / history -->
+            <div class="flabel">Activities <a data-metric="Activity history">History</a></div>
+            <div class="fcommits">
+              <button class="fcommit" data-metric="Activity result: Run">
+                <span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M7 21l3-6 3 2 1-4M14 13l4 1M8 9l3-1 2 3"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Run — 6.2 km</span><span class="fc-s">Today · 38 min · 6:07 /km</span></span>
+                <span class="fc-st ok">Result</span>
+              </button>
+              <button class="fcommit" data-metric="Activity result: Walk">
+                <span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M9 21l2-5 2 2 1-4M14 12l4 1"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Walk — 3.1 km</span><span class="fc-s">Today · 34 min · verified steps</span></span>
+                <span class="fc-st ok">Result</span>
+              </button>
+              <button class="fcommit" data-metric="Activity result: Strength">
+                <span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5l11 11M4 9l-1.5 1.5 2 2M20 15l1.5-1.5-2-2M9 4L7.5 5.5M15 20l1.5-1.5"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Strength — 45 min</span><span class="fc-s">Today · avg HR 128 bpm</span></span>
+                <span class="fc-st ok">Result</span>
+              </button>
             </div>
 
-            <div class="section-title">Explore <a>Core · Recovery · Sleep · Heart · HRV · Movement · Trends · Report</a></div>
-            <div class="row" data-metric="Activity History"><span class="rico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 4-5"/></svg></span><span class="rtext"><span class="t">Activity History</span><span class="s">Start Activity lives here and on Day</span></span></div>
-            <div class="row" data-metric="30-day Report"><span class="rico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="rtext"><span class="t">30-day Report</span><span class="s">4 recorded days so far — coverage shown honestly</span></span></div>
+            <!-- other verified vitals -->
+            <div class="flabel">Other verified vitals</div>
+            <div class="fvitals">
+              <button class="fvcard" data-metric="Blood oxygen">
+                <div class="fv-h"><div><div class="fv-t">Blood oxygen</div><div class="fv-s">Overnight · TAVI Band</div></div><span class="fv-ic" style="color:var(--sleep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></svg></span></div>
+                <div class="fv-v" style="margin-top:14px">97<small>% SpO₂</small></div>
+              </button>
+              <button class="fvcard" data-metric="Respiratory rate">
+                <div class="fv-h"><div><div class="fv-t">Respiratory rate</div><div class="fv-s">Overnight · TAVI Band</div></div><span class="fv-ic" style="color:var(--recovery)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-5 3 10 2-7 1.5 4H22"/></svg></span></div>
+                <div class="fv-v" style="margin-top:14px">14<small>br/min</small></div>
+              </button>
+            </div>
+            <div class="fb-note">Additional vitals appear here only when your band supports them.</div>
+
+            <!-- trends -->
+            <div class="flabel">Trends</div>
+            <div class="fsegs" role="tablist" aria-label="Trend range">
+              <button class="fseg on" id="trend7" role="tab" aria-selected="true">7 Days</button>
+              <button class="fseg" id="trend30" role="tab" aria-selected="false">30 Days</button>
+            </div>
+            <button class="fb-card" data-metric="Resting HR trend">
+              <div class="fb-row"><div><div class="fv-v" style="margin-top:0"><span id="trendVal">68</span><small>bpm</small></div><div class="fb-sub" id="trendLbl">Resting HR · 7-day average</div></div><span class="fb-badge" id="trendObs" style="color:var(--ink2);background:var(--surface2)">7 valid days</span></div>
+              <div class="fv-area" style="height:56px"><svg viewBox="0 0 320 60" preserveAspectRatio="none"><polyline fill="none" stroke="var(--core)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="0,40 46,34 92,38 137,30 183,32 229,22 274,26 320,20"/><circle cx="320" cy="20" r="3.5" fill="var(--core)"/></svg></div>
+              <div class="fb-meta" id="trendCmp">Compared with the previous 7 days · trending down 3 bpm</div>
+            </button>
+
+            <!-- 30-day report -->
+            <div class="flabel">30-Day Report</div>
+            <button class="fb-report" data-metric="30-day Report">
+              <div class="fb-row"><div class="fb-rtitle">Aug 16 – Sep 14</div><svg class="fb-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+              <div class="fb-cov"><span class="fb-cl">Sleep</span><span class="fb-cbar"><span style="width:87%;background:var(--sleep)"></span></span><span class="fb-cn">26 valid days</span></div>
+              <div class="fb-cov"><span class="fb-cl">Movement</span><span class="fb-cbar"><span style="width:93%;background:var(--recovery)"></span></span><span class="fb-cn">28 valid days</span></div>
+              <div class="fb-cov"><span class="fb-cl">Activities</span><span class="fb-cbar"><span style="width:47%;background:var(--core)"></span></span><span class="fb-cn">14 recorded</span></div>
+              <div class="fb-cov"><span class="fb-cl">Recovery</span><span class="fb-cbar"><span style="width:80%;background:var(--recovery)"></span></span><span class="fb-cn">24 valid days</span></div>
+              <div class="fb-meta">Coverage shown honestly · tap for sources</div>
+            </button>
+
+            <div class="footce">Body — one long page in the mandated order: scores → heart &amp; HRV → sleep → movement → activities → other vitals → trends → report. Detail pages open on tap.</div>
           </section>
 
           <!-- ============ CAPTURE ============ -->
@@ -964,6 +1118,25 @@ button.tapq{padding:6px}
     }
     so.addEventListener('click',function(){seg(true);});
     sd.addEventListener('click',function(){seg(false);});
+  })();
+
+  // Body trends 7 / 30 day toggle
+  (function(){
+    var t7=document.getElementById('trend7'),t30=document.getElementById('trend30'),
+        val=document.getElementById('trendVal'),lbl=document.getElementById('trendLbl'),
+        obs=document.getElementById('trendObs'),cmp=document.getElementById('trendCmp');
+    if(!t7||!t30)return;
+    function set(is7){
+      t7.classList.toggle('on',is7);t30.classList.toggle('on',!is7);
+      t7.setAttribute('aria-selected',is7?'true':'false');t30.setAttribute('aria-selected',is7?'false':'true');
+      val.textContent=is7?'68':'66';
+      lbl.textContent=is7?'Resting HR · 7-day average':'Resting HR · 30-day average';
+      obs.textContent=is7?'7 valid days':'26 valid days';
+      cmp.textContent=is7?'Compared with the previous 7 days · trending down 3 bpm'
+                          :'Compared with the previous 30 days · trending down 2 bpm';
+    }
+    t7.addEventListener('click',function(){set(true);});
+    t30.addEventListener('click',function(){set(false);});
   })();
 
   // toast
