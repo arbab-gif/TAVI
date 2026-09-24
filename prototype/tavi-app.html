@@ -814,6 +814,9 @@ button.tapq{padding:6px}
 .ds-v{font-family:var(--font-d);font-weight:300;font-size:25px;margin-top:8px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .ds-v small{font-size:11px;color:var(--ink3);font-weight:400;font-family:var(--font-u);margin-left:3px}
 .ds-w{font-size:10.5px;color:var(--ink3);margin-top:4px}
+.d-stats.three{grid-template-columns:repeat(3,1fr)}
+.d-stats.three .d-stat{padding:14px 10px 12px}
+.d-stats.three .ds-v{font-size:20px}
 </style>
 
 <div class="stage">
@@ -1054,9 +1057,9 @@ button.tapq{padding:6px}
             <!-- movement -->
             <div class="flabel">Movement</div>
             <div class="fb-facts">
-              <button class="fb-fact" data-metric="Steps"><div class="fb-fv">8,432</div><div class="fb-fl">Steps</div></button>
-              <button class="fb-fact" data-metric="Workout duration"><div class="fb-fv">2h 15m</div><div class="fb-fl">Workout time</div></button>
-              <button class="fb-fact" data-metric="Session distance"><div class="fb-fv">6.2<small>km</small></div><div class="fb-fl">Distance</div></button>
+              <button class="fb-fact js-move"><div class="fb-fv">8,432</div><div class="fb-fl">Steps</div></button>
+              <button class="fb-fact js-move"><div class="fb-fv">2h 15m</div><div class="fb-fl">Workout time</div></button>
+              <button class="fb-fact js-move"><div class="fb-fv">6.2<small>km</small></div><div class="fb-fl">Distance</div></button>
             </div>
 
             <!-- activities / history -->
@@ -1610,6 +1613,66 @@ button.tapq{padding:6px}
           </div>
         </section>
 
+        <!-- ============ MOVEMENT DETAIL (overlay) ============ -->
+        <section class="detail" id="detailMove" role="dialog" aria-modal="true" aria-label="Movement detail" aria-hidden="true">
+          <div class="d-head">
+            <button class="d-back" id="moveBack" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="d-title">Movement</div>
+            <button class="d-ask" data-metric="Share Movement">Share</button>
+          </div>
+          <div class="d-body">
+            <div class="d-datenav">
+              <button class="d-nav" id="movePrev" aria-label="Previous day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+              <div class="d-date" id="moveDate">Today · 14 Sep</div>
+              <button class="d-nav" id="moveNext" aria-label="Next day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+            </div>
+
+            <div class="d-label">Today · three separate facts</div>
+            <div class="d-stats three">
+              <div class="d-stat"><div class="ds-k"><span class="ds-dot" style="background:var(--recovery)"></span>Steps</div><div class="ds-v">8,432</div><div class="ds-w">of 10,000 goal</div></div>
+              <div class="d-stat"><div class="ds-k"><span class="ds-dot" style="background:var(--core)"></span>Workout</div><div class="ds-v">2<small>h</small> 15<small>m</small></div><div class="ds-w">3 sessions</div></div>
+              <div class="d-stat"><div class="ds-k"><span class="ds-dot" style="background:var(--sleep)"></span>Distance</div><div class="ds-v">6.2<small>km</small></div><div class="ds-w">Run + Walk</div></div>
+            </div>
+            <p class="d-note" style="margin-top:10px">Steps, workout duration and activity distance are kept as distinct facts — never combined into a single movement percentage.</p>
+
+            <div class="d-label">Steps · last 7 days</div>
+            <div class="d-chart">
+              <svg id="moveChart" viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Steps, last 7 days">
+                <g stroke="var(--line)" stroke-width="1"><line x1="0" y1="30" x2="320" y2="30"/><line x1="0" y1="70" x2="320" y2="70"/><line x1="0" y1="110" x2="320" y2="110"/></g>
+                <g id="moveBars"></g>
+              </svg>
+              <div class="d-axis"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+            </div>
+            <div class="d-readout" id="moveReadout">Tap a day to read its exact step count.</div>
+
+            <div class="d-label">Activities · Today</div>
+            <div class="fcommits">
+              <button class="fcommit" data-metric="Activity result: Run">
+                <span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M7 21l3-6 3 2 1-4M14 13l4 1M8 9l3-1 2 3"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Run — 6.2 km</span><span class="fc-s">7:02 AM · 38 min · 6:07 /km</span></span><span class="fc-st">›</span>
+              </button>
+              <button class="fcommit" data-metric="Activity result: Walk">
+                <span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4a2 2 0 1 0 0-.001M9 21l2-5 2 2 1-4M14 12l4 1"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Walk — 3.1 km</span><span class="fc-s">1:20 PM · 34 min · verified steps</span></span><span class="fc-st">›</span>
+              </button>
+              <button class="fcommit" data-metric="Activity result: Strength">
+                <span class="fc-ic done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5l11 11M4 9l-1.5 1.5 2 2M20 15l1.5-1.5-2-2"/></svg></span>
+                <span class="fc-x"><span class="fc-t">Strength — 45 min</span><span class="fc-s">6:00 PM · avg HR 128 bpm</span></span><span class="fc-st">›</span>
+              </button>
+            </div>
+
+            <div class="d-label">Source &amp; coverage</div>
+            <div class="d-rows">
+              <div class="d-row"><span class="d-k">Steps &amp; distance</span><span class="d-v">TAVI Band + Health</span></div>
+              <div class="d-row"><span class="d-k">Workouts</span><span class="d-v">3 recorded today</span></div>
+              <div class="d-row"><span class="d-k">Coverage</span><span class="d-v">Full-day wear</span></div>
+            </div>
+
+            <div class="d-label">How this is measured</div>
+            <p class="d-note">Steps are counted from motion, distance from activities with a supported track, and workout time from recorded sessions. Class activities without distance are reported as duration only.</p>
+          </div>
+        </section>
+
         <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
         <nav class="tabbar" role="tablist" aria-label="Main">
@@ -1936,6 +1999,39 @@ button.tapq{padding:6px}
     ask.addEventListener('click',function(){openToast('Ask opens with context · HRV · Overnight');});
     [].forEach.call(document.querySelectorAll('.js-hrv'),function(el){el.addEventListener('click',open);});
     draw();
+  })();
+
+  // Movement detail overlay (steps bar chart)
+  (function(){
+    var ov=document.getElementById('detailMove');if(!ov)return;
+    var back=document.getElementById('moveBack'),chart=document.getElementById('moveChart'),
+        bars=document.getElementById('moveBars'),readout=document.getElementById('moveReadout'),
+        dateEl=document.getElementById('moveDate'),prev=document.getElementById('movePrev'),next=document.getElementById('moveNext');
+    var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    var steps=[6800,7200,8100,7600,8400,9100,8432];
+    var sel=6;
+    function draw(){
+      var mx=Math.max.apply(null,steps),n=steps.length,bw=26,gap=(320-n*bw)/(n-1);
+      bars.innerHTML=steps.map(function(v,i){
+        var h=18+(v/mx)*110,x=i*(bw+gap),y=134-h,on=i===sel;
+        return '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw+'" height="'+h.toFixed(1)+'" rx="6" fill="var(--recovery)" opacity="'+(on?'1':'.5')+'"/>';
+      }).join('');
+    }
+    chart.addEventListener('click',function(e){
+      var rect=chart.getBoundingClientRect();
+      var i=Math.round((e.clientX-rect.left)/rect.width*(steps.length-1));i=Math.max(0,Math.min(steps.length-1,i));
+      sel=i;draw();
+      readout.innerHTML='<b>'+steps[i].toLocaleString()+' steps</b> · '+days[i]+' · TAVI Band';
+    });
+    var dates=['Fri · 12 Sep','Sat · 13 Sep','Today · 14 Sep'],di=2;
+    function setDate(){dateEl.textContent=dates[di];prev.style.opacity=di<=0?'.4':'';next.style.opacity=di>=dates.length-1?'.4':'';}
+    prev.addEventListener('click',function(){if(di>0){di--;setDate();}});
+    next.addEventListener('click',function(){if(di<dates.length-1){di++;setDate();}});
+    function open(){ov.classList.add('open');ov.setAttribute('aria-hidden','false');ov.querySelector('.d-body').scrollTop=0;di=2;setDate();sel=6;draw();readout.innerHTML='Tap a day to read its exact step count.';}
+    function close(){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}
+    back.addEventListener('click',close);
+    [].forEach.call(document.querySelectorAll('.js-move'),function(el){el.addEventListener('click',open);});
+    draw();setDate();
   })();
 
   // toast
